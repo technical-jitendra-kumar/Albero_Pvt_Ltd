@@ -10,6 +10,7 @@ import OfflinePage from './components/user/common/OfflinePage'
 import Footer from './components/ui/animated-footer'
 import BackToTopButton from './components/user/common/BackToTopButton'
 
+
 // Lazy load pages
 const Home = lazy(() => import('./pages/user/Home'))
 const RefundPolicy = lazy(() => import('./pages/user/Refund'))
@@ -93,3 +94,4 @@ export default function App() {
         </div>
     )
 }
+
