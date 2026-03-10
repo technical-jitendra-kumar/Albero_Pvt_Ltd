@@ -19,6 +19,30 @@ button {
 :root {
     --scrollbar-thumb: url('./assets/images/cursor/light/arrow.png'), auto;
     --scrollbar-thumb-hover: url('./assets/images/cursor/light/hand.png'), auto;
+    --font-bebas: 'Bebas Neue', sans-serif;
+    --font-dancing: 'Dancing Script', cursive;
+    --font-barlow-condensed: 'Barlow Condensed', sans-serif;
+    --font-barlow: 'Barlow', sans-serif;
+
+    /* ← these must be present */
+    --black: #000000;
+    --bg-1: #0f0f0f;
+    --bg-2: #161616;
+    --bg-card: #18181b;
+    --bg-mid: #262626;
+    --white: #ffffff;
+    --grey-mid: #747474;
+    --grey-light: oklch(0.87 0 0);
+    --grey-dim: oklch(0.371 0 0);
+    --blue-vivid: oklch(0.623 0.214 259.815);
+    --blue-deep: oklch(0.546 0.245 262.881);
+    --blue-soft: oklch(0.707 0.165 254.624);
+    --blue-dark: oklch(0.511 0.262 276.966);
+    --amber: oklch(0.795 0.184 86.047);
+    --amber-lt: oklch(0.852 0.199 91.936);
+    --amber-pale: oklch(0.973 0.071 103.193);
+    --border: rgba(255, 255, 255, 0.07);
+    --border-blu: oklch(0.623 0.214 259.815 / 0.25);
 }
 
 /* Custom scrollbar */

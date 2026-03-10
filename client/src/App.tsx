@@ -1,6 +1,7 @@
 import './App.css'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import WorkPage from './pages/user/work'
 
 // Components
 import Loader from './components/user/common/Loader'
@@ -68,6 +69,12 @@ export default function App() {
                         path="/terms-and-policies"
                         element={<TermsAndPolicies />}
                     />
+
+                    <Route
+                        path="/work"
+                        element={<WorkPage />}
+                    />
+
                     <Route
                         path="*"
                         element={<NotFound />}

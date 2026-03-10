@@ -3,3 +3,5 @@ build
 node_modules
 coverage
 dev-dist/
+src/styles/work.css
+src/index.css
