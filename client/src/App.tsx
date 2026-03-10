@@ -88,7 +88,6 @@ export default function App() {
                         { href: 'https://github.com/tahermaxse', label: 'Facebook' }
                     ]}
                     copyrightText="Albero 2025. All Rights Reserved"
-
                 />
             </Suspense>
         </div>
