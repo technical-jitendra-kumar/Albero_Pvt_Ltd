@@ -3,55 +3,76 @@ import {
     IconBrandWordpress,
     IconBrandLaravel,
     IconBrandReact,
-    IconBrandNextjs,
     IconPhotoSquareRounded,
     IconCloud,
-    IconEyeSearch
+    IconEyeSearch,
+    IconShoppingCart,
+    IconApi,
+    IconSettings,
+    IconBolt,
+    IconShieldLock
 } from '@tabler/icons-react'
 
 const features = [
     {
-        title: 'HTML/JS Development',
-        description:
-            'We build fast, responsive, and interactive static websites with modern JavaScript features to deliver seamless user experiences.',
+        title: 'Custom Website Development',
+        description: 'High-performance websites designed for speed, responsiveness, and seamless user experiences across all devices.',
         icon: IconFileTypeJsx
     },
     {
-        title: 'WordPress Development',
-        description: 'Custom WordPress solutions tailored to your business needs—ranging from simple blogs to fully functional e-commerce platforms.',
-        icon: IconBrandWordpress
-    },
-    {
-        title: 'Laravel Development',
-        description: 'Robust, scalable, and secure Laravel applications with clean code and optimized backend performance for your business growth.',
-        icon: IconBrandLaravel
-    },
-    {
-        title: 'MERN Stack',
-        description:
-            'Full-stack web applications using MongoDB, Express.js, React, and Node.js for dynamic, scalable, and high-performance solutions.',
+        title: 'Web Application Development',
+        description: 'Scalable web applications using modern frameworks like React, Next.js, Laravel, and Node.js.',
         icon: IconBrandReact
     },
     {
-        title: 'Next.js Development',
-        description:
-            'Cutting-edge Next.js applications with server-side rendering, SEO optimization, and lightning-fast performance for modern web apps.',
-        icon: IconBrandNextjs
+        title: 'WordPress & CMS Development',
+        description: 'Flexible content-driven websites using WordPress and custom CMS solutions tailored for business growth.',
+        icon: IconBrandWordpress
     },
     {
-        title: 'UI/UX Design',
-        description: 'Beautiful, user-friendly designs focused on delivering intuitive digital experiences and enhancing customer engagement.',
+        title: 'UI/UX Product Design',
+        description: 'Intuitive user interfaces and product experiences designed to increase engagement and usability.',
         icon: IconPhotoSquareRounded
     },
     {
-        title: 'Hosting & Domain',
-        description: 'Reliable hosting and domain management services with smooth deployment, high uptime, and complete scalability.',
+        title: 'Cloud Hosting & Deployment',
+        description: 'Reliable cloud infrastructure, hosting management, and CI/CD deployment for scalable digital platforms.',
         icon: IconCloud
     },
     {
-        title: 'SEO & Marketing',
-        description: 'Data-driven SEO strategies and digital marketing solutions to boost online visibility, traffic, and conversions.',
+        title: 'SEO & Digital Growth',
+        description: 'Data-driven SEO and digital growth strategies to increase visibility, traffic, and conversions.',
         icon: IconEyeSearch
+    },
+    {
+        title: 'Enterprise Solutions',
+        description: 'Custom enterprise-grade applications designed to automate workflows and improve operational efficiency.',
+        icon: IconBrandLaravel
+    },
+    {
+        title: 'E-Commerce Development',
+        description: 'Custom online stores with secure payments, inventory management, and optimized checkout experiences.',
+        icon: IconShoppingCart
+    },
+    {
+        title: 'API Development',
+        description: 'Secure REST API development and third-party integrations for seamless data communication.',
+        icon: IconApi
+    },
+    {
+        title: 'Website Maintenance',
+        description: 'Ongoing support, updates, performance monitoring, and bug fixes to keep your website running smoothly.',
+        icon: IconSettings
+    },
+    {
+        title: 'Performance Optimization',
+        description: 'Speed optimization, Core Web Vitals improvements, and performance tuning for better SEO and UX.',
+        icon: IconBolt
+    },
+    {
+        title: 'Website Security',
+        description: 'Security audits, SSL configuration, malware protection, and vulnerability fixes.',
+        icon: IconShieldLock
     }
 ]
 
