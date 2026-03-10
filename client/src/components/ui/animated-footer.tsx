@@ -13,6 +13,13 @@ interface FooterProps {
   copyrightText: string
 }
 
+interface Wave {
+  amp: number
+  freq: number
+  speed: number
+  opacity: number
+}
+
 const Footer: React.FC<FooterProps> = ({
   leftLinks,
   rightLinks,
@@ -36,13 +43,11 @@ const Footer: React.FC<FooterProps> = ({
 
     let time = 0
 
-    const waves = [
+    const waves: Wave[] = [
       { amp: 35, freq: 0.012, speed: 0.02, opacity: 0.45 },
       { amp: 25, freq: 0.018, speed: 0.015, opacity: 0.35 },
       { amp: 18, freq: 0.024, speed: 0.01, opacity: 0.25 }
     ]
-
-    const particles: any[] = []
 
     class Particle {
 
@@ -98,11 +103,13 @@ const Footer: React.FC<FooterProps> = ({
 
     }
 
+    const particles: Particle[] = []
+
     for (let i = 0; i < 40; i++) {
       particles.push(new Particle())
     }
 
-    function drawWave(wave: any) {
+    function drawWave(wave: Wave) {
 
       ctx.beginPath()
 
@@ -246,8 +253,6 @@ const Footer: React.FC<FooterProps> = ({
         </div>
 
       </div>
-
-      {/* Premium Wave Animation */}
 
       <canvas
         ref={canvasRef}
