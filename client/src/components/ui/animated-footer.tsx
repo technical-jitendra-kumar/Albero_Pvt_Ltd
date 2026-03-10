@@ -1,268 +1,203 @@
-import React, { useEffect, useRef } from "react"
-import { NavLink } from "../user/common/NavLink"
-import { CopyrightIcon } from "lucide-react"
+import React, { useEffect, useRef } from 'react'
+import { NavLink } from '../user/common/NavLink'
+import { CopyrightIcon } from 'lucide-react'
 
 interface LinkItem {
-  href: string
-  label: string
+    href: string
+    label: string
 }
 
 interface FooterProps {
-  leftLinks: LinkItem[]
-  rightLinks: LinkItem[]
-  copyrightText: string
+    leftLinks: LinkItem[]
+    rightLinks: LinkItem[]
+    copyrightText: string
 }
 
 interface Wave {
-  amp: number
-  freq: number
-  speed: number
-  opacity: number
+    amp: number
+    freq: number
+    speed: number
+    opacity: number
 }
 
-const Footer: React.FC<FooterProps> = ({
-  leftLinks,
-  rightLinks,
-  copyrightText
-}) => {
+const Footer: React.FC<FooterProps> = ({ leftLinks, rightLinks, copyrightText }) => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
 
-  useEffect(() => {
+        const ctx = canvas.getContext('2d')!
 
-    const canvas = canvasRef.current
-    if (!canvas) return
+        let width = canvas.offsetWidth
+        const height = 240
 
-    const ctx = canvas.getContext("2d")!
+        canvas.width = width
+        canvas.height = height
 
-    let width = canvas.offsetWidth
-    const height = 240
+        let time = 0
 
-    canvas.width = width
-    canvas.height = height
+        const waves: Wave[] = [
+            { amp: 35, freq: 0.012, speed: 0.02, opacity: 0.45 },
+            { amp: 25, freq: 0.018, speed: 0.015, opacity: 0.35 },
+            { amp: 18, freq: 0.024, speed: 0.01, opacity: 0.25 }
+        ]
 
-    let time = 0
+        class Particle {
+            x: number
+            waveIndex: number
+            offset: number
 
-    const waves: Wave[] = [
-      { amp: 35, freq: 0.012, speed: 0.02, opacity: 0.45 },
-      { amp: 25, freq: 0.018, speed: 0.015, opacity: 0.35 },
-      { amp: 18, freq: 0.024, speed: 0.01, opacity: 0.25 }
-    ]
+            constructor() {
+                this.x = Math.random() * width
+                this.waveIndex = Math.floor(Math.random() * waves.length)
+                this.offset = Math.random() * 1000
+            }
 
-    class Particle {
+            update() {
+                this.x += 1.2
 
-      x: number
-      waveIndex: number
-      offset: number
+                if (this.x > width) {
+                    this.x = 0
+                }
+            }
 
-      constructor() {
+            draw() {
+                const wave = waves[this.waveIndex]
 
-        this.x = Math.random() * width
-        this.waveIndex = Math.floor(Math.random() * waves.length)
-        this.offset = Math.random() * 1000
+                const y = height * 0.55 + Math.sin(this.x * wave.freq + time * wave.speed) * wave.amp
 
-      }
+                const gradient = ctx.createRadialGradient(this.x, y, 0, this.x, y, 8)
 
-      update() {
+                gradient.addColorStop(0, 'rgba(43,127,255,1)')
+                gradient.addColorStop(1, 'rgba(43,127,255,0)')
 
-        this.x += 1.2
-
-        if (this.x > width) {
-          this.x = 0
+                ctx.beginPath()
+                ctx.arc(this.x, y, 2.2, 0, Math.PI * 2)
+                ctx.fillStyle = gradient
+                ctx.fill()
+            }
         }
 
-      }
+        const particles: Particle[] = []
 
-      draw() {
+        for (let i = 0; i < 40; i++) {
+            particles.push(new Particle())
+        }
 
-        const wave = waves[this.waveIndex]
+        function drawWave(wave: Wave) {
+            ctx.beginPath()
 
-        const y =
-          height * 0.55 +
-          Math.sin(this.x * wave.freq + time * wave.speed) *
-            wave.amp
+            for (let x = 0; x <= width; x++) {
+                const y = height * 0.55 + Math.sin(x * wave.freq + time * wave.speed) * wave.amp
 
-        const gradient = ctx.createRadialGradient(
-          this.x,
-          y,
-          0,
-          this.x,
-          y,
-          8
-        )
+                if (x === 0) ctx.moveTo(x, y)
+                else ctx.lineTo(x, y)
+            }
 
-        gradient.addColorStop(0, "rgba(43,127,255,1)")
-        gradient.addColorStop(1, "rgba(43,127,255,0)")
+            ctx.lineTo(width, height)
+            ctx.lineTo(0, height)
+            ctx.closePath()
 
-        ctx.beginPath()
-        ctx.arc(this.x, y, 2.2, 0, Math.PI * 2)
-        ctx.fillStyle = gradient
-        ctx.fill()
+            const gradient = ctx.createLinearGradient(0, height * 0.5, 0, height)
 
-      }
+            gradient.addColorStop(0, `rgba(43,127,255,${wave.opacity})`)
+            gradient.addColorStop(1, 'rgba(43,127,255,0)')
 
-    }
+            ctx.fillStyle = gradient
+            ctx.fill()
+        }
 
-    const particles: Particle[] = []
+        function drawBackgroundGlow() {
+            const gradient = ctx.createRadialGradient(width / 2, height * 0.6, 0, width / 2, height * 0.6, height)
 
-    for (let i = 0; i < 40; i++) {
-      particles.push(new Particle())
-    }
+            gradient.addColorStop(0, 'rgba(43,127,255,0.15)')
+            gradient.addColorStop(1, 'rgba(0,0,0,0)')
 
-    function drawWave(wave: Wave) {
+            ctx.fillStyle = gradient
+            ctx.fillRect(0, 0, width, height)
+        }
 
-      ctx.beginPath()
+        function animate() {
+            ctx.clearRect(0, 0, width, height)
 
-      for (let x = 0; x <= width; x++) {
+            drawBackgroundGlow()
 
-        const y =
-          height * 0.55 +
-          Math.sin(x * wave.freq + time * wave.speed) *
-            wave.amp
+            waves.forEach(drawWave)
 
-        if (x === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
+            particles.forEach((p) => {
+                p.update()
+                p.draw()
+            })
 
-      }
+            time += 1
 
-      ctx.lineTo(width, height)
-      ctx.lineTo(0, height)
-      ctx.closePath()
+            requestAnimationFrame(animate)
+        }
 
-      const gradient = ctx.createLinearGradient(
-        0,
-        height * 0.5,
-        0,
-        height
-      )
+        animate()
 
-      gradient.addColorStop(0, `rgba(43,127,255,${wave.opacity})`)
-      gradient.addColorStop(1, "rgba(43,127,255,0)")
+        const handleResize = () => {
+            width = canvas.offsetWidth
+            canvas.width = width
+            canvas.height = height
+        }
 
-      ctx.fillStyle = gradient
-      ctx.fill()
+        window.addEventListener('resize', handleResize)
 
-    }
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
-    function drawBackgroundGlow() {
+    return (
+        <footer className="bg-black text-white flex flex-col justify-between w-full">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between gap-4 pt-8 pb-24 px-4">
+                <div className="space-y-2">
+                    <ul className="flex flex-wrap gap-4">
+                        {leftLinks.map((link, i) => (
+                            <li key={i}>
+                                <a
+                                    href={link.href}
+                                    className="text-sm hover:text-[#2B7FFF]">
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
 
-      const gradient = ctx.createRadialGradient(
-        width / 2,
-        height * 0.6,
-        0,
-        width / 2,
-        height * 0.6,
-        height
-      )
+                    <p className="text-sm mt-4 flex items-center gap-x-1">
+                        <CopyrightIcon className="h-4 w-4" />
+                        {copyrightText}
+                    </p>
+                </div>
 
-      gradient.addColorStop(0, "rgba(43,127,255,0.15)")
-      gradient.addColorStop(1, "rgba(0,0,0,0)")
+                <div className="space-y-4">
+                    <ul className="flex flex-wrap gap-4">
+                        {rightLinks.map((link, i) => (
+                            <li key={i}>
+                                <NavLink href={link.href}>
+                                    <span className="text-sm hover:text-[#2B7FFF]">{link.label}</span>
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
 
-      ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, width, height)
+                    <div className="text-center md:text-right mt-4">
+                        <button
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="text-sm hover:underline">
+                            Back to top
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-    }
-
-    function animate() {
-
-      ctx.clearRect(0, 0, width, height)
-
-      drawBackgroundGlow()
-
-      waves.forEach(drawWave)
-
-      particles.forEach(p => {
-        p.update()
-        p.draw()
-      })
-
-      time += 1
-
-      requestAnimationFrame(animate)
-
-    }
-
-    animate()
-
-    const handleResize = () => {
-
-      width = canvas.offsetWidth
-      canvas.width = width
-      canvas.height = height
-
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => window.removeEventListener("resize", handleResize)
-
-  }, [])
-
-  return (
-
-    <footer className="bg-black text-white flex flex-col justify-between w-full">
-
-      <div className="container mx-auto flex flex-col md:flex-row justify-between gap-4 pt-8 pb-24 px-4">
-
-        <div className="space-y-2">
-
-          <ul className="flex flex-wrap gap-4">
-            {leftLinks.map((link, i) => (
-              <li key={i}>
-                <a href={link.href} className="text-sm hover:text-[#2B7FFF]">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <p className="text-sm mt-4 flex items-center gap-x-1">
-            <CopyrightIcon className="h-4 w-4" />
-            {copyrightText}
-          </p>
-
-        </div>
-
-        <div className="space-y-4">
-
-          <ul className="flex flex-wrap gap-4">
-            {rightLinks.map((link, i) => (
-              <li key={i}>
-                <NavLink href={link.href}>
-                  <span className="text-sm hover:text-[#2B7FFF]">
-                    {link.label}
-                  </span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-
-          <div className="text-center md:text-right mt-4">
-
-            <button
-              onClick={() =>
-                window.scrollTo({ top: 0, behavior: "smooth" })
-              }
-              className="text-sm hover:underline"
-            >
-              Back to top
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <canvas
-        ref={canvasRef}
-        className="w-full"
-        style={{ height: "240px" }}
-      />
-
-    </footer>
-
-  )
+            <canvas
+                ref={canvasRef}
+                className="w-full"
+                style={{ height: '240px' }}
+            />
+        </footer>
+    )
 }
 
 export default Footer
