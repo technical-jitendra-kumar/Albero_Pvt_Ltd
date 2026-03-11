@@ -71,7 +71,7 @@ button {
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 1;
+    opacity: 0.65;
 }
 
 .cursor-glow {

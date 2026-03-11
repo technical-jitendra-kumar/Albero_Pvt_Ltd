@@ -11,10 +11,12 @@ import { Contact } from '@/components/user/home/Contact'
 import SEO from '@/components/user/common/SEO'
 import { heroData } from '@/constants/hero'
 import { homeSEO } from '@/constants/seo'
+import ParticleCanvas from '@/components/workui/ParticleCanvas'
 
 export default function Home() {
     return (
         <div>
+            <ParticleCanvas />
             {/* SEO */}
             <SEO
                 title={homeSEO.title}

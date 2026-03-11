@@ -1,10 +1,15 @@
 import '../../styles/work.css'
 import '../../styles/about.css'
+
+import ParticleCanvas from '@/components/workui/ParticleCanvas'
+import CursorGlow from '@/components/workui/CursorGlow'
 import ScrollReveal from '@/components/workui/ScrollReveal'
 
 export default function AboutPage() {
     return (
         <div className="about-page">
+            <ParticleCanvas />
+            <CursorGlow />
             <ScrollReveal />
 
             {/* ── HERO ── */}
@@ -15,6 +20,8 @@ export default function AboutPage() {
                 <div className="hero-arc-inner"></div>
                 <div className="hero-corner tl"></div>
                 <div className="hero-corner tr"></div>
+                <div className="hero-corner bl"></div>
+                <div className="hero-corner br"></div>
 
                 <div className="about-hero-inner">
                     <div className="hero-badge reveal">

@@ -11,23 +11,25 @@ const AnimatedNavLink = ({ href, children }: { href: string; children: React.Rea
 
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault()
+
+        if (href.startsWith('/')) {
+            navigate(href)
+            return
+        }
+
         const targetId = href.replace('#', '')
 
         if (location.pathname !== '/') {
-            // Navigate to home, then scroll after load
             navigate('/', { state: { scrollTo: targetId } })
         } else {
-            // Already on home → scroll directly with offset
             const section = document.getElementById(targetId)
             if (section) {
-                const yOffset = -60 // 👈 adjust this to your navbar height
+                const yOffset = -60
                 const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset
-
                 window.scrollTo({ top: y, behavior: 'smooth' })
             }
         }
     }
-
     return (
         <a
             href={href}
@@ -114,14 +116,20 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-8">
-                    {['Home', 'About', 'Services', 'Our Work', 'Pricing'].map((item) => (
+                    {[
+                        { label: 'Home', href: '#home' },
+                        { label: 'About', href: '/about' },
+                        { label: 'Services', href: '#services' },
+                        { label: 'Our Work', href: '/work' },
+                        { label: 'Pricing', href: '#pricing' }
+                    ].map(({ label, href }) => (
                         <motion.div
-                            key={item}
+                            key={label}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3 }}
                             whileHover={{ scale: 1.05 }}>
-                            <AnimatedNavLink href={`#${item.toLowerCase()}`}>{item}</AnimatedNavLink>
+                            <AnimatedNavLink href={href}>{label}</AnimatedNavLink>
                         </motion.div>
                     ))}
                 </nav>
@@ -198,20 +206,26 @@ const Navbar = () => {
                         </motion.button>
 
                         <div className="flex flex-col space-y-6">
-                            {['Home', 'About', 'Services', 'Our Work', 'Pricing'].map((item, i) => (
+                            {[
+                                { label: 'Home', href: '#home' },
+                                { label: 'About', href: '/about' },
+                                { label: 'Services', href: '#services' },
+                                { label: 'Our Work', href: '/work' },
+                                { label: 'Pricing', href: '#pricing' }
+                            ].map(({ label, href }, i) => (
                                 <motion.div
-                                    key={item}
+                                    key={label}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.1 + 0.1 }}
                                     exit={{ opacity: 0, x: 20 }}>
-                                    <NavLink href={`#${item.toLowerCase()}`}>
+                                    <AnimatedNavLink href={href}>
                                         <span
                                             className="text-base text-white font-medium"
                                             onClick={toggleMenu}>
-                                            {item}
+                                            {label}
                                         </span>
-                                    </NavLink>
+                                    </AnimatedNavLink>
                                 </motion.div>
                             ))}
 
@@ -242,5 +256,4 @@ const Navbar = () => {
         </div>
     )
 }
-;<AnimatedNavLink href="/about">About</AnimatedNavLink>
 export { Navbar }
