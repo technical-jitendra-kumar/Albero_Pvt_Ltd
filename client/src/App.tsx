@@ -1,7 +1,6 @@
 import './App.css'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import WorkPage from './pages/user/work'
 
 // Components
 import Loader from './components/user/common/Loader'
@@ -15,6 +14,8 @@ import BackToTopButton from './components/user/common/BackToTopButton'
 const Home = lazy(() => import('./pages/user/Home'))
 const RefundPolicy = lazy(() => import('./pages/user/Refund'))
 const TermsAndPolicies = lazy(() => import('./pages/user/Terms'))
+const WorkPage = lazy(() => import('./pages/user/work'))
+const AboutPage = lazy(() => import('./pages/user/About'))
 
 export default function App() {
     const [isOnline, setIsOnline] = useState(navigator.onLine)
@@ -73,6 +74,11 @@ export default function App() {
                     <Route
                         path="/work"
                         element={<WorkPage />}
+                    />
+
+                    <Route
+                        path="/about"
+                        element={<AboutPage />}
                     />
 
                     <Route

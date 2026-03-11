@@ -8,6 +8,7 @@
 html,
 body {
     cursor: url('./assets/images/cursor/light/arrow.png'), auto;
+    background: #000000;
 }
 
 a,
@@ -63,4 +64,24 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
     cursor: var(--scrollbar-thumb-hover);
+}
+
+#particle-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(0.623 0.214 259.815 / 0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.05s linear;
 }

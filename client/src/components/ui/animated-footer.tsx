@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { NavLink } from '../user/common/NavLink'
 import { CopyrightIcon } from 'lucide-react'
 
 interface LinkItem {
@@ -13,189 +12,262 @@ interface FooterProps {
     copyrightText: string
 }
 
-interface Wave {
-    amp: number
-    freq: number
-    speed: number
-    opacity: number
-}
-
 const Footer: React.FC<FooterProps> = ({ leftLinks, rightLinks, copyrightText }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
+    const rafRef = useRef<number>(0)
 
     useEffect(() => {
         const canvas = canvasRef.current
         if (!canvas) return
 
         const ctx = canvas.getContext('2d')!
-
-        let width = canvas.offsetWidth
-        const height = 240
-
-        canvas.width = width
-        canvas.height = height
-
+        let width = 0
+        const height = 220
         let time = 0
 
-        const waves: Wave[] = [
-            { amp: 35, freq: 0.012, speed: 0.02, opacity: 0.45 },
-            { amp: 25, freq: 0.018, speed: 0.015, opacity: 0.35 },
-            { amp: 18, freq: 0.024, speed: 0.01, opacity: 0.25 }
+        function resize() {
+            width = window.innerWidth
+            canvas!.width = width
+            canvas!.height = height
+        }
+
+        resize()
+        window.addEventListener('resize', resize)
+
+        // Wave config
+        const waves = [
+            { amp: 32, freq: 0.01, speed: 0.022, opacity: 0.55, yBase: 0.52 },
+            { amp: 22, freq: 0.016, speed: 0.016, opacity: 0.4, yBase: 0.58 },
+            { amp: 14, freq: 0.022, speed: 0.011, opacity: 0.28, yBase: 0.64 }
         ]
 
-        class Particle {
-            x: number
-            waveIndex: number
-            offset: number
+        // Particles on wave surface
+        const particles: { x: number; waveIdx: number; speed: number; size: number; alpha: number }[] = []
+        for (let i = 0; i < 55; i++) {
+            particles.push({
+                x: Math.random() * 2000,
+                waveIdx: Math.floor(Math.random() * waves.length),
+                speed: 0.6 + Math.random() * 1.2,
+                size: 1.2 + Math.random() * 2,
+                alpha: 0.4 + Math.random() * 0.6
+            })
+        }
 
-            constructor() {
-                this.x = Math.random() * width
-                this.waveIndex = Math.floor(Math.random() * waves.length)
-                this.offset = Math.random() * 1000
-            }
+        function getWaveY(x: number, wave: (typeof waves)[0]) {
+            return height * wave.yBase + Math.sin(x * wave.freq + time * wave.speed * 50) * wave.amp
+        }
 
-            update() {
-                this.x += 1.2
-
-                if (this.x > width) {
-                    this.x = 0
+        function drawWaves() {
+            waves.forEach((wave, wi) => {
+                // Draw filled wave
+                ctx.beginPath()
+                for (let x = 0; x <= width; x += 2) {
+                    const y = getWaveY(x, wave)
+                    if (x === 0) ctx.moveTo(x, y)
+                    else ctx.lineTo(x, y)
                 }
-            }
+                ctx.lineTo(width, height)
+                ctx.lineTo(0, height)
+                ctx.closePath()
 
-            draw() {
-                const wave = waves[this.waveIndex]
+                const grad = ctx.createLinearGradient(0, height * wave.yBase - wave.amp, 0, height)
+                grad.addColorStop(0, `rgba(43,127,255,${wave.opacity})`)
+                grad.addColorStop(0.5, `rgba(30,90,220,${wave.opacity * 0.7})`)
+                grad.addColorStop(1, `rgba(10,30,80,${wave.opacity * 0.4})`)
+                ctx.fillStyle = grad
+                ctx.fill()
 
-                const y = height * 0.55 + Math.sin(this.x * wave.freq + time * wave.speed) * wave.amp
+                // Draw glowing wave edge line
+                ctx.beginPath()
+                for (let x = 0; x <= width; x += 2) {
+                    const y = getWaveY(x, wave)
+                    if (x === 0) ctx.moveTo(x, y)
+                    else ctx.lineTo(x, y)
+                }
+                ctx.strokeStyle = `rgba(80,160,255,${wave.opacity * 0.9})`
+                ctx.lineWidth = wi === 0 ? 1.5 : 1
+                ctx.shadowBlur = wi === 0 ? 8 : 4
+                ctx.shadowColor = 'rgba(43,127,255,0.8)'
+                ctx.stroke()
+                ctx.shadowBlur = 0
+            })
+        }
 
-                const gradient = ctx.createRadialGradient(this.x, y, 0, this.x, y, 8)
+        function drawParticles() {
+            particles.forEach((p) => {
+                p.x += p.speed
+                if (p.x > width + 20) p.x = -20
 
-                gradient.addColorStop(0, 'rgba(43,127,255,1)')
-                gradient.addColorStop(1, 'rgba(43,127,255,0)')
+                const wave = waves[p.waveIdx]
+                const y = getWaveY(p.x, wave)
+
+                // Glowing dot
+                const grad = ctx.createRadialGradient(p.x, y, 0, p.x, y, p.size * 3)
+                grad.addColorStop(0, `rgba(150,210,255,${p.alpha})`)
+                grad.addColorStop(0.4, `rgba(43,127,255,${p.alpha * 0.6})`)
+                grad.addColorStop(1, `rgba(43,127,255,0)`)
 
                 ctx.beginPath()
-                ctx.arc(this.x, y, 2.2, 0, Math.PI * 2)
-                ctx.fillStyle = gradient
+                ctx.arc(p.x, y, p.size, 0, Math.PI * 2)
+                ctx.fillStyle = grad
+                ctx.shadowBlur = 10
+                ctx.shadowColor = 'rgba(43,127,255,0.9)'
                 ctx.fill()
-            }
+                ctx.shadowBlur = 0
+            })
         }
 
-        const particles: Particle[] = []
-
-        for (let i = 0; i < 40; i++) {
-            particles.push(new Particle())
-        }
-
-        function drawWave(wave: Wave) {
-            ctx.beginPath()
-
-            for (let x = 0; x <= width; x++) {
-                const y = height * 0.55 + Math.sin(x * wave.freq + time * wave.speed) * wave.amp
-
-                if (x === 0) ctx.moveTo(x, y)
-                else ctx.lineTo(x, y)
-            }
-
-            ctx.lineTo(width, height)
-            ctx.lineTo(0, height)
-            ctx.closePath()
-
-            const gradient = ctx.createLinearGradient(0, height * 0.5, 0, height)
-
-            gradient.addColorStop(0, `rgba(43,127,255,${wave.opacity})`)
-            gradient.addColorStop(1, 'rgba(43,127,255,0)')
-
-            ctx.fillStyle = gradient
-            ctx.fill()
-        }
-
-        function drawBackgroundGlow() {
-            const gradient = ctx.createRadialGradient(width / 2, height * 0.6, 0, width / 2, height * 0.6, height)
-
-            gradient.addColorStop(0, 'rgba(43,127,255,0.15)')
-            gradient.addColorStop(1, 'rgba(0,0,0,0)')
-
-            ctx.fillStyle = gradient
+        function drawAmbientGlow() {
+            // Wide bottom glow
+            const grad = ctx.createRadialGradient(width / 2, height * 0.7, 0, width / 2, height * 0.7, width * 0.55)
+            grad.addColorStop(0, 'rgba(43,100,255,0.12)')
+            grad.addColorStop(0.5, 'rgba(20,60,180,0.06)')
+            grad.addColorStop(1, 'rgba(0,0,0,0)')
+            ctx.fillStyle = grad
             ctx.fillRect(0, 0, width, height)
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height)
-
-            drawBackgroundGlow()
-
-            waves.forEach(drawWave)
-
-            particles.forEach((p) => {
-                p.update()
-                p.draw()
-            })
-
-            time += 1
-
-            requestAnimationFrame(animate)
+            drawAmbientGlow()
+            drawWaves()
+            drawParticles()
+            time += 0.016
+            rafRef.current = requestAnimationFrame(animate)
         }
 
-        animate()
+        rafRef.current = requestAnimationFrame(animate)
 
-        const handleResize = () => {
-            width = canvas.offsetWidth
-            canvas.width = width
-            canvas.height = height
+        return () => {
+            cancelAnimationFrame(rafRef.current)
+            window.removeEventListener('resize', resize)
         }
-
-        window.addEventListener('resize', handleResize)
-
-        return () => window.removeEventListener('resize', handleResize)
     }, [])
 
     return (
-        <footer className="bg-black text-white flex flex-col justify-between w-full">
-            <div className="container mx-auto flex flex-col md:flex-row justify-between gap-4 pt-8 pb-24 px-4">
-                <div className="space-y-2">
-                    <ul className="flex flex-wrap gap-4">
-                        {leftLinks.map((link, i) => (
-                            <li key={i}>
-                                <a
-                                    href={link.href}
-                                    className="text-sm hover:text-[#2B7FFF]">
-                                    {link.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+        <footer
+            style={{
+                background: '#000',
+                color: '#fff',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                position: 'relative',
+                zIndex: 10,
+                borderTop: '1px solid rgba(255,255,255,0.07)',
+                textAlign: 'left'
+            }}>
+            {/* Top divider glow line */}
+            <div
+                style={{
+                    height: '1px',
+                    background: 'linear-gradient(90deg, transparent, rgba(43,127,255,0.4), rgba(43,127,255,0.4), transparent)'
+                }}
+            />
 
-                    <p className="text-sm mt-4 flex items-center gap-x-1">
-                        <CopyrightIcon className="h-4 w-4" />
+            {/* Footer content */}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    padding: '36px 60px 40px',
+                    flexWrap: 'wrap',
+                    gap: '24px',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    textAlign: 'left'
+                }}>
+                {/* Left */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {/* Logo */}
+                    <div
+                        style={{
+                            fontFamily: "'Bebas Neue', sans-serif",
+                            fontSize: '26px',
+                            letterSpacing: '4px',
+                            color: '#fff',
+                            marginBottom: '4px'
+                        }}>
+                        ALBERO<span style={{ color: 'oklch(0.623 0.214 259.815)' }}>.</span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                        {leftLinks.map((link, i) => (
+                            <a
+                                key={i}
+                                href={link.href}
+                                style={{
+                                    fontFamily: "'Barlow Condensed', sans-serif",
+                                    fontSize: '11px',
+                                    fontWeight: 700,
+                                    letterSpacing: '2px',
+                                    textTransform: 'uppercase',
+                                    color: '#747474',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.2s'
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = '#747474')}>
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+
+                    <p
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            fontFamily: "'Barlow Condensed', sans-serif",
+                            fontSize: '11px',
+                            letterSpacing: '1.5px',
+                            textTransform: 'uppercase',
+                            color: '#747474',
+                            margin: 0
+                        }}>
+                        <CopyrightIcon style={{ width: '13px', height: '13px' }} />
                         {copyrightText}
                     </p>
                 </div>
 
-                <div className="space-y-4">
-                    <ul className="flex flex-wrap gap-4">
+                {/* Right */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-end' }}>
+                    <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                         {rightLinks.map((link, i) => (
-                            <li key={i}>
-                                <NavLink href={link.href}>
-                                    <span className="text-sm hover:text-[#2B7FFF]">{link.label}</span>
-                                </NavLink>
-                            </li>
+                            <a
+                                key={i}
+                                href={link.href}
+                                style={{
+                                    fontFamily: "'Barlow Condensed', sans-serif",
+                                    fontSize: '11px',
+                                    fontWeight: 700,
+                                    letterSpacing: '2px',
+                                    textTransform: 'uppercase',
+                                    color: '#747474',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.2s'
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = '#747474')}>
+                                {link.label}
+                            </a>
                         ))}
-                    </ul>
-
-                    <div className="text-center md:text-right mt-4">
-                        <button
-                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            className="text-sm hover:underline">
-                            Back to top
-                        </button>
                     </div>
                 </div>
             </div>
 
-            <canvas
-                ref={canvasRef}
-                className="w-full"
-                style={{ height: '240px' }}
-            />
+            {/* Wave canvas — full width, no cropping */}
+            <div style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)', overflow: 'hidden', lineHeight: 0 }}>
+                <canvas
+                    ref={canvasRef}
+                    style={{
+                        display: 'block',
+                        width: '100%',
+                        height: '220px'
+                    }}
+                />
+            </div>
         </footer>
     )
 }

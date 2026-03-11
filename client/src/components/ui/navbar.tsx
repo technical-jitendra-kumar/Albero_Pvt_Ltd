@@ -242,5 +242,5 @@ const Navbar = () => {
         </div>
     )
 }
-
+;<AnimatedNavLink href="/about">About</AnimatedNavLink>
 export { Navbar }
