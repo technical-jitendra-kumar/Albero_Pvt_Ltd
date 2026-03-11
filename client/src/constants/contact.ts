@@ -22,10 +22,10 @@ export const contactData = {
     },
     link: {
         title: 'Follow us',
-        facebook: 'https://m.facebook.com/profile.php?id=61579248144811',
-        twitter: 'https://twitter.com',
-        linkedin: 'https://linkedin.com',
-        instagram: 'https://www.instagram.com/albero_tech/'
+        facebook: 'https://www.facebook.com/AlberoTechnologies1',
+        twitter: 'https://x.com/Alberotech1',
+        linkedin: 'https://www.linkedin.com/company/albero-technologies-pvt-ltd/',
+        instagram: 'https://www.instagram.com/albero.technologies/'
     },
     otherCard: {
         title: 'Free Consultation',
