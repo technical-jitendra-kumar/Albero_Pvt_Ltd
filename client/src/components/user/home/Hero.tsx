@@ -52,13 +52,13 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     </NavLink>
                 )}
 
-                {/* Title */}
+                {/* Title — only change: to-white/40 → to-[oklch(0.623_0.214_259.815)] */}
                 <h1
                     className="animate-fade-in -translate-y-4 text-balance 
         bg-gradient-to-br from-30% 
         bg-clip-text py-6 text-5xl font-bold leading-none tracking-tighter 
         text-transparent sm:text-6xl md:text-7xl lg:text-8xl 
-        from-white to-white/40">
+        from-white to-[oklch(0.623_0.214_259.815)]">
                     {title}
                 </h1>
 
