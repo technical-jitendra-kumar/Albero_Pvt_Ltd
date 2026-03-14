@@ -1,11 +1,10 @@
 'use client'
-
+import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { pricingData } from '@/constants/pricing'
 import type { PricingService, ProductTier } from '@/constants/pricing'
 import { Check, ChevronRight } from 'lucide-react'
 import { NavLink } from '../common/NavLink'
-import { useState } from 'react'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
