@@ -32,64 +32,6 @@ const CAT_STYLE: Record<string, { accent: string; accentBg: string; border: stri
     Support: { accent: 'var(--grey-light)', accentBg: 'oklch(0.87 0 0 / 0.06)', border: 'oklch(0.87 0 0 / 0.15)' }
 }
 
-// ─── Decorations ──────────────────────────────────────────────────────────────
-
-function DotGrid({ id, color, opacity }: { id: string; color: string; opacity: number }) {
-    return (
-        <svg
-            width="200"
-            height="200"
-            viewBox="0 0 200 200"
-            fill="none"
-            aria-hidden="true"
-            style={{ display: 'block' }}>
-            <defs>
-                <pattern
-                    id={id}
-                    x="0"
-                    y="0"
-                    width="18"
-                    height="18"
-                    patternUnits="userSpaceOnUse">
-                    <circle
-                        cx="1.5"
-                        cy="1.5"
-                        r="1.5"
-                        fill={color}
-                        fillOpacity={opacity}
-                    />
-                </pattern>
-            </defs>
-            <rect
-                width="200"
-                height="200"
-                fill={`url(#${id})`}
-            />
-        </svg>
-    )
-}
-
-function Bracket({ color, rotate = 0 }: { color: string; rotate?: number }) {
-    return (
-        <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-            style={{ transform: `rotate(${rotate}deg)`, display: 'block' }}>
-            <path
-                d="M3 21 L3 3 L21 3"
-                stroke={color}
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0.4"
-            />
-        </svg>
-    )
-}
-
 // ─── Products Tab ─────────────────────────────────────────────────────────────
 
 function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Billing } */) {
@@ -109,7 +51,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                             fontWeight: 700,
                             letterSpacing: '.12em',
                             textTransform: 'uppercase',
-                            color: 'var(--grey-mid)',
+                            color: 'rgba(255,255,255,0.35)',
                             marginBottom: 6,
                             padding: '0 4px'
                         }}>
@@ -128,22 +70,27 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                     gap: 10,
                                     padding: '11px 12px',
                                     borderRadius: 12,
-                                    border: `1px solid ${isAct ? 'var(--border-blu)' : 'transparent'}`,
-                                    background: isAct ? 'oklch(from var(--blue-vivid) l c h / 0.10)' : 'transparent',
+                                    border: `1px solid ${isAct ? 'rgba(99,102,241,0.35)' : 'rgba(255,255,255,0.06)'}`,
+                                    background: isAct
+                                        ? 'linear-gradient(135deg,rgba(99,102,241,0.15),rgba(99,102,241,0.06))'
+                                        : 'rgba(255,255,255,0.03)',
+                                    backdropFilter: 'blur(12px)',
+                                    WebkitBackdropFilter: 'blur(12px)',
+                                    boxShadow: isAct ? '0 1px 0 rgba(255,255,255,0.08) inset' : 'none',
                                     cursor: 'pointer',
                                     textAlign: 'left',
-                                    transition: 'background .18s, border-color .18s'
+                                    transition: 'background .18s, border-color .18s, box-shadow .18s'
                                 }}
                                 onMouseEnter={(e) => {
                                     if (!isAct) {
-                                        e.currentTarget.style.background = 'var(--bg-card)'
-                                        e.currentTarget.style.borderColor = 'var(--border)'
+                                        e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
                                     }
                                 }}
                                 onMouseLeave={(e) => {
                                     if (!isAct) {
-                                        e.currentTarget.style.background = 'transparent'
-                                        e.currentTarget.style.borderColor = 'transparent'
+                                        e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
                                     }
                                 }}>
                                 <div
@@ -155,8 +102,9 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        background: isAct ? p.accentBg : 'var(--bg-mid)',
-                                        color: isAct ? p.accent : 'var(--grey-mid)',
+                                        background: isAct ? p.accentBg : 'rgba(255,255,255,0.06)',
+                                        border: `1px solid ${isAct ? 'rgba(99,102,241,0.3)' : 'rgba(255,255,255,0.06)'}`,
+                                        color: isAct ? p.accent : 'rgba(255,255,255,0.35)',
                                         transition: 'background .18s, color .18s'
                                     }}>
                                     <PIcon size={17} />
@@ -167,7 +115,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                             fontFamily: 'var(--font-barlow)',
                                             fontSize: 13,
                                             fontWeight: 700,
-                                            color: isAct ? 'var(--white)' : 'var(--grey-light)',
+                                            color: isAct ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.55)',
                                             whiteSpace: 'nowrap'
                                         }}>
                                         {p.name}
@@ -176,7 +124,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                         style={{
                                             fontFamily: 'var(--font-barlow)',
                                             fontSize: 10,
-                                            color: 'var(--grey-mid)',
+                                            color: 'rgba(255,255,255,0.25)',
                                             whiteSpace: 'nowrap',
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis',
@@ -193,7 +141,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                 {/* ── Tiers ── */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                     {/* Product header */}
-                    <div style={{ marginBottom: 28, paddingBottom: 20, borderBottom: '1px solid var(--border)' }}>
+                    <div style={{ marginBottom: 28, paddingBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 8 }}>
                             <div
                                 style={{
@@ -201,7 +149,9 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                     height: 46,
                                     borderRadius: 12,
                                     background: product.accentBg,
-                                    border: '1px solid var(--border-blu)',
+                                    border: '1px solid rgba(99,102,241,0.28)',
+                                    backdropFilter: 'blur(8px)',
+                                    boxShadow: '0 1px 0 rgba(255,255,255,0.1) inset',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -216,7 +166,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                         fontFamily: 'var(--font-bebas)',
                                         fontSize: 28,
                                         letterSpacing: '.03em',
-                                        color: 'var(--white)',
+                                        color: 'rgba(255,255,255,0.95)',
                                         lineHeight: 1
                                     }}>
                                     {product.name}
@@ -234,7 +184,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                 </div>
                             </div>
                         </div>
-                        <p style={{ fontFamily: 'var(--font-barlow)', fontSize: 14, color: 'var(--grey-mid)', lineHeight: 1.65 }}>
+                        <p style={{ fontFamily: 'var(--font-barlow)', fontSize: 14, color: 'rgba(255,255,255,0.38)', lineHeight: 1.65 }}>
                             {product.description}
                         </p>
                     </div>
@@ -255,36 +205,21 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                     key={i}
                                     className={`prc-tier-card ${isHot ? 'prc-tier-hot' : ''}`}>
                                     {isHot && (
-                                        <>
-                                            <div
-                                                aria-hidden="true"
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: -50,
-                                                    right: -40,
-                                                    width: 180,
-                                                    height: 180,
-                                                    borderRadius: '50%',
-                                                    background: 'var(--blue-vivid)',
-                                                    filter: 'blur(60px)',
-                                                    opacity: 0.1,
-                                                    pointerEvents: 'none'
-                                                }}
-                                            />
-                                            <div
-                                                aria-hidden="true"
-                                                style={{ position: 'absolute', top: 10, left: 10, pointerEvents: 'none' }}>
-                                                <Bracket color="var(--blue-vivid)" />
-                                            </div>
-                                            <div
-                                                aria-hidden="true"
-                                                style={{ position: 'absolute', bottom: 10, right: 10, pointerEvents: 'none' }}>
-                                                <Bracket
-                                                    color="var(--blue-vivid)"
-                                                    rotate={180}
-                                                />
-                                            </div>
-                                        </>
+                                        <div
+                                            aria-hidden="true"
+                                            style={{
+                                                position: 'absolute',
+                                                top: -50,
+                                                right: -40,
+                                                width: 180,
+                                                height: 180,
+                                                borderRadius: '50%',
+                                                background: 'oklch(0.623 0.214 259.815)',
+                                                filter: 'blur(60px)',
+                                                opacity: 0.18,
+                                                pointerEvents: 'none'
+                                            }}
+                                        />
                                     )}
 
                                     <div style={{ position: 'relative' }}>
@@ -300,9 +235,10 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                     fontWeight: 700,
                                                     letterSpacing: '.1em',
                                                     textTransform: 'uppercase',
-                                                    color: isHot ? 'var(--blue-soft)' : 'var(--grey-mid)',
-                                                    background: isHot ? 'oklch(from var(--blue-vivid) l c h / 0.12)' : 'var(--bg-mid)',
-                                                    border: `1px solid ${isHot ? 'var(--border-blu)' : 'var(--border)'}`
+                                                    color: isHot ? 'oklch(0.707 0.165 254.624)' : 'rgba(255,255,255,0.38)',
+                                                    background: isHot ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.05)',
+                                                    border: `1px solid ${isHot ? 'rgba(99,102,241,0.35)' : 'rgba(255,255,255,0.08)'}`,
+                                                    backdropFilter: 'blur(8px)'
                                                 }}>
                                                 {tier.label}
                                             </span>
@@ -312,15 +248,15 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                         width: 6,
                                                         height: 6,
                                                         borderRadius: '50%',
-                                                        background: 'var(--blue-vivid)',
-                                                        boxShadow: '0 0 6px var(--blue-vivid)',
+                                                        background: 'oklch(0.623 0.214 259.815)',
+                                                        boxShadow: '0 0 8px oklch(0.623 0.214 259.815)',
                                                         display: 'inline-block'
                                                     }}
                                                 />
                                             )}
                                         </div>
 
-                                        {/* ── Uncomment  to show pricing ──
+                                        {/* ── Uncomment when ready to show pricing ──
                                         <div style={{ marginBottom: 4 }}>
                                             <span style={{ fontFamily: 'var(--font-bebas)', fontSize: isCustom ? 32 : 44, letterSpacing: '-.01em', color: isHot ? 'var(--blue-soft)' : 'var(--white)', lineHeight: 1 }}>
                                                 {priceDisplay}
@@ -346,13 +282,13 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                 fontWeight: 600,
                                                 letterSpacing: '.08em',
                                                 textTransform: 'uppercase',
-                                                color: 'var(--grey-mid)',
+                                                color: 'rgba(255,255,255,0.28)',
                                                 marginBottom: 16
                                             }}>
                                             {tier.limit}
                                         </div>
 
-                                        <div style={{ height: 1, background: 'var(--border)', marginBottom: 16 }} />
+                                        <div style={{ height: 1, background: 'rgba(255,255,255,0.07)', marginBottom: 16 }} />
 
                                         {/* Features */}
                                         <ul
@@ -373,7 +309,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                         gap: 8,
                                                         fontFamily: 'var(--font-barlow)',
                                                         fontSize: 12,
-                                                        color: 'var(--grey-light)',
+                                                        color: 'rgba(255,255,255,0.6)',
                                                         lineHeight: 1.5
                                                     }}>
                                                     <div
@@ -381,7 +317,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                             width: 16,
                                                             height: 16,
                                                             borderRadius: '50%',
-                                                            background: 'rgba(34,197,94,0.1)',
+                                                            background: 'rgba(34,197,94,0.12)',
                                                             border: '1px solid rgba(34,197,94,0.25)',
                                                             display: 'flex',
                                                             alignItems: 'center',
@@ -416,28 +352,34 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                                     letterSpacing: '.09em',
                                                     textTransform: 'uppercase',
                                                     cursor: 'pointer',
-                                                    background: isHot ? 'var(--white)' : 'transparent',
-                                                    border: isHot ? '1px solid var(--white)' : '1px solid var(--border)',
-                                                    color: isHot ? 'var(--black)' : 'var(--grey-light)',
-                                                    transition: 'background .2s, transform .2s, border-color .2s, color .2s'
+                                                    background: isHot ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.05)',
+                                                    border: isHot ? '1px solid rgba(255,255,255,0.9)' : '1px solid rgba(255,255,255,0.1)',
+                                                    color: isHot ? '#000' : 'rgba(255,255,255,0.55)',
+                                                    backdropFilter: 'blur(8px)',
+                                                    boxShadow: isHot
+                                                        ? '0 1px 0 rgba(255,255,255,0.3) inset, 0 8px 24px rgba(99,102,241,0.2)'
+                                                        : '0 1px 0 rgba(255,255,255,0.06) inset',
+                                                    transition: 'background .2s, transform .2s, border-color .2s, color .2s, box-shadow .2s'
                                                 }}
                                                 onMouseEnter={(e) => {
                                                     const b = e.currentTarget
                                                     if (isHot) {
-                                                        b.style.background = 'var(--grey-light)'
+                                                        b.style.background = 'rgba(255,255,255,1)'
                                                     } else {
-                                                        b.style.borderColor = 'var(--border-blu)'
-                                                        b.style.color = 'var(--white)'
+                                                        b.style.borderColor = 'rgba(99,102,241,0.4)'
+                                                        b.style.color = 'rgba(255,255,255,0.9)'
+                                                        b.style.background = 'rgba(99,102,241,0.12)'
                                                     }
                                                     b.style.transform = 'translateY(-1px)'
                                                 }}
                                                 onMouseLeave={(e) => {
                                                     const b = e.currentTarget
                                                     if (isHot) {
-                                                        b.style.background = 'var(--white)'
+                                                        b.style.background = 'rgba(255,255,255,0.95)'
                                                     } else {
-                                                        b.style.borderColor = 'var(--border)'
-                                                        b.style.color = 'var(--grey-light)'
+                                                        b.style.borderColor = 'rgba(255,255,255,0.1)'
+                                                        b.style.color = 'rgba(255,255,255,0.55)'
+                                                        b.style.background = 'rgba(255,255,255,0.05)'
                                                     }
                                                     b.style.transform = 'translateY(0)'
                                                 }}>
@@ -466,7 +408,6 @@ export default function Pricing() {
     // const [billing,  setBilling]  = useState<Billing>('monthly')
 
     const { badgeTitle, heading, description, allServices } = pricingData
-
     const filtered: PricingService[] = activeCat === 'All' ? allServices : allServices.filter((s) => s.category === activeCat)
 
     return (
@@ -474,137 +415,197 @@ export default function Pricing() {
             id="pricing"
             style={{ background: 'var(--black)', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
             <style>{`
-                /* ── Switcher track ── */
+                /* ══ GLASS SYSTEM ══════════════════════════════════════════ */
+
+                /* Shared glass card */
+                .gl {
+                    background: linear-gradient(135deg,
+                        rgba(255,255,255,0.055) 0%,
+                        rgba(255,255,255,0.018) 50%,
+                        rgba(99,102,241,0.04) 100%);
+                    backdrop-filter: blur(20px) saturate(1.4);
+                    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+                    border: 1px solid rgba(255,255,255,0.09);
+                    box-shadow:
+                        0 0 0 1px rgba(255,255,255,0.03) inset,
+                        0 1px 0 rgba(255,255,255,0.1) inset,
+                        0 20px 48px rgba(0,0,0,0.4),
+                        0 4px 12px rgba(0,0,0,0.25);
+                    transition: transform 0.3s cubic-bezier(.22,1,.36,1), border-color 0.3s, box-shadow 0.3s;
+                }
+                .gl::before {
+                    content: '';
+                    position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18) 40%, rgba(255,255,255,0.18) 60%, transparent);
+                    pointer-events: none; z-index: 10; border-radius: inherit;
+                }
+                .gl::after {
+                    content: '';
+                    position: absolute; inset: 0; border-radius: inherit;
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+                    background-size: 200px 200px; pointer-events: none; opacity: 0.5; z-index: 1;
+                }
+                .gl:hover {
+                    transform: translateY(-3px) scale(1.006);
+                    border-color: rgba(99,102,241,0.28);
+                    box-shadow:
+                        0 0 0 1px rgba(255,255,255,0.05) inset,
+                        0 1px 0 rgba(255,255,255,0.14) inset,
+                        0 28px 64px rgba(0,0,0,0.5),
+                        0 0 32px rgba(99,102,241,0.1),
+                        0 6px 20px rgba(0,0,0,0.3);
+                }
+
+                /* Hot tier glass — brighter */
+                .gl-hot {
+                    background: linear-gradient(135deg,
+                        rgba(99,102,241,0.18) 0%,
+                        rgba(99,102,241,0.08) 50%,
+                        rgba(99,102,241,0.04) 100%) !important;
+                    border-color: rgba(99,102,241,0.35) !important;
+                    box-shadow:
+                        0 0 0 1px rgba(99,102,241,0.15) inset,
+                        0 1px 0 rgba(255,255,255,0.14) inset,
+                        0 20px 48px rgba(0,0,0,0.45),
+                        0 0 40px rgba(99,102,241,0.15) !important;
+                }
+
+                /* ── Tab switcher ── */
                 .prc-track {
                     display: inline-flex; gap: 3px; padding: 4px;
-                    border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);
+                    border-radius: 12px;
+                    background: rgba(255,255,255,0.04);
+                    border: 1px solid rgba(255,255,255,0.08);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.07) inset;
                 }
                 .prc-btn {
                     padding: 7px 16px; border-radius: 8px; border: 1px solid transparent;
                     background: transparent; font-family: var(--font-barlow-condensed);
                     font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-                    color: var(--grey-mid); cursor: pointer;
+                    color: rgba(255,255,255,0.35); cursor: pointer;
                     transition: background .18s, color .18s, border-color .18s; white-space: nowrap;
                 }
-                .prc-btn:hover { color: var(--grey-light); }
+                .prc-btn:hover { color: rgba(255,255,255,0.7); }
                 .prc-btn-active {
-                    background: oklch(from var(--blue-vivid) l c h / 0.12) !important;
-                    border-color: var(--border-blu) !important; color: var(--white) !important;
+                    background: linear-gradient(135deg,rgba(99,102,241,0.22),rgba(99,102,241,0.1)) !important;
+                    border-color: rgba(99,102,241,0.4) !important;
+                    color: rgba(255,255,255,0.95) !important;
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset !important;
                 }
+
                 /* ── Tier grid ── */
                 .prc-tiers-grid {
                     display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
                 }
                 @media (max-width: 900px) { .prc-tiers-grid { grid-template-columns: repeat(2, 1fr); } }
-                @media (max-width: 500px) { .prc-tiers-grid { grid-template-columns: 1fr; } }
-                /* ── Tier card ── */
+                @media (max-width: 500px)  { .prc-tiers-grid { grid-template-columns: 1fr; } }
+
+                /* ── Tier card = glass ── */
                 .prc-tier-card {
-                    background: var(--bg-2); border-radius: 16px; border: 1px solid var(--border);
-                    padding: 22px 18px; position: relative; overflow: hidden;
-                    transition: border-color .22s, transform .2s;
+                    border-radius: 16px; padding: 22px 18px;
+                    position: relative; overflow: hidden;
+                    /* glass */
+                    background: linear-gradient(135deg,rgba(255,255,255,0.055),rgba(255,255,255,0.018) 50%,rgba(99,102,241,0.04));
+                    backdrop-filter: blur(20px) saturate(1.4);
+                    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+                    border: 1px solid rgba(255,255,255,0.09);
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset, 0 16px 40px rgba(0,0,0,0.35);
+                    transition: transform .25s cubic-bezier(.22,1,.36,1), border-color .25s, box-shadow .25s;
                 }
-                .prc-tier-card:hover { transform: translateY(-2px); }
-                .prc-tier-hot { background: oklch(from var(--blue-vivid) l c h / 0.05) !important; border-color: var(--border-blu) !important; }
+                .prc-tier-card::before {
+                    content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+                    background: linear-gradient(90deg,transparent,rgba(255,255,255,0.16) 40%,rgba(255,255,255,0.16) 60%,transparent);
+                    pointer-events: none; z-index: 10;
+                }
+                .prc-tier-card:hover {
+                    transform: translateY(-3px);
+                    border-color: rgba(99,102,241,0.25);
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 24px 56px rgba(0,0,0,0.45), 0 0 24px rgba(99,102,241,0.09);
+                }
+                .prc-tier-hot {
+                    background: linear-gradient(135deg,rgba(99,102,241,0.18),rgba(99,102,241,0.08) 50%,rgba(99,102,241,0.04)) !important;
+                    border-color: rgba(99,102,241,0.35) !important;
+                    box-shadow: 0 0 0 1px rgba(99,102,241,0.12) inset, 0 1px 0 rgba(255,255,255,0.14) inset, 0 20px 48px rgba(0,0,0,0.45), 0 0 36px rgba(99,102,241,0.14) !important;
+                }
+
                 /* ── Category pills ── */
                 .prc-cat-pill {
-                    padding: 6px 14px; border-radius: 20px; background: var(--bg-card); border: 1px solid var(--border);
+                    padding: 6px 14px; border-radius: 20px;
+                    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+                    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
                     font-family: var(--font-barlow-condensed); font-size: 11px; font-weight: 700;
-                    letter-spacing: .1em; text-transform: uppercase; color: var(--grey-mid); cursor: pointer;
+                    letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,0.38); cursor: pointer;
                     transition: background .18s, border-color .18s, color .18s;
                 }
-                .prc-cat-pill:hover { color: var(--grey-light); border-color: rgba(255,255,255,0.15); }
-                .prc-cat-active { background: oklch(from var(--blue-vivid) l c h / 0.12) !important; border-color: var(--border-blu) !important; color: var(--white) !important; }
-                /* ── Services grid ── */
+                .prc-cat-pill:hover { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); }
+                .prc-cat-active {
+                    background: linear-gradient(135deg,rgba(99,102,241,0.2),rgba(99,102,241,0.09)) !important;
+                    border-color: rgba(99,102,241,0.4) !important;
+                    color: rgba(255,255,255,0.95) !important;
+                    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset !important;
+                }
+
+                /* ── Service cards (glass) ── */
                 .prc-svc-grid {
                     display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
                     max-width: 1152px; margin: 0 auto;
                 }
                 @media (max-width: 900px) { .prc-svc-grid { grid-template-columns: repeat(2, 1fr); } }
-                @media (max-width: 540px) { .prc-svc-grid { grid-template-columns: 1fr; } }
+                @media (max-width: 540px)  { .prc-svc-grid { grid-template-columns: 1fr; } }
+
                 /* ── Products tab responsive ── */
-                @media (max-width: 780px) {
-                    .prc-prod-row { flex-direction: column !important; }
-                }
+                @media (max-width: 780px) { .prc-prod-row { flex-direction: column !important; } }
             `}</style>
 
-            {/* ── BG decorations ── */}
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
-                <DotGrid
-                    id="prc-tl"
-                    color="var(--blue-vivid)"
-                    opacity={0.12}
-                />
-            </div>
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', bottom: 0, right: 0, pointerEvents: 'none' }}>
-                <DotGrid
-                    id="prc-br"
-                    color="var(--amber)"
-                    opacity={0.11}
-                />
-            </div>
+            {/* ── Scene orbs ── */}
             <div
                 aria-hidden="true"
                 style={{
                     position: 'absolute',
-                    top: -160,
-                    left: '30%',
+                    top: -200,
+                    left: '20%',
+                    width: 700,
+                    height: 700,
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle,oklch(0.546 0.245 262.881) 0%,transparent 70%)',
+                    opacity: 0.1,
+                    pointerEvents: 'none',
+                    filter: 'blur(10px)'
+                }}
+            />
+            <div
+                aria-hidden="true"
+                style={{
+                    position: 'absolute',
+                    bottom: -150,
+                    right: '10%',
                     width: 500,
                     height: 500,
                     borderRadius: '50%',
-                    background: 'var(--blue-deep)',
-                    filter: 'blur(140px)',
-                    opacity: 0.06,
-                    pointerEvents: 'none'
+                    background: 'radial-gradient(circle,oklch(0.623 0.214 259.815) 0%,transparent 70%)',
+                    opacity: 0.07,
+                    pointerEvents: 'none',
+                    filter: 'blur(10px)'
                 }}
             />
             <div
                 aria-hidden="true"
                 style={{
                     position: 'absolute',
-                    bottom: -120,
-                    right: '20%',
-                    width: 400,
-                    height: 400,
+                    top: '45%',
+                    left: '-5%',
+                    width: 300,
+                    height: 300,
                     borderRadius: '50%',
-                    background: 'var(--amber)',
-                    filter: 'blur(140px)',
-                    opacity: 0.05,
-                    pointerEvents: 'none'
+                    background: 'radial-gradient(circle,oklch(0.511 0.262 276.966) 0%,transparent 70%)',
+                    opacity: 0.08,
+                    pointerEvents: 'none',
+                    filter: 'blur(10px)'
                 }}
             />
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', top: 28, left: 20, pointerEvents: 'none' }}>
-                <Bracket color="var(--blue-vivid)" />
-            </div>
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', top: 28, right: 20, pointerEvents: 'none' }}>
-                <Bracket
-                    color="var(--blue-vivid)"
-                    rotate={90}
-                />
-            </div>
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', bottom: 28, left: 20, pointerEvents: 'none' }}>
-                <Bracket
-                    color="var(--amber)"
-                    rotate={270}
-                />
-            </div>
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', bottom: 28, right: 20, pointerEvents: 'none' }}>
-                <Bracket
-                    color="var(--amber)"
-                    rotate={180}
-                />
-            </div>
 
             {/* ── Header ── */}
             <div style={{ textAlign: 'center', marginBottom: 44, position: 'relative', zIndex: 1 }}>
@@ -618,7 +619,7 @@ export default function Pricing() {
                         fontFamily: 'var(--font-bebas)',
                         fontSize: 'clamp(36px,5vw,60px)',
                         letterSpacing: '.04em',
-                        color: 'var(--white)',
+                        color: 'rgba(255,255,255,0.95)',
                         lineHeight: 1,
                         marginBottom: 14,
                         marginTop: 16
@@ -629,7 +630,7 @@ export default function Pricing() {
                     style={{
                         fontFamily: 'var(--font-barlow)',
                         fontSize: 16,
-                        color: 'var(--grey-mid)',
+                        color: 'rgba(255,255,255,0.35)',
                         maxWidth: 540,
                         margin: '0 auto 28px',
                         lineHeight: 1.75
@@ -639,7 +640,6 @@ export default function Pricing() {
 
                 {/* Controls row */}
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-                    {/* Main tab switcher */}
                     <div className="prc-track">
                         {(
                             [
@@ -716,14 +716,14 @@ export default function Pricing() {
                             fontWeight: 600,
                             letterSpacing: '.1em',
                             textTransform: 'uppercase',
-                            color: 'var(--grey-dim)',
+                            color: 'rgba(255,255,255,0.2)',
                             textAlign: 'center',
                             marginBottom: 24
                         }}>
                         {filtered.length} service{filtered.length !== 1 ? 's' : ''}
                     </p>
 
-                    {/* Service cards */}
+                    {/* Service cards — glass */}
                     <div className="prc-svc-grid">
                         {filtered.map((svc, i) => {
                             const c = CAT_STYLE[svc.category] ?? CAT_STYLE.Support
@@ -731,26 +731,13 @@ export default function Pricing() {
                             return (
                                 <div
                                     key={i}
-                                    style={{
-                                        background: 'var(--bg-2)',
-                                        border: '1px solid var(--border)',
-                                        borderRadius: 16,
-                                        padding: '22px 20px',
-                                        position: 'relative',
-                                        overflow: 'hidden',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        transition: 'border-color .2s, transform .2s, background .2s'
-                                    }}
+                                    className="gl"
+                                    style={{ borderRadius: 16, padding: '22px 20px', display: 'flex', flexDirection: 'column', cursor: 'default' }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.borderColor = c.border
-                                        e.currentTarget.style.background = c.accentBg
-                                        e.currentTarget.style.transform = 'translateY(-2px)'
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.currentTarget.style.borderColor = 'var(--border)'
-                                        e.currentTarget.style.background = 'var(--bg-2)'
-                                        e.currentTarget.style.transform = 'translateY(0)'
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)'
                                     }}>
                                     {/* Ghost watermark */}
                                     <span
@@ -763,7 +750,7 @@ export default function Pricing() {
                                             fontSize: 64,
                                             lineHeight: 1,
                                             color: c.accent,
-                                            opacity: 0.05,
+                                            opacity: 0.06,
                                             pointerEvents: 'none',
                                             userSelect: 'none'
                                         }}>
@@ -785,7 +772,8 @@ export default function Pricing() {
                                             textTransform: 'uppercase',
                                             color: c.accent,
                                             background: c.accentBg,
-                                            border: `1px solid ${c.border}`
+                                            border: `1px solid ${c.border}`,
+                                            backdropFilter: 'blur(8px)'
                                         }}>
                                         {svc.category}
                                     </span>
@@ -798,22 +786,24 @@ export default function Pricing() {
                                             borderRadius: 11,
                                             background: c.accentBg,
                                             border: `1px solid ${c.border}`,
+                                            backdropFilter: 'blur(8px)',
+                                            boxShadow: '0 1px 0 rgba(255,255,255,0.08) inset',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             color: c.accent,
-                                            marginBottom: 14
+                                            marginBottom: 14,
+                                            flexShrink: 0
                                         }}>
                                         <SvcIcon size={20} />
                                     </div>
 
-                                    {/* Name + desc */}
                                     <div
                                         style={{
                                             fontFamily: 'var(--font-bebas)',
                                             fontSize: 20,
                                             letterSpacing: '.03em',
-                                            color: 'var(--white)',
+                                            color: 'rgba(255,255,255,0.92)',
                                             lineHeight: 1.1,
                                             marginBottom: 8
                                         }}>
@@ -823,7 +813,7 @@ export default function Pricing() {
                                         style={{
                                             fontFamily: 'var(--font-barlow)',
                                             fontSize: 13,
-                                            color: 'var(--grey-mid)',
+                                            color: 'rgba(255,255,255,0.36)',
                                             lineHeight: 1.65,
                                             flex: 1
                                         }}>
@@ -831,13 +821,13 @@ export default function Pricing() {
                                     </div>
 
                                     {/* ── Uncomment when ready to show pricing ──
-                                    <div style={{ height: 1, background: 'var(--border)', margin: '14px 0' }} />
+                                    <div style={{ height: 1, background: 'rgba(255,255,255,0.07)', margin: '14px 0' }} />
                                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
                                         <span style={{ fontFamily: 'var(--font-bebas)', fontSize: 17, letterSpacing: '.03em', color: c.accent }}>
                                             {currency === 'INR' ? svc.priceRange.inr : currency === 'EUR' ? svc.priceRange.eur : svc.priceRange.usd}
                                         </span>
                                         {svc.frequency && (
-                                            <span style={{ fontFamily: 'var(--font-barlow-condensed)', fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--grey-mid)', marginLeft: 5 }}>
+                                            <span style={{ fontFamily: 'var(--font-barlow-condensed)', fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)', marginLeft: 5 }}>
                                                 {svc.frequency}
                                             </span>
                                         )}
@@ -850,7 +840,7 @@ export default function Pricing() {
 
                     {/* Footer CTA */}
                     <div style={{ textAlign: 'center', marginTop: 48 }}>
-                        <p style={{ fontFamily: 'var(--font-barlow)', fontSize: 15, color: 'var(--grey-mid)', marginBottom: 20 }}>
+                        <p style={{ fontFamily: 'var(--font-barlow)', fontSize: 15, color: 'rgba(255,255,255,0.32)', marginBottom: 20 }}>
                             Need a custom quote for your specific requirements?
                         </p>
                         <NavLink href="#contact">
@@ -861,24 +851,28 @@ export default function Pricing() {
                                     gap: 9,
                                     padding: '13px 30px',
                                     borderRadius: 10,
-                                    background: 'var(--white)',
-                                    border: '1px solid var(--white)',
+                                    background: 'rgba(255,255,255,0.92)',
+                                    border: '1px solid rgba(255,255,255,0.9)',
                                     fontFamily: 'var(--font-barlow-condensed)',
                                     fontSize: 13,
                                     fontWeight: 700,
                                     letterSpacing: '.09em',
                                     textTransform: 'uppercase',
-                                    color: 'var(--black)',
+                                    color: '#000',
                                     cursor: 'pointer',
-                                    transition: 'background .2s, transform .2s'
+                                    backdropFilter: 'blur(8px)',
+                                    boxShadow: '0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 24px rgba(99,102,241,0.2)',
+                                    transition: 'background .2s, transform .2s, box-shadow .2s'
                                 }}
                                 onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = 'var(--grey-light)'
+                                    e.currentTarget.style.background = 'rgba(255,255,255,1)'
                                     e.currentTarget.style.transform = 'translateY(-2px)'
+                                    e.currentTarget.style.boxShadow = '0 1px 0 rgba(255,255,255,0.5) inset,0 12px 32px rgba(99,102,241,0.28)'
                                 }}
                                 onMouseLeave={(e) => {
-                                    e.currentTarget.style.background = 'var(--white)'
+                                    e.currentTarget.style.background = 'rgba(255,255,255,0.92)'
                                     e.currentTarget.style.transform = 'translateY(0)'
+                                    e.currentTarget.style.boxShadow = '0 1px 0 rgba(255,255,255,0.5) inset,0 8px 24px rgba(99,102,241,0.2)'
                                 }}>
                                 Get a Custom Quote <ChevronRight size={14} />
                             </button>
