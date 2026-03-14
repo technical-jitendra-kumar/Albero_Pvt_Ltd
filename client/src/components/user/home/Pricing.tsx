@@ -3,26 +3,27 @@
 import React, { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { pricingData } from '@/constants/pricing'
-import type { PricingService } from '@/constants/pricing'
+import type { PricingService, ProductTier } from '@/constants/pricing'
 import { Check, ChevronRight } from 'lucide-react'
 import { NavLink } from '../common/NavLink'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Currency = 'USD' | 'EUR' | 'INR'
+type MainTab = 'products' | 'services'
 type Category = 'All' | 'Development' | 'Design' | 'Marketing' | 'Infrastructure' | 'Support'
 
-// ─── Conversion ───────────────────────────────────────────────────────────────
+// ── Uncomment when ready to show pricing ──
+// type Currency = 'USD' | 'EUR' | 'INR'
+// type Billing  = 'monthly' | 'yearly'
+// const RATES:   Record<Currency, number> = { USD: 1, EUR: 0.92, INR: 83.5 }
+// const SYMBOLS: Record<Currency, string> = { USD: '$', EUR: '€', INR: '₹' }
+// function fmtPrice(usd: number, cur: Currency): string {
+//     if (usd === 0)  return 'Free'
+//     if (usd === -1) return 'Custom'
+//     return SYMBOLS[cur] + Math.round(usd * RATES[cur]).toLocaleString()
+// }
 
-const RATES: Record<Currency, number> = { USD: 1, EUR: 0.92, INR: 83.5 }
-const SYMBOLS: Record<Currency, string> = { USD: '$', EUR: '€', INR: '₹' }
-
-function formatPrice(usd: number, currency: Currency): string {
-    const val = Math.round(usd * RATES[currency])
-    return SYMBOLS[currency] + val.toLocaleString()
-}
-
-// ─── Category accent colours (palette-only) ───────────────────────────────────
+const CATEGORIES: Category[] = ['All', 'Development', 'Design', 'Marketing', 'Infrastructure', 'Support']
 
 const CAT_STYLE: Record<string, { accent: string; accentBg: string; border: string }> = {
     Development: { accent: 'var(--blue-vivid)', accentBg: 'oklch(from var(--blue-vivid) l c h / 0.10)', border: 'var(--border-blu)' },
@@ -90,16 +91,382 @@ function Bracket({ color, rotate = 0 }: { color: string; rotate?: number }) {
     )
 }
 
-const CATEGORIES: Category[] = ['All', 'Development', 'Design', 'Marketing', 'Infrastructure', 'Support']
+// ─── Products Tab ─────────────────────────────────────────────────────────────
 
-// ─── Component ────────────────────────────────────────────────────────────────
+function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Billing } */) {
+    const { productSubscriptions } = pricingData
+    const [activeId, setActiveId] = useState(productSubscriptions[0].id)
+    const product = productSubscriptions.find((p) => p.id === activeId)!
+
+    return (
+        <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+            <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+                {/* ── Sidebar ── */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: 220, flexShrink: 0 }}>
+                    <div
+                        style={{
+                            fontFamily: 'var(--font-barlow-condensed)',
+                            fontSize: 10,
+                            fontWeight: 700,
+                            letterSpacing: '.12em',
+                            textTransform: 'uppercase',
+                            color: 'var(--grey-mid)',
+                            marginBottom: 6,
+                            padding: '0 4px'
+                        }}>
+                        Our Products
+                    </div>
+                    {productSubscriptions.map((p) => {
+                        const isAct = p.id === activeId
+                        const PIcon = p.icon
+                        return (
+                            <button
+                                key={p.id}
+                                onClick={() => setActiveId(p.id)}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 10,
+                                    padding: '11px 12px',
+                                    borderRadius: 12,
+                                    border: `1px solid ${isAct ? 'var(--border-blu)' : 'transparent'}`,
+                                    background: isAct ? 'oklch(from var(--blue-vivid) l c h / 0.10)' : 'transparent',
+                                    cursor: 'pointer',
+                                    textAlign: 'left',
+                                    transition: 'background .18s, border-color .18s'
+                                }}
+                                onMouseEnter={(e) => {
+                                    if (!isAct) {
+                                        e.currentTarget.style.background = 'var(--bg-card)'
+                                        e.currentTarget.style.borderColor = 'var(--border)'
+                                    }
+                                }}
+                                onMouseLeave={(e) => {
+                                    if (!isAct) {
+                                        e.currentTarget.style.background = 'transparent'
+                                        e.currentTarget.style.borderColor = 'transparent'
+                                    }
+                                }}>
+                                <div
+                                    style={{
+                                        width: 34,
+                                        height: 34,
+                                        borderRadius: 9,
+                                        flexShrink: 0,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        background: isAct ? p.accentBg : 'var(--bg-mid)',
+                                        color: isAct ? p.accent : 'var(--grey-mid)',
+                                        transition: 'background .18s, color .18s'
+                                    }}>
+                                    <PIcon size={17} />
+                                </div>
+                                <div>
+                                    <div
+                                        style={{
+                                            fontFamily: 'var(--font-barlow)',
+                                            fontSize: 13,
+                                            fontWeight: 700,
+                                            color: isAct ? 'var(--white)' : 'var(--grey-light)',
+                                            whiteSpace: 'nowrap'
+                                        }}>
+                                        {p.name}
+                                    </div>
+                                    <div
+                                        style={{
+                                            fontFamily: 'var(--font-barlow)',
+                                            fontSize: 10,
+                                            color: 'var(--grey-mid)',
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            maxWidth: 140
+                                        }}>
+                                        {p.tagline}
+                                    </div>
+                                </div>
+                            </button>
+                        )
+                    })}
+                </div>
+
+                {/* ── Tiers ── */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                    {/* Product header */}
+                    <div style={{ marginBottom: 28, paddingBottom: 20, borderBottom: '1px solid var(--border)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 8 }}>
+                            <div
+                                style={{
+                                    width: 46,
+                                    height: 46,
+                                    borderRadius: 12,
+                                    background: product.accentBg,
+                                    border: '1px solid var(--border-blu)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: product.accent,
+                                    flexShrink: 0
+                                }}>
+                                <product.icon size={22} />
+                            </div>
+                            <div>
+                                <div
+                                    style={{
+                                        fontFamily: 'var(--font-bebas)',
+                                        fontSize: 28,
+                                        letterSpacing: '.03em',
+                                        color: 'var(--white)',
+                                        lineHeight: 1
+                                    }}>
+                                    {product.name}
+                                </div>
+                                <div
+                                    style={{
+                                        fontFamily: 'var(--font-barlow-condensed)',
+                                        fontSize: 11,
+                                        fontWeight: 600,
+                                        letterSpacing: '.08em',
+                                        textTransform: 'uppercase',
+                                        color: product.accent
+                                    }}>
+                                    {product.tagline}
+                                </div>
+                            </div>
+                        </div>
+                        <p style={{ fontFamily: 'var(--font-barlow)', fontSize: 14, color: 'var(--grey-mid)', lineHeight: 1.65 }}>
+                            {product.description}
+                        </p>
+                    </div>
+
+                    {/* Tier cards */}
+                    <div className="prc-tiers-grid">
+                        {product.tiers.map((tier: ProductTier, i: number) => {
+                            const isHot = !!tier.highlighted
+
+                            // ── Uncomment when ready to show pricing ──
+                            // const rawPrice     = billing === 'yearly' ? tier.yearlyUSD : tier.monthlyUSD
+                            // const priceDisplay = fmtPrice(rawPrice, currency)
+                            // const isFree       = rawPrice === 0
+                            // const isCustom     = rawPrice === -1
+
+                            return (
+                                <div
+                                    key={i}
+                                    className={`prc-tier-card ${isHot ? 'prc-tier-hot' : ''}`}>
+                                    {isHot && (
+                                        <>
+                                            <div
+                                                aria-hidden="true"
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: -50,
+                                                    right: -40,
+                                                    width: 180,
+                                                    height: 180,
+                                                    borderRadius: '50%',
+                                                    background: 'var(--blue-vivid)',
+                                                    filter: 'blur(60px)',
+                                                    opacity: 0.1,
+                                                    pointerEvents: 'none'
+                                                }}
+                                            />
+                                            <div
+                                                aria-hidden="true"
+                                                style={{ position: 'absolute', top: 10, left: 10, pointerEvents: 'none' }}>
+                                                <Bracket color="var(--blue-vivid)" />
+                                            </div>
+                                            <div
+                                                aria-hidden="true"
+                                                style={{ position: 'absolute', bottom: 10, right: 10, pointerEvents: 'none' }}>
+                                                <Bracket
+                                                    color="var(--blue-vivid)"
+                                                    rotate={180}
+                                                />
+                                            </div>
+                                        </>
+                                    )}
+
+                                    <div style={{ position: 'relative' }}>
+                                        {/* Label row */}
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                                            <span
+                                                style={{
+                                                    display: 'inline-block',
+                                                    padding: '3px 10px',
+                                                    borderRadius: 20,
+                                                    fontFamily: 'var(--font-barlow-condensed)',
+                                                    fontSize: 10,
+                                                    fontWeight: 700,
+                                                    letterSpacing: '.1em',
+                                                    textTransform: 'uppercase',
+                                                    color: isHot ? 'var(--blue-soft)' : 'var(--grey-mid)',
+                                                    background: isHot ? 'oklch(from var(--blue-vivid) l c h / 0.12)' : 'var(--bg-mid)',
+                                                    border: `1px solid ${isHot ? 'var(--border-blu)' : 'var(--border)'}`
+                                                }}>
+                                                {tier.label}
+                                            </span>
+                                            {isHot && (
+                                                <span
+                                                    style={{
+                                                        width: 6,
+                                                        height: 6,
+                                                        borderRadius: '50%',
+                                                        background: 'var(--blue-vivid)',
+                                                        boxShadow: '0 0 6px var(--blue-vivid)',
+                                                        display: 'inline-block'
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+
+                                        {/* ── Uncomment when ready to show pricing ──
+                                        <div style={{ marginBottom: 4 }}>
+                                            <span style={{ fontFamily: 'var(--font-bebas)', fontSize: isCustom ? 32 : 44, letterSpacing: '-.01em', color: isHot ? 'var(--blue-soft)' : 'var(--white)', lineHeight: 1 }}>
+                                                {priceDisplay}
+                                            </span>
+                                            {!isFree && !isCustom && (
+                                                <span style={{ fontFamily: 'var(--font-barlow-condensed)', fontSize: 11, color: 'var(--grey-mid)', marginLeft: 4 }}>
+                                                    / {billing === 'yearly' ? 'mo · billed yearly' : 'month'}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {billing === 'yearly' && !isFree && !isCustom && tier.monthlyUSD > 0 && (
+                                            <div style={{ display: 'inline-block', marginBottom: 8, padding: '2px 9px', borderRadius: 20, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)', fontFamily: 'var(--font-barlow-condensed)', fontSize: 9, fontWeight: 700, letterSpacing: '.09em', textTransform: 'uppercase', color: '#4ade80' }}>
+                                                Save {Math.round((1 - tier.yearlyUSD / tier.monthlyUSD) * 100)}%
+                                            </div>
+                                        )}
+                                        */}
+
+                                        {/* User limit */}
+                                        <div
+                                            style={{
+                                                fontFamily: 'var(--font-barlow-condensed)',
+                                                fontSize: 11,
+                                                fontWeight: 600,
+                                                letterSpacing: '.08em',
+                                                textTransform: 'uppercase',
+                                                color: 'var(--grey-mid)',
+                                                marginBottom: 16
+                                            }}>
+                                            {tier.limit}
+                                        </div>
+
+                                        <div style={{ height: 1, background: 'var(--border)', marginBottom: 16 }} />
+
+                                        {/* Features */}
+                                        <ul
+                                            style={{
+                                                listStyle: 'none',
+                                                padding: 0,
+                                                margin: '0 0 20px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: 8
+                                            }}>
+                                            {tier.features.map((f, j) => (
+                                                <li
+                                                    key={j}
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'flex-start',
+                                                        gap: 8,
+                                                        fontFamily: 'var(--font-barlow)',
+                                                        fontSize: 12,
+                                                        color: 'var(--grey-light)',
+                                                        lineHeight: 1.5
+                                                    }}>
+                                                    <div
+                                                        style={{
+                                                            width: 16,
+                                                            height: 16,
+                                                            borderRadius: '50%',
+                                                            background: 'rgba(34,197,94,0.1)',
+                                                            border: '1px solid rgba(34,197,94,0.25)',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            flexShrink: 0,
+                                                            marginTop: 1
+                                                        }}>
+                                                        <Check
+                                                            size={8}
+                                                            color="#4ade80"
+                                                        />
+                                                    </div>
+                                                    {f}
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        {/* CTA */}
+                                        <NavLink href="#contact">
+                                            <button
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    gap: 7,
+                                                    width: '100%',
+                                                    padding: '11px 14px',
+                                                    borderRadius: 10,
+                                                    fontFamily: 'var(--font-barlow-condensed)',
+                                                    fontSize: 12,
+                                                    fontWeight: 700,
+                                                    letterSpacing: '.09em',
+                                                    textTransform: 'uppercase',
+                                                    cursor: 'pointer',
+                                                    background: isHot ? 'var(--white)' : 'transparent',
+                                                    border: isHot ? '1px solid var(--white)' : '1px solid var(--border)',
+                                                    color: isHot ? 'var(--black)' : 'var(--grey-light)',
+                                                    transition: 'background .2s, transform .2s, border-color .2s, color .2s'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    const b = e.currentTarget
+                                                    if (isHot) {
+                                                        b.style.background = 'var(--grey-light)'
+                                                    } else {
+                                                        b.style.borderColor = 'var(--border-blu)'
+                                                        b.style.color = 'var(--white)'
+                                                    }
+                                                    b.style.transform = 'translateY(-1px)'
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    const b = e.currentTarget
+                                                    if (isHot) {
+                                                        b.style.background = 'var(--white)'
+                                                    } else {
+                                                        b.style.borderColor = 'var(--border)'
+                                                        b.style.color = 'var(--grey-light)'
+                                                    }
+                                                    b.style.transform = 'translateY(0)'
+                                                }}>
+                                                {tier.cta} <ChevronRight size={13} />
+                                            </button>
+                                        </NavLink>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function Pricing() {
-    const [currency, setCurrency] = useState<Currency>('USD')
-    const [activeTab, setActiveTab] = useState<'plans' | 'services'>('plans')
+    const [mainTab, setMainTab] = useState<MainTab>('products')
     const [activeCat, setActiveCat] = useState<Category>('All')
 
-    const { badgeTitle, heading, description, plans, allServices } = pricingData
+    // ── Uncomment when ready to show pricing ──
+    // const [currency, setCurrency] = useState<Currency>('USD')
+    // const [billing,  setBilling]  = useState<Billing>('monthly')
+
+    const { badgeTitle, heading, description, allServices } = pricingData
 
     const filtered: PricingService[] = activeCat === 'All' ? allServices : allServices.filter((s) => s.category === activeCat)
 
@@ -108,221 +475,57 @@ export default function Pricing() {
             id="pricing"
             style={{ background: 'var(--black)', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
             <style>{`
-                /* ── Currency / tab switchers ── */
+                /* ── Switcher track ── */
                 .prc-track {
-                    display: inline-flex;
-                    gap: 3px; padding: 4px;
-                    border-radius: 12px;
-                    background: var(--bg-card);
-                    border: 1px solid var(--border);
+                    display: inline-flex; gap: 3px; padding: 4px;
+                    border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border);
                 }
                 .prc-btn {
-                    padding: 7px 18px;
-                    border-radius: 8px;
-                    border: 1px solid transparent;
-                    background: transparent;
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 12px; font-weight: 700;
-                    letter-spacing: .1em; text-transform: uppercase;
+                    padding: 7px 16px; border-radius: 8px; border: 1px solid transparent;
+                    background: transparent; font-family: var(--font-barlow-condensed);
+                    font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
                     color: var(--grey-mid); cursor: pointer;
-                    transition: background .18s, color .18s, border-color .18s;
-                    white-space: nowrap;
+                    transition: background .18s, color .18s, border-color .18s; white-space: nowrap;
                 }
                 .prc-btn:hover { color: var(--grey-light); }
                 .prc-btn-active {
                     background: oklch(from var(--blue-vivid) l c h / 0.12) !important;
-                    border-color: var(--border-blu) !important;
-                    color: var(--white) !important;
+                    border-color: var(--border-blu) !important; color: var(--white) !important;
                 }
-
-                /* ── Plans grid ── */
-                .prc-plans-grid {
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    gap: 16px;
-                    max-width: 1152px;
-                    margin: 0 auto;
+                /* ── Tier grid ── */
+                .prc-tiers-grid {
+                    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
                 }
-                @media (max-width: 1100px) { .prc-plans-grid { grid-template-columns: repeat(2,1fr); } }
-                @media (max-width: 580px)  { .prc-plans-grid { grid-template-columns: 1fr; } }
-
-                /* ── Plan card ── */
-                .prc-card {
-                    background: var(--bg-2);
-                    border: 1px solid var(--border);
-                    border-radius: 20px;
-                    padding: 28px 22px;
-                    position: relative; overflow: hidden;
-                    display: flex; flex-direction: column;
-                    transition: border-color .22s, transform .22s;
+                @media (max-width: 900px) { .prc-tiers-grid { grid-template-columns: repeat(2, 1fr); } }
+                @media (max-width: 500px) { .prc-tiers-grid { grid-template-columns: 1fr; } }
+                /* ── Tier card ── */
+                .prc-tier-card {
+                    background: var(--bg-2); border-radius: 16px; border: 1px solid var(--border);
+                    padding: 22px 18px; position: relative; overflow: hidden;
+                    transition: border-color .22s, transform .2s;
                 }
-                .prc-card:hover { border-color: var(--border-blu); transform: translateY(-3px); }
-                .prc-card-hot {
-                    border-color: var(--border-blu) !important;
-                    background: oklch(from var(--blue-vivid) l c h / 0.05) !important;
-                }
-                .prc-tag {
-                    display: inline-block;
-                    padding: 3px 10px; border-radius: 20px;
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 10px; font-weight: 700;
-                    letter-spacing: .1em; text-transform: uppercase;
-                    color: var(--grey-mid);
-                    background: var(--bg-mid); border: 1px solid var(--border);
-                }
-                .prc-tag-hot {
-                    color: var(--blue-soft) !important;
-                    background: oklch(from var(--blue-vivid) l c h / 0.10) !important;
-                    border-color: var(--border-blu) !important;
-                }
-                .prc-plan-name {
-                    font-family: var(--font-bebas);
-                    font-size: 26px; letter-spacing: .04em;
-                    color: var(--white); line-height: 1; margin-bottom: 6px;
-                }
-                .prc-plan-info {
-                    font-family: var(--font-barlow);
-                    font-size: 12px; color: var(--grey-mid);
-                    line-height: 1.55; margin-bottom: 18px;
-                }
-                .prc-price-row {
-                    display: flex; align-items: flex-end; gap: 3px; margin-bottom: 3px;
-                }
-                .prc-price-sym {
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 16px; font-weight: 700;
-                    color: var(--grey-mid); padding-bottom: 5px;
-                }
-                .prc-price-val {
-                    font-family: var(--font-bebas);
-                    font-size: 48px; letter-spacing: -.01em;
-                    color: var(--white); line-height: 1;
-                }
-                .prc-price-note {
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 10px; font-weight: 600;
-                    letter-spacing: .08em; text-transform: uppercase;
-                    color: var(--grey-dim); margin-bottom: 18px;
-                }
-                .prc-divider { height: 1px; background: var(--border); margin-bottom: 18px; }
-                .prc-feat-list {
-                    list-style: none; padding: 0; margin: 0 0 22px;
-                    display: flex; flex-direction: column; gap: 9px; flex: 1;
-                }
-                .prc-feat-item {
-                    display: flex; align-items: flex-start; gap: 9px;
-                    font-family: var(--font-barlow); font-size: 12.5px;
-                    color: var(--grey-light); line-height: 1.5;
-                }
-                .prc-feat-chk {
-                    width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
-                    background: rgba(34,197,94,0.1);
-                    border: 1px solid rgba(34,197,94,0.25);
-                    display: flex; align-items: center; justify-content: center;
-                }
-
-                /* plan cta */
-                .prc-plan-btn {
-                    display: flex; align-items: center; justify-content: center; gap: 7px;
-                    width: 100%; padding: 12px 16px; border-radius: 10px;
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 12px; font-weight: 700;
-                    letter-spacing: .09em; text-transform: uppercase;
-                    cursor: pointer; text-decoration: none;
-                    transition: background .2s, transform .2s, box-shadow .2s;
-                    white-space: nowrap;
-                }
-                .prc-plan-btn:hover { transform: translateY(-1px); }
-                .prc-btn-outline   { background:transparent; border:1px solid var(--border); color:var(--grey-light); }
-                .prc-btn-outline:hover { border-color:var(--border-blu); color:var(--white); }
-                .prc-btn-default   { background:var(--white); border:1px solid var(--white); color:var(--black); }
-                .prc-btn-default:hover { background:var(--grey-light); box-shadow:0 8px 24px oklch(from var(--blue-vivid) l c h / 0.25); }
-                .prc-btn-secondary { background:oklch(from var(--blue-vivid) l c h / 0.12); border:1px solid var(--border-blu); color:var(--blue-soft); }
-                .prc-btn-secondary:hover { background:oklch(from var(--blue-vivid) l c h / 0.2); }
-                .prc-btn-destructive { background:oklch(from var(--amber) l c h / 0.12); border:1px solid oklch(from var(--amber) l c h / 0.3); color:var(--amber); }
-                .prc-btn-destructive:hover { background:oklch(from var(--amber) l c h / 0.2); }
-
-                /* ── Services section ── */
-                .prc-cat-bar {
-                    display: flex; flex-wrap: wrap; gap: 6px;
-                    justify-content: center; margin-bottom: 32px;
-                }
+                .prc-tier-card:hover { transform: translateY(-2px); }
+                .prc-tier-hot { background: oklch(from var(--blue-vivid) l c h / 0.05) !important; border-color: var(--border-blu) !important; }
+                /* ── Category pills ── */
                 .prc-cat-pill {
-                    padding: 6px 16px; border-radius: 20px;
-                    background: var(--bg-card); border: 1px solid var(--border);
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 11px; font-weight: 700;
-                    letter-spacing: .1em; text-transform: uppercase;
-                    color: var(--grey-mid); cursor: pointer;
+                    padding: 6px 14px; border-radius: 20px; background: var(--bg-card); border: 1px solid var(--border);
+                    font-family: var(--font-barlow-condensed); font-size: 11px; font-weight: 700;
+                    letter-spacing: .1em; text-transform: uppercase; color: var(--grey-mid); cursor: pointer;
                     transition: background .18s, border-color .18s, color .18s;
                 }
                 .prc-cat-pill:hover { color: var(--grey-light); border-color: rgba(255,255,255,0.15); }
-                .prc-cat-active {
-                    background: oklch(from var(--blue-vivid) l c h / 0.12) !important;
-                    border-color: var(--border-blu) !important;
-                    color: var(--white) !important;
-                }
-
-                /* service card grid */
+                .prc-cat-active { background: oklch(from var(--blue-vivid) l c h / 0.12) !important; border-color: var(--border-blu) !important; color: var(--white) !important; }
+                /* ── Services grid ── */
                 .prc-svc-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 14px;
-                    max-width: 1152px;
-                    margin: 0 auto;
+                    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+                    max-width: 1152px; margin: 0 auto;
                 }
-                @media (max-width: 900px) { .prc-svc-grid { grid-template-columns: repeat(2,1fr); } }
+                @media (max-width: 900px) { .prc-svc-grid { grid-template-columns: repeat(2, 1fr); } }
                 @media (max-width: 540px) { .prc-svc-grid { grid-template-columns: 1fr; } }
-
-                /* service card */
-                .prc-svc-card {
-                    background: var(--bg-2);
-                    border: 1px solid var(--border);
-                    border-radius: 16px;
-                    padding: 22px 20px;
-                    position: relative; overflow: hidden;
-                    display: flex; flex-direction: column; gap: 0;
-                    transition: border-color .2s, transform .2s, background .2s;
+                /* ── Products tab responsive ── */
+                @media (max-width: 780px) {
+                    .prc-prod-row { flex-direction: column !important; }
                 }
-                .prc-svc-card:hover { transform: translateY(-2px); }
-
-                .prc-svc-icon {
-                    width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
-                    display: flex; align-items: center; justify-content: center;
-                    margin-bottom: 14px;
-                }
-                .prc-svc-cat-badge {
-                    position: absolute; top: 14px; right: 14px;
-                    padding: 2px 9px; border-radius: 20px;
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 9px; font-weight: 700;
-                    letter-spacing: .09em; text-transform: uppercase;
-                }
-                .prc-svc-name {
-                    font-family: var(--font-bebas);
-                    font-size: 20px; letter-spacing: .03em;
-                    color: var(--white); line-height: 1.1; margin-bottom: 7px;
-                }
-                .prc-svc-desc {
-                    font-family: var(--font-barlow);
-                    font-size: 12.5px; color: var(--grey-mid);
-                    line-height: 1.6; margin-bottom: 18px; flex: 1;
-                }
-                .prc-svc-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
-                .prc-svc-price {
-                    font-family: var(--font-bebas);
-                    font-size: 18px; letter-spacing: .03em;
-                }
-                .prc-svc-freq {
-                    font-family: var(--font-barlow-condensed);
-                    font-size: 10px; font-weight: 600;
-                    letter-spacing: .08em; text-transform: uppercase;
-                    color: var(--grey-mid); margin-left: 5px;
-                }
-
-                /* ── Content fade ── */
-                .prc-fade { transition: opacity .25s, transform .25s; }
-                .prc-fading { opacity: 0; transform: translateY(8px); }
             `}</style>
 
             {/* ── BG decorations ── */}
@@ -435,152 +638,68 @@ export default function Pricing() {
                     {description}
                 </p>
 
-                {/* Main tab switcher */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}>
+                {/* Controls row */}
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                    {/* Main tab switcher */}
                     <div className="prc-track">
-                        {(['plans', 'services'] as const).map((t) => (
+                        {(
+                            [
+                                { key: 'products', label: '📦  Products' },
+                                { key: 'services', label: '⚙️  All Services' }
+                            ] as { key: MainTab; label: string }[]
+                        ).map((t) => (
                             <button
-                                key={t}
-                                onClick={() => setActiveTab(t)}
-                                onMouseEnter={() => setActiveTab(t)}
-                                className={`prc-btn ${activeTab === t ? 'prc-btn-active' : ''}`}>
-                                {t === 'plans' ? '📋  Project Plans' : '⚙️  All Services'}
+                                key={t.key}
+                                onClick={() => setMainTab(t.key)}
+                                className={`prc-btn ${mainTab === t.key ? 'prc-btn-active' : ''}`}>
+                                {t.label}
                             </button>
                         ))}
                     </div>
 
-                    {/* Currency switcher */}
+                    {/* ── Uncomment when ready to show pricing ──
+                    {mainTab === 'products' && (
+                        <div className="prc-track">
+                            {(['monthly', 'yearly'] as Billing[]).map(b => (
+                                <button key={b} onClick={() => setBilling(b)}
+                                    className={`prc-btn ${billing === b ? 'prc-btn-active' : ''}`}>
+                                    {b === 'monthly' ? 'Monthly' : 'Yearly 🎁'}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                     <div className="prc-track">
-                        {(['USD', 'EUR', 'INR'] as Currency[]).map((c) => (
-                            <button
-                                key={c}
-                                onClick={() => setCurrency(c)}
+                        {(['USD', 'EUR', 'INR'] as Currency[]).map(c => (
+                            <button key={c} onClick={() => setCurrency(c)}
                                 className={`prc-btn ${currency === c ? 'prc-btn-active' : ''}`}>
                                 {c}
                             </button>
                         ))}
                     </div>
+                    */}
                 </div>
+
+                {/* ── Uncomment when ready to show pricing ──
+                {mainTab === 'products' && billing === 'yearly' && (
+                    <p style={{ fontFamily: 'var(--font-barlow-condensed)', fontSize: 11, fontWeight: 600, letterSpacing: '.09em', textTransform: 'uppercase', color: '#4ade80', marginTop: 12 }}>
+                        🎁 Save up to 20% with yearly billing
+                    </p>
+                )}
+                */}
             </div>
 
-            {/* ══ TAB: Plans ══════════════════════════════════════════════ */}
-            {activeTab === 'plans' && (
-                <div
-                    className="prc-plans-grid prc-fade"
-                    style={{ position: 'relative', zIndex: 1 }}>
-                    {plans.map((plan, i) => {
-                        const isHot = !!plan.highlighted
-                        const formatted = formatPrice(plan.price, currency)
-                        const sym = formatted.replace(/[\d,]/g, '')
-                        const val = formatted.replace(/[^0-9,]/g, '')
-                        return (
-                            <div
-                                key={i}
-                                className={`prc-card ${isHot ? 'prc-card-hot' : ''}`}>
-                                {isHot && (
-                                    <>
-                                        <div
-                                            aria-hidden="true"
-                                            style={{
-                                                position: 'absolute',
-                                                top: -60,
-                                                right: -40,
-                                                width: 200,
-                                                height: 200,
-                                                borderRadius: '50%',
-                                                background: 'var(--blue-vivid)',
-                                                filter: 'blur(70px)',
-                                                opacity: 0.12,
-                                                pointerEvents: 'none'
-                                            }}
-                                        />
-                                        <div
-                                            aria-hidden="true"
-                                            style={{ position: 'absolute', bottom: 0, right: 0, pointerEvents: 'none' }}>
-                                            <DotGrid
-                                                id={`prc-cd-${i}`}
-                                                color="var(--blue-vivid)"
-                                                opacity={0.09}
-                                            />
-                                        </div>
-                                        <div
-                                            aria-hidden="true"
-                                            style={{ position: 'absolute', top: 12, left: 12, pointerEvents: 'none' }}>
-                                            <Bracket color="var(--blue-vivid)" />
-                                        </div>
-                                        <div
-                                            aria-hidden="true"
-                                            style={{ position: 'absolute', bottom: 12, right: 12, pointerEvents: 'none' }}>
-                                            <Bracket
-                                                color="var(--blue-vivid)"
-                                                rotate={180}
-                                            />
-                                        </div>
-                                    </>
-                                )}
-                                <div style={{ position: 'relative' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                                        <span className={`prc-tag ${isHot ? 'prc-tag-hot' : ''}`}>{plan.tag}</span>
-                                        {isHot && (
-                                            <span
-                                                style={{
-                                                    width: 6,
-                                                    height: 6,
-                                                    borderRadius: '50%',
-                                                    background: 'var(--blue-vivid)',
-                                                    boxShadow: '0 0 6px var(--blue-vivid)',
-                                                    display: 'inline-block'
-                                                }}
-                                            />
-                                        )}
-                                    </div>
-                                    <div className="prc-plan-name">{plan.name}</div>
-                                    <div className="prc-plan-info">{plan.info}</div>
-                                    <div className="prc-price-row">
-                                        <span className="prc-price-sym">{sym}</span>
-                                        <span
-                                            className="prc-price-val"
-                                            style={{ color: isHot ? 'var(--blue-soft)' : 'var(--white)' }}>
-                                            {val}
-                                        </span>
-                                    </div>
-                                    <div className="prc-price-note">One-time project fee</div>
-                                    <div className="prc-divider" />
-                                    <ul className="prc-feat-list">
-                                        {plan.features.map((f, j) => (
-                                            <li
-                                                key={j}
-                                                className="prc-feat-item">
-                                                <div className="prc-feat-chk">
-                                                    <Check
-                                                        size={9}
-                                                        color="#4ade80"
-                                                    />
-                                                </div>
-                                                {f.text}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <NavLink href="#contact">
-                                        <button className={`prc-plan-btn prc-btn-${plan.btn.variant}`}>
-                                            {plan.btn.text}
-                                            <ChevronRight size={13} />
-                                        </button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        )
-                    })}
+            {/* ══ TAB: Products ═══════════════════════════════════════════ */}
+            {mainTab === 'products' && (
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                    <ProductsTab /* currency={currency} billing={billing} */ />
                 </div>
             )}
 
             {/* ══ TAB: All Services ════════════════════════════════════════ */}
-            {activeTab === 'services' && (
-                <div
-                    className="prc-fade"
-                    style={{ position: 'relative', zIndex: 1 }}>
-                    {/* Category filter pills */}
-                    <div className="prc-cat-bar">
+            {mainTab === 'services' && (
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                    {/* Category filter */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, justifyContent: 'center', marginBottom: 28 }}>
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
@@ -591,7 +710,6 @@ export default function Pricing() {
                         ))}
                     </div>
 
-                    {/* Count label */}
                     <p
                         style={{
                             fontFamily: 'var(--font-barlow-condensed)',
@@ -603,29 +721,39 @@ export default function Pricing() {
                             textAlign: 'center',
                             marginBottom: 24
                         }}>
-                        {filtered.length} service{filtered.length !== 1 ? 's' : ''} — prices in {currency}
+                        {filtered.length} service{filtered.length !== 1 ? 's' : ''}
                     </p>
 
                     {/* Service cards */}
                     <div className="prc-svc-grid">
                         {filtered.map((svc, i) => {
                             const c = CAT_STYLE[svc.category] ?? CAT_STYLE.Support
-                            const priceStr = currency === 'INR' ? svc.priceRange.inr : currency === 'EUR' ? svc.priceRange.eur : svc.priceRange.usd
                             const SvcIcon = svc.icon
                             return (
                                 <div
                                     key={i}
-                                    className="prc-svc-card"
-                                    style={{ '--hover-border': c.border } as React.CSSProperties}
+                                    style={{
+                                        background: 'var(--bg-2)',
+                                        border: '1px solid var(--border)',
+                                        borderRadius: 16,
+                                        padding: '22px 20px',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        transition: 'border-color .2s, transform .2s, background .2s'
+                                    }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.borderColor = c.border
                                         e.currentTarget.style.background = c.accentBg
+                                        e.currentTarget.style.transform = 'translateY(-2px)'
                                     }}
                                     onMouseLeave={(e) => {
                                         e.currentTarget.style.borderColor = 'var(--border)'
                                         e.currentTarget.style.background = 'var(--bg-2)'
+                                        e.currentTarget.style.transform = 'translateY(0)'
                                     }}>
-                                    {/* Ghost category watermark */}
+                                    {/* Ghost watermark */}
                                     <span
                                         aria-hidden="true"
                                         style={{
@@ -635,7 +763,6 @@ export default function Pricing() {
                                             fontFamily: 'var(--font-bebas)',
                                             fontSize: 64,
                                             lineHeight: 1,
-                                            letterSpacing: '-.02em',
                                             color: c.accent,
                                             opacity: 0.05,
                                             pointerEvents: 'none',
@@ -646,34 +773,77 @@ export default function Pricing() {
 
                                     {/* Category badge */}
                                     <span
-                                        className="prc-svc-cat-badge"
-                                        style={{ color: c.accent, background: c.accentBg, border: `1px solid ${c.border}` }}>
+                                        style={{
+                                            position: 'absolute',
+                                            top: 14,
+                                            right: 14,
+                                            padding: '2px 9px',
+                                            borderRadius: 20,
+                                            fontFamily: 'var(--font-barlow-condensed)',
+                                            fontSize: 9,
+                                            fontWeight: 700,
+                                            letterSpacing: '.09em',
+                                            textTransform: 'uppercase',
+                                            color: c.accent,
+                                            background: c.accentBg,
+                                            border: `1px solid ${c.border}`
+                                        }}>
                                         {svc.category}
                                     </span>
 
                                     {/* Icon */}
                                     <div
-                                        className="prc-svc-icon"
-                                        style={{ background: c.accentBg, border: `1px solid ${c.border}`, color: c.accent }}>
+                                        style={{
+                                            width: 42,
+                                            height: 42,
+                                            borderRadius: 11,
+                                            background: c.accentBg,
+                                            border: `1px solid ${c.border}`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: c.accent,
+                                            marginBottom: 14
+                                        }}>
                                         <SvcIcon size={20} />
                                     </div>
 
                                     {/* Name + desc */}
-                                    <div className="prc-svc-name">{svc.name}</div>
-                                    <div className="prc-svc-desc">{svc.description}</div>
-
-                                    {/* Divider */}
-                                    <div className="prc-svc-divider" />
-
-                                    {/* Price */}
-                                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                                        <span
-                                            className="prc-svc-price"
-                                            style={{ color: c.accent }}>
-                                            {priceStr}
-                                        </span>
-                                        {svc.frequency && <span className="prc-svc-freq">{svc.frequency}</span>}
+                                    <div
+                                        style={{
+                                            fontFamily: 'var(--font-bebas)',
+                                            fontSize: 20,
+                                            letterSpacing: '.03em',
+                                            color: 'var(--white)',
+                                            lineHeight: 1.1,
+                                            marginBottom: 8
+                                        }}>
+                                        {svc.name}
                                     </div>
+                                    <div
+                                        style={{
+                                            fontFamily: 'var(--font-barlow)',
+                                            fontSize: 13,
+                                            color: 'var(--grey-mid)',
+                                            lineHeight: 1.65,
+                                            flex: 1
+                                        }}>
+                                        {svc.description}
+                                    </div>
+
+                                    {/* ── Uncomment when ready to show pricing ──
+                                    <div style={{ height: 1, background: 'var(--border)', margin: '14px 0' }} />
+                                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                                        <span style={{ fontFamily: 'var(--font-bebas)', fontSize: 17, letterSpacing: '.03em', color: c.accent }}>
+                                            {currency === 'INR' ? svc.priceRange.inr : currency === 'EUR' ? svc.priceRange.eur : svc.priceRange.usd}
+                                        </span>
+                                        {svc.frequency && (
+                                            <span style={{ fontFamily: 'var(--font-barlow-condensed)', fontSize: 10, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--grey-mid)', marginLeft: 5 }}>
+                                                {svc.frequency}
+                                            </span>
+                                        )}
+                                    </div>
+                                    */}
                                 </div>
                             )
                         })}
@@ -701,15 +871,15 @@ export default function Pricing() {
                                     textTransform: 'uppercase',
                                     color: 'var(--black)',
                                     cursor: 'pointer',
-                                    transition: 'background .2s, transform .2s, box-shadow .2s'
+                                    transition: 'background .2s, transform .2s'
                                 }}
                                 onMouseEnter={(e) => {
-                                    ;(e.currentTarget as HTMLButtonElement).style.background = 'var(--grey-light)'
-                                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'
+                                    e.currentTarget.style.background = 'var(--grey-light)'
+                                    e.currentTarget.style.transform = 'translateY(-2px)'
                                 }}
                                 onMouseLeave={(e) => {
-                                    ;(e.currentTarget as HTMLButtonElement).style.background = 'var(--white)'
-                                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'
+                                    e.currentTarget.style.background = 'var(--white)'
+                                    e.currentTarget.style.transform = 'translateY(0)'
                                 }}>
                                 Get a Custom Quote <ChevronRight size={14} />
                             </button>
