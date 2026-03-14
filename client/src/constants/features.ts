@@ -7,7 +7,7 @@ export const featuresData = [
     },
     {
         card2: {
-            title: 'Secure by default',
+            title: 'Secure by Default',
             subtitle: 'Enterprise-grade security with encrypted data protection and secure authentication systems.'
         }
     },
@@ -19,14 +19,14 @@ export const featuresData = [
     },
     {
         card4: {
-            title: 'Reliable Performance',
-            subtitle: 'Scalable, stable, and efficient systems built to support long-term business growth.'
+            title: 'Built for Developers',
+            subtitle: 'Clean architecture, RESTful APIs, and modular codebases that are easy to extend and maintain.'
         }
     },
     {
         card5: {
-            title: 'Keep your loved ones safe',
-            subtitle: 'Advanced data protection ensuring privacy, safety, and trusted digital environments.',
+            title: 'Trusted by Teams',
+            subtitle: 'Real collaboration tools and shared workflows that keep your team aligned and productive.',
             avatarName1: 'Rahul',
             avatar1: 'https://avatars.githubusercontent.com/u/102558960?v=4',
             avatarName2: 'Amit',

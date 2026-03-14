@@ -320,7 +320,7 @@ function ProductsTab(/* { currency, billing }: { currency: Currency; billing: Bi
                                             )}
                                         </div>
 
-                                        {/* ── Uncomment when ready to show pricing ──
+                                        {/* ── Uncomment  to show pricing ──
                                         <div style={{ marginBottom: 4 }}>
                                             <span style={{ fontFamily: 'var(--font-bebas)', fontSize: isCustom ? 32 : 44, letterSpacing: '-.01em', color: isHot ? 'var(--blue-soft)' : 'var(--white)', lineHeight: 1 }}>
                                                 {priceDisplay}
