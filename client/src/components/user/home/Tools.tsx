@@ -1,7 +1,6 @@
 import { animate, motion, useMotionValue } from 'motion/react'
 import React, { useEffect, useState, type CSSProperties } from 'react'
 import useMeasure from 'react-use-measure'
-
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { toolsData } from '@/constants/tools'
@@ -9,6 +8,8 @@ import { toolsData } from '@/constants/tools'
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
+
+// ─── InfiniteSlider (unchanged) ───────────────────────────────────────────────
 
 type InfiniteSliderProps = {
     children: React.ReactNode
@@ -39,29 +40,23 @@ function InfiniteSlider({
         let controls
         const size = direction === 'horizontal' ? width : height
         if (size === 0) return
-
         const contentSize = size + gap
         const from = reverse ? -contentSize / 2 : 0
         const to = reverse ? 0 : -contentSize / 2
-
-        const distanceToTravel = Math.abs(to - from)
-        const duration = distanceToTravel / currentSpeed
-
+        const duration = Math.abs(to - from) / currentSpeed
         if (isTransitioning) {
-            const remainingDistance = Math.abs(translation.get() - to)
-            const transitionDuration = remainingDistance / currentSpeed
             controls = animate(translation, [translation.get(), to], {
                 ease: 'linear',
-                duration: transitionDuration,
+                duration: Math.abs(translation.get() - to) / currentSpeed,
                 onComplete: () => {
                     setIsTransitioning(false)
-                    setKey((prevKey) => prevKey + 1)
+                    setKey((k) => k + 1)
                 }
             })
         } else {
             controls = animate(translation, [from, to], {
                 ease: 'linear',
-                duration: duration,
+                duration,
                 repeat: Infinity,
                 repeatType: 'loop',
                 repeatDelay: 0,
@@ -70,7 +65,6 @@ function InfiniteSlider({
                 }
             })
         }
-
         return () => controls?.stop()
     }, [key, translation, currentSpeed, width, height, gap, isTransitioning, direction, reverse])
 
@@ -88,7 +82,7 @@ function InfiniteSlider({
         : {}
 
     return (
-        <div className={cn('overflow-hidden', className)}>
+        <div className={cn('overflow-x-hidden overflow-y-visible', className)}>
             <motion.div
                 className="flex w-max"
                 style={{
@@ -115,7 +109,6 @@ export function BlurredInfiniteSlider({ children, fadeWidth = 80, containerClass
         maskImage: `linear-gradient(to right, transparent, black ${fadeWidth}px, black calc(100% - ${fadeWidth}px), transparent)`,
         WebkitMaskImage: `linear-gradient(to right, transparent, black ${fadeWidth}px, black calc(100% - ${fadeWidth}px), transparent)`
     }
-
     return (
         <div
             className={cn('relative w-full', containerClassName)}
@@ -125,31 +118,183 @@ export function BlurredInfiniteSlider({ children, fadeWidth = 80, containerClass
     )
 }
 
+// ─── Row config ───────────────────────────────────────────────────────────────
+
+const rows = [
+    { data: toolsData.row1, label: toolsData.rowLabels.row1, sub: '10 technologies', reverse: false, speed: 36 },
+    { data: toolsData.row2, label: toolsData.rowLabels.row2, sub: '10 technologies', reverse: true, speed: 42 },
+    { data: toolsData.row3, label: toolsData.rowLabels.row3, sub: '15 technologies', reverse: false, speed: 34 }
+]
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function LogoCloudDemoPage() {
     return (
-        <section className="w-full bg-black overflow-hidden py-16">
-            <div className="m-auto max-w-7xl md:px-5">
-                <div className="flex flex-col items-center md:flex-row">
-                    <div className="flex-shrink-0 text-center md:text-right md:max-w-44 md:border-r md:border-gray-200 dark:md:border-gray-800 md:pr-6">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{toolsData.heading}</p>
-                    </div>
-                    {/* На маленьких экранах этот блок будет под текстом */}
-                    <div className="w-full py-6 md:w-auto md:flex-1">
-                        <BlurredInfiniteSlider
-                            speedOnHover={20}
-                            speed={40}
-                            gap={112}
-                            fadeWidth={80}>
-                            {toolsData.logos.map((logo) => (
-                                <div
-                                    className="mx-auto w-fit invert hover:text-blue-500 hover:scale-110 transition-transform duration-200"
-                                    title={logo.iconName}>
-                                    <logo.icon size={48} />
+        <section className="w-full bg-black overflow-x-hidden py-20">
+            <style>{`
+                /* ── Icon ── */
+                .tl-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    color: white;
+                    opacity: 0.38;
+                    filter: grayscale(1) brightness(0.9);
+                    transition: opacity 0.3s ease, filter 0.3s ease;
+                    cursor: default;
+                }
+                .tl-icon:hover {
+                    opacity: 1;
+                    filter: grayscale(0) brightness(1.2);
+                }
+
+                /* ── Row wrapper ── */
+                .tl-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 0;
+                }
+
+                /* ── Left label block ── */
+                .tl-left {
+                    flex-shrink: 0;
+                    width: 180px;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    padding-right: 20px;
+                }
+
+                /* Vertical accent bar */
+                .tl-bar {
+                    width: 2px;
+                    height: 44px;
+                    border-radius: 1px;
+                    background: linear-gradient(
+                        to bottom,
+                        transparent,
+                        oklch(0.623 0.214 259.815 / 0.7) 40%,
+                        oklch(0.623 0.214 259.815 / 0.7) 60%,
+                        transparent
+                    );
+                    flex-shrink: 0;
+                }
+
+                .tl-label-text {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+                }
+                .tl-label-title {
+                    font-family: var(--font-barlow-condensed);
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 0.12em;
+                    text-transform: uppercase;
+                    color: rgba(255,255,255,0.5);
+                    line-height: 1.2;
+                }
+                .tl-label-sub {
+                    font-family: var(--font-barlow);
+                    font-size: 10px;
+                    color: rgba(255,255,255,0.2);
+                    letter-spacing: 0.04em;
+                }
+
+                /* ── Horizontal rule between rows ── */
+                .tl-divider {
+                    height: 1px;
+                    background: linear-gradient(
+                        90deg,
+                        transparent 0%,
+                        rgba(255,255,255,0.06) 20%,
+                        rgba(255,255,255,0.06) 80%,
+                        transparent 100%
+                    );
+                    margin: 0 0;
+                }
+            `}</style>
+
+            {/* ── Section header ── */}
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 16,
+                    marginBottom: 40
+                }}>
+                <div style={{ height: 1, width: 60, background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.15))' }} />
+                <p
+                    style={{
+                        fontFamily: 'var(--font-barlow-condensed)',
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(255,255,255,0.25)',
+                        whiteSpace: 'nowrap'
+                    }}>
+                    {toolsData.heading}
+                </p>
+                <div style={{ height: 1, width: 60, background: 'linear-gradient(to left, transparent, rgba(255,255,255,0.15))' }} />
+            </div>
+
+            {/* ── Rows ── */}
+            <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+                {rows.map((row, ri) => (
+                    <React.Fragment key={ri}>
+                        <div className="tl-row">
+                            {/* Left: vertical bar + label */}
+                            <div className="tl-left">
+                                <div className="tl-bar" />
+                                <div className="tl-label-text">
+                                    <span className="tl-label-title">{row.label}</span>
+                                    <span className="tl-label-sub">{row.sub}</span>
                                 </div>
-                            ))}
-                        </BlurredInfiniteSlider>
-                    </div>
-                </div>
+                            </div>
+
+                            {/* Slider */}
+                            <div
+                                style={{
+                                    flex: 1,
+                                    minWidth: 0,
+                                    /* overflow must be visible vertically so hover lift isn't clipped */
+                                    overflowX: 'hidden',
+                                    overflowY: 'visible',
+                                    maskImage: 'linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%)',
+                                    WebkitMaskImage:
+                                        'linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%)',
+                                    paddingTop: 12,
+                                    paddingBottom: 12
+                                }}>
+                                <InfiniteSlider
+                                    speedOnHover={10}
+                                    speed={row.speed}
+                                    gap={52}
+                                    reverse={row.reverse}>
+                                    {row.data.map((logo) => (
+                                        <div
+                                            key={logo.id}
+                                            className="tl-icon"
+                                            title={logo.iconName}>
+                                            <logo.icon size={36} />
+                                        </div>
+                                    ))}
+                                </InfiniteSlider>
+                            </div>
+                        </div>
+
+                        {/* Divider between rows */}
+                        {ri < rows.length - 1 && (
+                            <div
+                                className="tl-divider"
+                                style={{ margin: '20px 0 20px 180px' }}
+                            />
+                        )}
+                    </React.Fragment>
+                ))}
             </div>
         </section>
     )
