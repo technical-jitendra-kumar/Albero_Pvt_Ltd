@@ -413,7 +413,7 @@ export default function Pricing() {
     return (
         <section
             id="pricing"
-            style={{ background: 'var(--black)', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
+            style={{ background: 'transparent', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
             <style>{`
                 /* ══ GLASS SYSTEM ══════════════════════════════════════════ */
 

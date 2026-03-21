@@ -13,7 +13,7 @@ export function Features() {
     return (
         <section
             style={{
-                background: 'var(--black)',
+                background: 'transparent',
                 padding: '90px 20px',
                 position: 'relative',
                 overflow: 'hidden'

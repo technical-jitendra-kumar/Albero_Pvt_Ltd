@@ -147,6 +147,7 @@ export default function LogoCloudDemoPage() {
                 .tl-icon:hover {
                     opacity: 1;
                     filter: grayscale(0) brightness(1.2);
+                    color: #D49C01;
                 }
 
                 /* ── Row wrapper ── */

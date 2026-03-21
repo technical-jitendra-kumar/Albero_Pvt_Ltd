@@ -97,7 +97,7 @@ export default function Process() {
     const next = () => setActive((i) => (i + 1) % total)
 
     return (
-        <section style={{ background: 'var(--black)', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
+        <section style={{ background: 'transparent', color: 'var(--white)', padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
             <style>{`
                 /* ══ GLASS SYSTEM ══════════════════════════════════════════ */
                 .pr-main {
@@ -589,6 +589,7 @@ export default function Process() {
                             <button
                                 key={s.id}
                                 onClick={() => setActive(i)}
+                                onMouseEnter={() => setActive(i)}
                                 className={`pr-sidebar-btn ${isActive ? (c.isBlue ? 'pr-active-blue' : 'pr-active-amber') : ''}`}>
                                 <div className={`pr-s-icon ${isActive ? (c.isBlue ? 'pr-s-icon-blue' : 'pr-s-icon-amber') : ''}`}>
                                     {String(i + 1).padStart(2, '0')}
