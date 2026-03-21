@@ -1,39 +1,40 @@
 export const contactData = {
-    badgeTitle: 'Contact Us',
-    title: "Let's Build Your Website Today",
-    subtitle: 'Ready to start your project? Get in touch with us for a free consultation and quote.',
+    badgeTitle: 'Contact Our Experts',
+    title: 'Have a Website or App Idea? Let’s Build It Together.',
+    subtitle:
+        'From business websites to Shopify stores and AI-powered solutions—we help you design, build, and scale digital products that actually generate revenue.',
     form: {
-        title: 'Send us a message',
-        nameLabel: 'Name',
+        title: 'Tell Us About Your Project',
+        nameLabel: 'FullName',
         namePlaceholder: 'Your full name',
-        emailLabel: 'Email',
-        emailPlaceholder: 'your.email@example.com',
-        messageLabel: 'Message',
+        emailLabel: 'Email Address',
+        emailPlaceholder: 'you@company.com',
         phoneLabel: 'Phone',
-        phonePlaceholder: 'Your phone number',
-        messagePlaceholder: 'Tell us about your project...',
-        buttonLabel: 'Send Message'
+        phonePlaceholder: '+91 XXXXX XXXXX',
+        messageLabel: 'What Do You Need?',
+        messagePlaceholder: 'Example: Website, Shopify store, redesign, AI tool, automation, etc. Also mention your goals, timeline, and budget.',
+        buttonLabel: 'Get Free Consultation'
     },
     card: {
-        title: 'Get in touch',
+        title: 'Direct Contact',
         email: 'contact@albero.in',
         phone: '+91 9170780671',
         address: 'Noida, India'
     },
     link: {
-        title: 'Follow us',
+        title: 'Follow & Connect',
         facebook: 'https://www.facebook.com/AlberoTechnologies1',
         twitter: 'https://x.com/Alberotech1',
         linkedin: 'https://www.linkedin.com/company/albero-technologies-pvt-ltd/',
         instagram: 'https://www.instagram.com/albero.technologies/'
     },
     otherCard: {
-        title: 'Free Consultation',
-        subtitle1: 'Have a project idea in mind or need expert guidance with your development? Enjoy a',
-        subtitle2: 'free 30-minute consultation',
-        subtitle3: ' with our team to discuss your',
-        subtitle4: 'goals, challenges,',
-        subtitle5: 'and the best way forward.',
-        tagline: 'No obligations • 100% confidential • Expert advice'
+        title: 'Free Strategy Session',
+        subtitle1: 'Confused about what to build or how to scale? Get a  ',
+        subtitle2: 'free 30-minute strategy call  ',
+        subtitle3: 'where we help you plan your ',
+        subtitle4: 'website, e-commerce store, or automation system, ',
+        subtitle5: 'and need crm, lms, hrm or any other custom software? We got you covered',
+        tagline: 'No fluff • Practical advice • Built for real business growth'
     }
 }
