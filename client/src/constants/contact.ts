@@ -5,7 +5,7 @@ export const contactData = {
         'From business websites to Shopify stores and AI-powered solutions—we help you design, build, and scale digital products that actually generate revenue.',
     form: {
         title: 'Tell Us About Your Project',
-        nameLabel: 'FullName',
+        nameLabel: 'Full Name',
         namePlaceholder: 'Your full name',
         emailLabel: 'Email Address',
         emailPlaceholder: 'you@company.com',
