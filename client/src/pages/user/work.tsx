@@ -9,7 +9,7 @@ export default function WorkPage() {
     const { hero, collection, projects, industries, techStack, process, aiServices, steamPackages, testimonials, clients, presence, cta } = workData
 
     // Helper: render mock-img boxes from a mocks array
-    const renderMocks = (mocks: (typeof projects.web.slides)[0]['mocks'], gridCls: string, revealCls = '') => (
+    const renderMocks = (mocks: Array<{ icon: string; label: string; cls?: string; span?: number }>, gridCls: string, revealCls = '') => (
         <div className={`mock-grid ${gridCls} ${revealCls}`}>
             {mocks.map((m, i) => (
                 <div
