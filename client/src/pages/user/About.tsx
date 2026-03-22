@@ -4,8 +4,11 @@ import '../../styles/about.css'
 import ParticleCanvas from '@/components/workui/ParticleCanvas'
 import CursorGlow from '@/components/workui/CursorGlow'
 import ScrollReveal from '@/components/workui/ScrollReveal'
+import { aboutData } from '@/constants/about'
 
 export default function AboutPage() {
+    const { hero, mission, story, team, stats, whyUs, cta } = aboutData
+
     return (
         <div className="about-page">
             <ParticleCanvas />
@@ -26,40 +29,29 @@ export default function AboutPage() {
                 <div className="about-hero-inner">
                     <div className="hero-badge reveal">
                         <span className="hero-badge-dot"></span>
-                        WHO WE ARE
+                        {hero.badge}
                     </div>
 
                     <h1 className="about-hero-title reveal">
-                        WE BUILD
-                        <span className="stroke-word"> DIGITAL</span>
+                        {hero.titleLine1}
+                        <span className="stroke-word">{hero.titleStroke}</span>
                         <br />
-                        <em>Experiences</em>
+                        <em>{hero.titleEm}</em>
                     </h1>
 
                     <div className="hero-divline"></div>
 
-                    <p className="about-hero-sub reveal">
-                        Albero Technologies is a full-stack web development studio crafting high-performance, visually stunning digital products for
-                        startups and enterprises worldwide.
-                    </p>
+                    <p className="about-hero-sub reveal">{hero.body}</p>
 
                     <div className="about-hero-chips stagger">
-                        <div className="about-chip">
-                            <span className="about-chip-num">3+</span>
-                            <span className="about-chip-lbl">Years Building</span>
-                        </div>
-                        <div className="about-chip">
-                            <span className="about-chip-num">113+</span>
-                            <span className="about-chip-lbl">Projects Shipped</span>
-                        </div>
-                        <div className="about-chip">
-                            <span className="about-chip-num">67+</span>
-                            <span className="about-chip-lbl">Happy Clients</span>
-                        </div>
-                        <div className="about-chip">
-                            <span className="about-chip-num">95%</span>
-                            <span className="about-chip-lbl">Satisfaction Rate</span>
-                        </div>
+                        {hero.chips.map((chip, i) => (
+                            <div
+                                key={i}
+                                className="about-chip">
+                                <span className="about-chip-num">{chip.num}</span>
+                                <span className="about-chip-lbl">{chip.label}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
@@ -73,49 +65,39 @@ export default function AboutPage() {
             <section className="section">
                 <div className="about-mission-grid">
                     <div className="about-mission-left reveal-left">
-                        <span className="s-label">OUR MISSION</span>
+                        <span className="s-label">{mission.label}</span>
                         <h2 className="about-section-title">
-                            Empowering Businesses
-                            <em> Through Technology</em>
+                            {mission.title}
+                            <em>{mission.titleEm}</em>
                         </h2>
                         <p className="about-body-text">
-                            We believe every business deserves world-class digital infrastructure. Our mission is to bridge the gap between ambition
-                            and execution — delivering software that doesn't just work, but <strong>wins</strong>.
+                            {mission.body1Parts.before}
+                            <strong>{mission.body1Parts.bold}</strong>
+                            {mission.body1Parts.after}
                         </p>
-                        <p className="about-body-text">
-                            From early-stage startups to established enterprises, we bring the same level of craft, care, and commitment to every
-                            project we take on.
-                        </p>
+                        <p className="about-body-text">{mission.body2}</p>
                         <div className="about-mission-tags tags">
-                            <span className="tag">Innovation First</span>
-                            <span className="tag">Client Focused</span>
-                            <span className="tag">Scalable Solutions</span>
-                            <span className="tag">Quality Driven</span>
+                            {mission.tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="tag">
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
                     </div>
 
                     <div className="about-mission-right reveal-right">
                         <div className="about-value-cards stagger">
-                            <div className="about-value-card">
-                                <div className="about-value-icon">⚡</div>
-                                <div className="about-value-title">Speed Without Compromise</div>
-                                <div className="about-value-desc">We ship fast without cutting corners — every line of code is intentional.</div>
-                            </div>
-                            <div className="about-value-card">
-                                <div className="about-value-icon">🎯</div>
-                                <div className="about-value-title">Precision Engineering</div>
-                                <div className="about-value-desc">Pixel-perfect interfaces backed by robust, maintainable architecture.</div>
-                            </div>
-                            <div className="about-value-card">
-                                <div className="about-value-icon">🤝</div>
-                                <div className="about-value-title">True Partnership</div>
-                                <div className="about-value-desc">We embed with your team, not just deliver a product and disappear.</div>
-                            </div>
-                            <div className="about-value-card">
-                                <div className="about-value-icon">🔮</div>
-                                <div className="about-value-title">Future-Ready Builds</div>
-                                <div className="about-value-desc">Architectures designed to scale with your ambitions, not against them.</div>
-                            </div>
+                            {mission.values.map((v, i) => (
+                                <div
+                                    key={i}
+                                    className="about-value-card">
+                                    <div className="about-value-icon">{v.icon}</div>
+                                    <div className="about-value-title">{v.title}</div>
+                                    <div className="about-value-desc">{v.desc}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -126,48 +108,17 @@ export default function AboutPage() {
             {/* ── STORY ── */}
             <section className="section">
                 <div className="about-story reveal">
-                    <span className="s-label">OUR STORY</span>
+                    <span className="s-label">{story.label}</span>
                     <h2 className="about-section-title about-center">
-                        From a Small Team to
-                        <em> A Global Studio</em>
+                        {story.title}
+                        <em>{story.titleEm}</em>
                     </h2>
                 </div>
 
                 <div className="about-timeline">
                     <div className="about-timeline-line"></div>
 
-                    {[
-                        {
-                            year: '2021',
-                            title: 'The Beginning',
-                            desc: 'Albero was founded with a single mission — build software that makes a real difference. Started with two developers and a laptop.',
-                            side: 'left'
-                        },
-                        {
-                            year: '2022',
-                            title: 'First 20 Clients',
-                            desc: 'Word spread fast. We onboarded our first 20 clients across industries from education to e-commerce, learning what truly great products look like.',
-                            side: 'right'
-                        },
-                        {
-                            year: '2023',
-                            title: 'Expanding Services',
-                            desc: 'We expanded into digital marketing, UI/UX design, and enterprise solutions — becoming a true end-to-end technology partner.',
-                            side: 'left'
-                        },
-                        {
-                            year: '2024',
-                            title: 'Going Global',
-                            desc: 'Crossed 100 projects, entered international markets, and built a team of specialists across development, design, and strategy.',
-                            side: 'right'
-                        },
-                        {
-                            year: '2025',
-                            title: 'Today & Beyond',
-                            desc: 'Now a full-stack studio with 67+ active clients, we continue to push the boundaries of what digital products can achieve.',
-                            side: 'left'
-                        }
-                    ].map((item, i) => (
+                    {story.timeline.map((item, i) => (
                         <div
                             key={i}
                             className={`about-timeline-item ${item.side} reveal`}>
@@ -187,25 +138,20 @@ export default function AboutPage() {
             {/* ── TEAM ── */}
             <section className="section">
                 <div className="reveal">
-                    <span className="s-label">THE TEAM</span>
+                    <span className="s-label">{team.label}</span>
                     <h2 className="about-section-title">
-                        People Behind
-                        <em> The Magic</em>
+                        {team.title}
+                        <em>{team.titleEm}</em>
                     </h2>
                     <p
                         className="about-body-text"
                         style={{ maxWidth: '520px', marginBottom: '48px' }}>
-                        A small but mighty team of engineers, designers, and strategists obsessed with building things people love to use.
+                        {team.body}
                     </p>
                 </div>
 
                 <div className="about-team-grid stagger">
-                    {[
-                        { name: 'Taher Maksee', role: 'Founder & Lead Developer', emoji: '👨‍💻', tags: ['React', 'Node.js', 'Architecture'] },
-                        { name: 'Design Lead', role: 'UI/UX & Brand Design', emoji: '🎨', tags: ['Figma', 'Motion', 'Branding'] },
-                        { name: 'Backend Engineer', role: 'Systems & Infrastructure', emoji: '⚙️', tags: ['AWS', 'PostgreSQL', 'APIs'] },
-                        { name: 'Growth Lead', role: 'Marketing & Strategy', emoji: '📈', tags: ['SEO', 'Analytics', 'Growth'] }
-                    ].map((member, i) => (
+                    {team.members.map((member, i) => (
                         <div
                             key={i}
                             className="about-team-card">
@@ -231,20 +177,15 @@ export default function AboutPage() {
             {/* ── STATS ── */}
             <section className="section">
                 <div className="reveal">
-                    <span className="s-label">BY THE NUMBERS</span>
+                    <span className="s-label">{stats.label}</span>
                     <h2 className="about-section-title">
-                        Results That
-                        <em> Speak Louder</em>
+                        {stats.title}
+                        <em>{stats.titleEm}</em>
                     </h2>
                 </div>
 
                 <div className="stats-row stagger">
-                    {[
-                        { num: '113', suffix: '+', label: 'Projects Completed' },
-                        { num: '67', suffix: '+', label: 'Happy Clients' },
-                        { num: '3', suffix: '+', label: 'Years Experience' },
-                        { num: '95', suffix: '%', label: 'Client Satisfaction' }
-                    ].map((s, i) => (
+                    {stats.items.map((s, i) => (
                         <div
                             key={i}
                             className="stat-card">
@@ -265,42 +206,15 @@ export default function AboutPage() {
             {/* ── WHY US ── */}
             <section className="section">
                 <div className="reveal">
-                    <span className="s-label">WHY ALBERO</span>
+                    <span className="s-label">{whyUs.label}</span>
                     <h2 className="about-section-title">
-                        What Sets Us
-                        <em> Apart</em>
+                        {whyUs.title}
+                        <em>{whyUs.titleEm}</em>
                     </h2>
                 </div>
 
                 <div className="about-why-grid stagger">
-                    {[
-                        {
-                            icon: '🏗️',
-                            title: 'End-to-End Ownership',
-                            desc: 'From wireframe to deployment to maintenance — we own the full lifecycle so nothing falls through the cracks.'
-                        },
-                        {
-                            icon: '💬',
-                            title: 'Radical Transparency',
-                            desc: 'Weekly updates, open timelines, and direct access to your dev team. No middlemen, no surprises.'
-                        },
-                        {
-                            icon: '📐',
-                            title: 'Design-First Thinking',
-                            desc: "Every product starts with design. We believe great UX is not a luxury — it's the foundation of good software."
-                        },
-                        {
-                            icon: '🔒',
-                            title: 'Security by Default',
-                            desc: 'Enterprise-grade security practices baked into every project from day one.'
-                        },
-                        {
-                            icon: '🚀',
-                            title: 'Fast Turnaround',
-                            desc: 'We move with urgency. Most MVPs shipped in 4–6 weeks without sacrificing quality.'
-                        },
-                        { icon: '📞', title: '24/7 Support', desc: 'Post-launch support, monitoring, and rapid response whenever you need us.' }
-                    ].map((item, i) => (
+                    {whyUs.cards.map((item, i) => (
                         <div
                             key={i}
                             className="about-why-card">
@@ -315,21 +229,21 @@ export default function AboutPage() {
             {/* ── CTA ── */}
             <section className="cta-section reveal">
                 <h2>
-                    Ready to Build
+                    {cta.title}
                     <br />
-                    <em>Something Great?</em>
+                    <em>{cta.titleEm}</em>
                 </h2>
-                <p>Let's talk about your project. No commitments, just a conversation.</p>
+                <p>{cta.body}</p>
                 <div className="cta-btns">
                     <a
-                        href="#contact"
+                        href={cta.primaryHref}
                         className="btn-w">
-                        Start a Project
+                        {cta.primaryLabel}
                     </a>
                     <a
-                        href="/work"
+                        href={cta.secondaryHref}
                         className="btn-o">
-                        View Our Work →
+                        {cta.secondaryLabel}
                     </a>
                 </div>
             </section>
