@@ -1,19 +1,5 @@
 // ─── Work Page Constants ─────────────────────────────────────────────────────
 
-// Shared mock item type
-type MockItem = {
-    icon: string
-    label: string
-    cls?: string
-    span?: number
-}
-
-type PhoneMock = {
-    icon: string
-    label: string
-    cls: string
-}
-
 export const workData = {
     // ── Hero ──────────────────────────────────────────────────────────────────
     hero: {
