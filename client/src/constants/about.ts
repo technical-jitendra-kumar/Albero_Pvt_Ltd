@@ -5,87 +5,87 @@ export const aboutData = {
     hero: {
         badge: 'WHO WE ARE',
         titleLine1: 'WE BUILD',
-        titleStroke: ' DIGITAL',
-        titleEm: 'Experiences',
-        body: 'Albero Technologies is a full-stack web development studio crafting high-performance, visually stunning digital products for startups and enterprises worldwide.',
+        titleStroke: ' SCALABLE',
+        titleEm: 'Digital Products',
+        body: 'Albero Technologies is a product engineering and SaaS-driven technology company helping businesses launch faster, automate operations, and scale with high-performance digital systems.',
         chips: [
-            { num: '3+', label: 'Years Building' },
-            { num: '113+', label: 'Projects Shipped' },
-            { num: '67+', label: 'Happy Clients' },
-            { num: '95%', label: 'Satisfaction Rate' }
+            { num: '3+', label: 'Years Building Scalable Systems' },
+            { num: '113+', label: 'Projects Delivered Successfully' },
+            { num: '67+', label: 'Businesses Scaled' },
+            { num: '95%', label: 'Client Retention Rate' }
         ]
     },
 
     // ── Mission ───────────────────────────────────────────────────────────────
     mission: {
         label: 'OUR MISSION',
-        title: 'Empowering Businesses',
-        titleEm: ' Through Technology',
+        title: 'Helping Businesses',
+        titleEm: ' Scale Through Technology',
         body1Parts: {
-            before: "We believe every business deserves world-class digital infrastructure. Our mission is to bridge the gap between ambition and execution — delivering software that doesn't just work, but ",
-            bold: 'wins',
+            before: 'We believe technology should drive measurable growth. Our mission is to turn ideas into scalable digital products that don’t just function — they ',
+            bold: 'perform',
             after: '.'
         },
-        body2: 'From early-stage startups to established enterprises, we bring the same level of craft, care, and commitment to every project we take on.',
-        tags: ['Innovation First', 'Client Focused', 'Scalable Solutions', 'Quality Driven'],
+        body2: 'Whether it’s a startup building its first product or an enterprise optimizing operations, we focus on delivering systems that generate results, not just code.',
+        tags: ['Growth Focused', 'Performance Driven', 'Scalable Systems', 'Result Oriented'],
         values: [
             {
                 icon: '⚡',
-                title: 'Speed Without Compromise',
-                desc: 'We ship fast without cutting corners — every line of code is intentional.'
+                title: 'Speed With Precision',
+                desc: 'We deliver fast without sacrificing quality—because speed matters, but stability matters more.'
             },
             {
                 icon: '🎯',
-                title: 'Precision Engineering',
-                desc: 'Pixel-perfect interfaces backed by robust, maintainable architecture.'
+                title: 'Precision EngineeringOutcome-Driven Execution',
+                desc: 'Every feature we build is aligned with business goals like growth, conversion, and efficiency.'
             },
             {
                 icon: '🤝',
-                title: 'True Partnership',
-                desc: 'We embed with your team, not just deliver a product and disappear.'
+                title: 'Long-Term Partnership',
+                desc: 'We work as your technology partner—continuously improving, scaling, and supporting your product.'
             },
             {
-                icon: '🔮',
-                title: 'Future-Ready Builds',
-                desc: 'Architectures designed to scale with your ambitions, not against them.'
+                icon: '🚀',
+                title: 'Built to Scale',
+                desc: 'Our systems are designed to handle growth—from your first users to thousands without breaking.'
             }
         ]
     },
 
     // ── Story / Timeline ──────────────────────────────────────────────────────
     story: {
-        label: 'OUR STORY',
-        title: 'From a Small Team to',
-        titleEm: ' A Global Studio',
+        label: 'OUR JOURNEY',
+        title: 'From Small Beginnings to',
+        titleEm: ' Scalable Impact',
         timeline: [
             {
                 year: '2021',
-                title: 'The Beginning',
-                desc: 'Albero was founded with a single mission — build software that makes a real difference. Started with two developers and a laptop.',
+                title: 'Foundation',
+                desc: 'Started with a clear vision—to build digital products that actually create business impact, not just exist online.',
                 side: 'left'
             },
             {
                 year: '2022',
-                title: 'First 20 Clients',
-                desc: 'Word spread fast. We onboarded our first 20 clients across industries from education to e-commerce, learning what truly great products look like.',
+                title: 'Early Growth',
+                desc: 'Worked with startups and SMEs across industries, delivering high-performance websites and applications that drove real results.',
                 side: 'right'
             },
             {
                 year: '2023',
-                title: 'Expanding Services',
-                desc: 'We expanded into digital marketing, UI/UX design, and enterprise solutions — becoming a true end-to-end technology partner.',
+                title: 'Expansion',
+                desc: 'Expanded into UI/UX, automation, and enterprise systems—becoming a full-stack product engineering partner.',
                 side: 'left'
             },
             {
                 year: '2024',
-                title: 'Going Global',
-                desc: 'Crossed 100 projects, entered international markets, and built a team of specialists across development, design, and strategy.',
+                title: 'Scaling Globally',
+                desc: 'Crossed 100+ projects and started serving international clients with scalable SaaS and digital solutions.',
                 side: 'right'
             },
             {
                 year: '2025',
                 title: 'Today & Beyond',
-                desc: 'Now a full-stack studio with 67+ active clients, we continue to push the boundaries of what digital products can achieve.',
+                desc: 'Focused on building scalable systems, SaaS products, and automation tools that help businesses grow faster and smarter.',
                 side: 'left'
             }
         ]
@@ -94,9 +94,9 @@ export const aboutData = {
     // ── Team ──────────────────────────────────────────────────────────────────
     team: {
         label: 'THE TEAM',
-        title: 'People Behind',
-        titleEm: ' The Magic',
-        body: 'A small but mighty team of engineers, designers, and strategists obsessed with building things people love to use.',
+        title: 'Experts Behind',
+        titleEm: ' Scalable Systems',
+        body: 'A focused team of engineers, designers, and strategists dedicated to building high-performance products that drive real business growth.',
         members: [
             { name: 'Taher Maksee', role: 'Founder & Lead Developer', emoji: '👨‍💻', tags: ['React', 'Node.js', 'Architecture'] },
             { name: 'Design Lead', role: 'UI/UX & Brand Design', emoji: '🎨', tags: ['Figma', 'Motion', 'Branding'] },
@@ -109,50 +109,50 @@ export const aboutData = {
     stats: {
         label: 'BY THE NUMBERS',
         title: 'Results That',
-        titleEm: ' Speak Louder',
+        titleEm: ' Drive Growth',
         items: [
-            { num: '113', suffix: '+', label: 'Projects Completed' },
-            { num: '67', suffix: '+', label: 'Happy Clients' },
+            { num: '113', suffix: '+', label: 'Projects Delivered' },
+            { num: '67', suffix: '+', label: 'Clients Served' },
             { num: '3', suffix: '+', label: 'Years Experience' },
-            { num: '95', suffix: '%', label: 'Client Satisfaction' }
+            { num: '95', suffix: '%', label: 'Client Retention' }
         ]
     },
 
     // ── Why Us ────────────────────────────────────────────────────────────────
     whyUs: {
-        label: 'WHY ALBERO',
-        title: 'What Sets Us',
-        titleEm: ' Apart',
+        label: 'WHY ALBERO TECHNOLOGIES',
+        title: 'Why Businesses',
+        titleEm: ' Choose Us',
         cards: [
             {
                 icon: '🏗️',
-                title: 'End-to-End Ownership',
-                desc: 'From wireframe to deployment to maintenance — we own the full lifecycle so nothing falls through the cracks.'
+                title: 'End-to-End Execution',
+                desc: 'From idea to launch to scaling—we handle everything so you can focus on growing your business.'
             },
             {
                 icon: '💬',
-                title: 'Radical Transparency',
-                desc: 'Weekly updates, open timelines, and direct access to your dev team. No middlemen, no surprises.'
+                title: 'Transparent Communication',
+                desc: 'Clear timelines, regular updates, and direct access to the team—no confusion, no hidden processes.'
             },
             {
                 icon: '📐',
-                title: 'Design-First Thinking',
-                desc: "Every product starts with design. We believe great UX is not a luxury — it's the foundation of good software."
+                title: 'Conversion-Focused Design',
+                desc: 'We design products that don’t just look good—they convert users into customers.'
             },
             {
                 icon: '🔒',
-                title: 'Security by Default',
-                desc: 'Enterprise-grade security practices baked into every project from day one.'
+                title: 'Security & Reliability',
+                desc: 'Enterprise-grade security and stable systems built to handle real-world scale.'
             },
             {
                 icon: '🚀',
-                title: 'Fast Turnaround',
-                desc: 'We move with urgency. Most MVPs shipped in 4–6 weeks without sacrificing quality.'
+                title: 'Fast Delivery',
+                desc: 'Rapid execution with structured processes—most projects delivered within weeks, not months.'
             },
             {
                 icon: '📞',
-                title: '24/7 Support',
-                desc: 'Post-launch support, monitoring, and rapid response whenever you need us.'
+                title: 'Ongoing Support',
+                desc: 'We stay with you post-launch to optimize, scale, and continuously improve your product.'
             }
         ]
     },
@@ -160,11 +160,11 @@ export const aboutData = {
     // ── CTA ───────────────────────────────────────────────────────────────────
     cta: {
         title: 'Ready to Build',
-        titleEm: 'Something Great?',
-        body: "Let's talk about your project. No commitments, just a conversation.",
-        primaryLabel: 'Start a Project',
+        titleEm: 'Something That Scales?',
+        body: 'Let’s discuss your idea and turn it into a high-performance product built for growth.',
+        primaryLabel: 'Book a Free Strategy Call',
         primaryHref: '#contact',
-        secondaryLabel: 'View Our Work →',
+        secondaryLabel: 'Explore Our Work →',
         secondaryHref: '/work'
     }
 }

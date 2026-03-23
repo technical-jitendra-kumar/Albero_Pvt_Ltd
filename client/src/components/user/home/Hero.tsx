@@ -58,6 +58,13 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                         animation-delay: 0.3s, 1.4s;
                     }
 
+                    /* Prevent NavLink anchor from ever showing a white background */
+                    .hero-cta a, .hero-eyebrow a {
+                        background: transparent !important;
+                        display: inline-block;
+                    }
+
+                    /* Eyebrow pill */
                     .hero-pill {
                         display: inline-flex; align-items: center; gap: 8px;
                         padding: 6px 18px; border-radius: 999px;
@@ -69,18 +76,30 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     }
                     .hero-pill:hover { border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.07); }
 
+                    /* ── CTA button — FIX: removed ::before pseudo white bleed ── */
                     .hero-btn {
-                        position: relative; display: inline-flex; align-items: center; gap: 8px;
+                        position: relative;
+                        display: inline-flex; align-items: center; gap: 8px;
                         padding: 13px 28px; border-radius: 999px;
-                        background: #000; border: 1px solid rgba(255,255,255,0.15);
+                        background: #000;
+                        border: 1px solid rgba(255,255,255,0.15);
                         color: #fff; font-weight: 600; font-size: 14px;
                         cursor: pointer; overflow: hidden;
+                        /* FIX: isolate so child whites don't bleed out */
+                        isolation: isolate;
                         transition: border-color 0.25s, box-shadow 0.25s;
+                        /* FIX: prevent stuck hover state on page transition */
+                        -webkit-tap-highlight-color: transparent;
                     }
+                    /* Blue overlay on hover */
                     .hero-btn::before {
-                        content: ''; position: absolute; inset: 0;
+                        content: '';
+                        position: absolute; inset: 0;
                         background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(96,165,250,0.04));
-                        opacity: 0; transition: opacity 0.25s;
+                        opacity: 0;
+                        transition: opacity 0.25s;
+                        pointer-events: none;
+                        border-radius: inherit;
                     }
                     .hero-btn:hover { border-color: rgba(96,165,250,0.5); box-shadow: 0 0 24px rgba(96,165,250,0.2); }
                     .hero-btn:hover::before { opacity: 1; }
@@ -88,13 +107,59 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                         width: 22px; height: 22px; border-radius: 50%;
                         background: #fff; display: flex; align-items: center; justify-content: center;
                         transition: transform 0.2s; flex-shrink: 0;
+                        /* FIX: explicit z-index so icon stays above ::after */
+                        position: relative; z-index: 1;
                     }
                     .hero-btn:hover .hero-btn-icon { transform: rotate(45deg); }
-                    .hero-btn-label { position: relative; overflow: hidden; display: inline-block; }
+                    .hero-btn-label {
+                        position: relative; overflow: hidden; display: inline-block;
+                        /* FIX: explicit z-index so text stays above ::after */
+                        z-index: 1;
+                    }
                     .hero-btn-label span { display: block; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); }
                     .hero-btn-label span:last-child { position: absolute; inset: 0; transform: translateY(100%); color: #fff; }
                     .hero-btn:hover .hero-btn-label span:first-child { transform: translateY(-100%); }
                     .hero-btn:hover .hero-btn-label span:last-child  { transform: translateY(0); }
+
+                    /* ── Mobile optimisations ── */
+                    @media (max-width: 640px) {
+                        /* Reduce top padding so content isn't hidden behind navbar */
+                        #home { padding-top: 120px !important; min-height: 100svh; }
+
+                        /* Smaller eyebrow pill on mobile */
+                        .hero-pill { padding: 5px 14px; gap: 6px; }
+
+                        /* Title — no overflow on narrow screens */
+                        .hero-title { word-break: break-word; padding: 16px 0 !important; }
+
+                        /* Subtitle readable on mobile */
+                        .hero-subtitle { font-size: 15px !important; margin-bottom: 32px !important; }
+
+                        /* CTA button full-width-ish on mobile */
+                        .hero-btn { padding: 12px 22px; font-size: 13px; }
+                        .hero-btn-icon { width: 20px; height: 20px; }
+
+                        /* Globe — smaller on mobile so it doesn't bleed too much */
+                        .hero-globe-wrap {
+                            top: calc(100% - 60px) !important;
+                            height: 280px !important;
+                            width: 120vw !important;
+                        }
+
+                        /* Fewer star jitters on low-power mobile */
+                        .hero-star { animation-duration: 4s !important; }
+
+                        /* Bottom fade spacing */
+                        .hero-fade-bottom { margin-top: 48px !important; }
+                    }
+
+                    @media (max-width: 400px) {
+                        #home { padding-top: 100px !important; }
+                        .hero-globe-wrap {
+                            height: 220px !important;
+                            top: calc(100% - 50px) !important;
+                        }
+                    }
                 `}</style>
 
                 {/* ── Scan line ── */}
@@ -134,7 +199,7 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     />
                 ))}
 
-                {/* ══ EARTH GLOBE — real photo ══ */}
+                {/* ══ EARTH GLOBE ══ */}
                 <div
                     className="hero-globe-wrap absolute left-1/2 top-[calc(100%-90px)] lg:top-[calc(100%-150px)] h-[500px] w-[700px] md:h-[500px] md:w-[1100px] lg:h-[750px] lg:w-[140%] -translate-x-1/2 rounded-[100%]"
                     style={{
@@ -145,7 +210,6 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                         backgroundPosition: 'center 72%',
                         backgroundRepeat: 'no-repeat'
                     }}>
-                    {/* Side vignette — softens left/right arc edges */}
                     <div
                         style={{
                             position: 'absolute',
@@ -155,8 +219,6 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                             pointerEvents: 'none'
                         }}
                     />
-
-                    {/* Bottom fade — blends globe into page */}
                     <div
                         style={{
                             position: 'absolute',
@@ -168,8 +230,6 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                             pointerEvents: 'none'
                         }}
                     />
-
-                    {/* Top dark fade — hides sky at the very rim */}
                     <div
                         style={{
                             position: 'absolute',
@@ -269,9 +329,24 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     </p>
 
                     {ctaLabel && (
-                        <NavLink href="#contact">
-                            <div className="hero-cta flex justify-center">
-                                <button className="hero-btn">
+                        <div
+                            className="hero-cta flex justify-center"
+                            style={{ background: 'none' }}>
+                            <a
+                                href="#contact"
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    padding: 0,
+                                    margin: 0,
+                                    display: 'inline-flex',
+                                    textDecoration: 'none',
+                                    outline: 'none',
+                                    boxShadow: 'none'
+                                }}>
+                                <button
+                                    className="hero-btn"
+                                    type="button">
                                     <div className="hero-btn-label">
                                         <span>{ctaLabel}</span>
                                         <span>Right Now</span>
@@ -292,14 +367,14 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                                         </svg>
                                     </div>
                                 </button>
-                            </div>
-                        </NavLink>
+                            </a>
+                        </div>
                     )}
                 </div>
 
                 {/* ── Bottom Fade ── */}
                 <div
-                    className="relative mt-32 opacity-0"
+                    className="hero-fade-bottom relative mt-32 opacity-0"
                     style={{ perspective: 2000, animation: 'hero-fade-up 0.8s ease both', animationDelay: '0.7s' }}>
                     <div
                         style={{
