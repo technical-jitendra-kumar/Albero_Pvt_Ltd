@@ -11,8 +11,8 @@ import { IconArrowRight, IconChevronLeft, IconChevronRight } from '@tabler/icons
 type Tab = 'services' | 'products'
 
 const TABS: { key: Tab; label: string }[] = [
-    { key: 'services', label: '⚙️  Development Services' },
-    { key: 'products', label: '📦  Our Products' }
+    { key: 'products', label: 'Our Products' },
+    { key: 'services', label: 'Our Services' }
 ]
 
 // ─── Dot-grid SVG graphic ─────────────────────────────────────────────────────
@@ -655,7 +655,7 @@ function ProductsPanel() {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function Services() {
-    const [activeTab, setActiveTab] = useState<Tab>('services')
+    const [activeTab, setActiveTab] = useState<Tab>('products')
     const [fading, setFading] = useState(false)
 
     const switchTo = (tab: Tab) => {
@@ -973,8 +973,8 @@ export default function Services() {
             <SliderControls
                 total={TABS.length}
                 active={TABS.findIndex((t) => t.key === activeTab)}
-                onPrev={() => switchTo('services')}
-                onNext={() => switchTo('products')}
+                onPrev={() => switchTo('products')}
+                onNext={() => switchTo('services')}
                 onDot={(i) => switchTo(TABS[i].key)}
                 accentColor="oklch(0.623 0.214 259.815)"
             />
