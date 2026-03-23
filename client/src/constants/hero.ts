@@ -1,6 +1,7 @@
 export const heroData = {
-    title: 'Smarter Development • Faster Launch • Better Growth',
-    subtitle: 'We help startups, SMEs, and enterprises grow digitally with tailored web solutions.',
-    eyebrow: 'Get a Free Quote',
-    ctaLabel: 'Get Started'
+    title: 'Engineered for Speed • Built for Scale • Designed for Growth',
+    subtitle:
+        'We design and develop high-performance websites, SaaS products, and automation systems that help businesses generate leads, increase conversions, and scale efficiently.',
+    eyebrow: 'Trusted by Growing Businesses & Startups',
+    ctaLabel: 'Book a Free Strategy Call'
 }
