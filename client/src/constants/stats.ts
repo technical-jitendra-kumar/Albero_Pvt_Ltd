@@ -1,13 +1,13 @@
 const statsValues = [
-    { value: '3+', label: 'Years Experience' },
-    { value: '113+', label: 'Projects Completed' },
-    { value: '67+', label: 'Happy Clients' }
+    { value: '3+', label: 'Years of Building Scalable Digital Products' },
+    { value: '113+', label: 'Projects Successfully Delivered' },
+    { value: '67+', label: 'Businesses Scaled with Our Solutions' }
 ]
 
 export const statsData = {
-    badgeTitle: 'About Us',
-    heading: 'Empowering Businesses with Digital Transformation',
+    badgeTitle: 'Proven Impact',
+    heading: 'Driving Real Business Growth Through Technology',
     description:
-        'With over 3 years of experience serving 67+ clients across various industries, we specialize in creating high-performance web solutions that drive business growth.',
+        'We help businesses launch faster, scale smarter, and operate more efficiently with high-performance digital solutions. With proven experience across industries, our focus is simple—build systems that deliver measurable results, not just code.',
     stats: statsValues
 }

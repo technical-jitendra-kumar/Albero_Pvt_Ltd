@@ -26,39 +26,44 @@ const steps = [
     {
         id: '1',
         name: 'Step 1',
-        title: 'Discovery & Strategy',
-        description: 'We analyze your requirements, target audience, and business goals to create a comprehensive project strategy.'
+        title: 'Strategy & Product Planning',
+        description:
+            'We deep-dive into your business model, target users, and goals to define a clear roadmap. This ensures we build the right product—not just a good-looking one.'
     },
     {
         id: '2',
         name: 'Step 2',
-        title: 'Design (UI/UX, Figma prototypes)',
-        description: 'Our designers create beautiful, user-friendly interfaces with detailed Figma prototypes for your approval.'
+        title: 'UI/UX Design That Converts',
+        description:
+            'We design intuitive, conversion-focused interfaces with Figma prototypes—so you can visualize, validate, and refine before development begins.'
     },
     {
         id: '3',
         name: 'Step 3',
-        title: 'Development (Frontend + Backend)',
-        description: 'Our developers bring designs to life using modern technologies and best practices for optimal performance.'
+        title: 'Scalable Development (Frontend + Backend)',
+        description: 'Using modern tech stacks, we build fast, secure, and scalable systems engineered for long-term growth—not quick fixes.'
     },
     {
         id: '4',
         name: 'Step 4',
-        title: 'Testing & QA (Performance, Security)',
-        description: 'Rigorous testing ensures your website is secure, fast, and works perfectly across all devices and browsers.'
+        title: 'Testing, Optimization & Security',
+        description:
+            'We rigorously test for performance, security, and reliability—ensuring your product runs flawlessly across all devices and user scenarios.'
     },
     {
         id: '5',
         name: 'Step 5',
-        title: 'Launch & Ongoing Support',
-        description: 'We deploy your website and provide continuous support, maintenance, and updates as needed.'
+        title: 'Launch, Scale & Continuous Support',
+        description:
+            'We don’t stop at launch. We help you scale, optimize, and continuously improve with ongoing support, updates, and growth-focused enhancements.'
     }
 ]
 
 export const processData = {
-    badgeTitle: 'Our Process',
-    heading: 'How We Bring Your Vision to Life',
-    description: 'Our proven 5-step process ensures quality delivery and client satisfaction.',
+    badgeTitle: 'Our Proven Process',
+    heading: 'From Idea to Scalable Product — Delivered Fast & Right',
+    description:
+        'We follow a structured, result-driven approach to ensure your product is not just built—but optimized for performance, scalability, and real business growth.',
     images: images,
     defaultClasses: defaultClasses,
     totalSteps: TOTAL_STEPS,

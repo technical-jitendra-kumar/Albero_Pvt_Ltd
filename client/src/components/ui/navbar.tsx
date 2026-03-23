@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { NavLink } from '../user/common/NavLink'
 import { Menu, X } from 'lucide-react'
 import Logo from '../../assets/images/logo.png'
+import { navbarData } from '@/constants/navbar'
 
 const AnimatedNavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
     const navigate = useNavigate()
@@ -45,14 +46,12 @@ const AnimatedNavLink = ({ href, children }: { href: string; children: React.Rea
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false)
-
     const [isOpen, setIsOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
 
     const toggleMenu = () => setIsOpen(!isOpen)
 
-    // Disable background scroll when mobile menu is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden'
@@ -82,16 +81,15 @@ const Navbar = () => {
           border-white/30 bg-black/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1),inset_0_0_8px_4px_rgba(255,255,255,0.4)]">
                 {/* Logo */}
                 <div className="flex items-center">
-                    <NavLink href="#home">
+                    <NavLink href={navbarData.logo.logoHref}>
                         <motion.div
                             className="relative flex items-center cursor-pointer"
                             initial="rest"
                             whileHover="hover"
                             animate="rest">
-                            {/* Logo */}
                             <motion.img
                                 src={Logo}
-                                alt="Albero Logo"
+                                alt={navbarData.logo.alt}
                                 className="w-10 h-10 object-contain"
                                 variants={{
                                     rest: { scale: 1 },
@@ -99,8 +97,6 @@ const Navbar = () => {
                                 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             />
-
-                            {/* Text Reveal (absolute so it doesn’t push links) */}
                             <motion.span
                                 className="absolute left-10 text-xl font-semibold tracking-widest text-white whitespace-nowrap"
                                 variants={{
@@ -108,7 +104,7 @@ const Navbar = () => {
                                     hover: { opacity: 1, x: 0 }
                                 }}
                                 transition={{ duration: 0.4, ease: 'easeInOut' }}>
-                                lbero
+                                {navbarData.logo.revealText}
                             </motion.span>
                         </motion.div>
                     </NavLink>
@@ -116,13 +112,7 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center space-x-8">
-                    {[
-                        { label: 'Home', href: '#home' },
-                        { label: 'About', href: '/about' },
-                        { label: 'Services', href: '#services' },
-                        { label: 'Our Work', href: '/work' },
-                        { label: 'Pricing', href: '#pricing' }
-                    ].map(({ label, href }) => (
+                    {navbarData.navLinks.map(({ label, href }) => (
                         <motion.div
                             key={label}
                             initial={{ opacity: 0, y: -10 }}
@@ -134,13 +124,13 @@ const Navbar = () => {
                     ))}
                 </nav>
 
-                {/* 🔥 Desktop CTA (Animated Button) */}
+                {/* Desktop CTA */}
                 <motion.div
                     className="hidden md:block relative"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.2 }}>
-                    <NavLink href="#contact">
+                    <NavLink href={navbarData.cta.href}>
                         <button
                             className="group relative border-2 flex justify-center items-center gap-3 border-white/70 rounded-full w-[9.3rem] h-12 
                            transition-all duration-500 ease-out hover:border-white hover:shadow-lg hover:shadow-white/20 
@@ -164,7 +154,7 @@ const Navbar = () => {
                             <span
                                 className="text-white font-medium tracking-wide text-sm transition-all duration-300 
                              group-hover:text-amber-50 relative z-10">
-                                Contact Us
+                                {navbarData.cta.label}
                             </span>
 
                             {/* Dot + Ripple */}
@@ -206,13 +196,7 @@ const Navbar = () => {
                         </motion.button>
 
                         <div className="flex flex-col space-y-6">
-                            {[
-                                { label: 'Home', href: '#home' },
-                                { label: 'About', href: '/about' },
-                                { label: 'Services', href: '#services' },
-                                { label: 'Our Work', href: '/work' },
-                                { label: 'Pricing', href: '#pricing' }
-                            ].map(({ label, href }, i) => (
+                            {navbarData.navLinks.map(({ label, href }, i) => (
                                 <motion.div
                                     key={label}
                                     initial={{ opacity: 0, x: 20 }}
@@ -229,8 +213,8 @@ const Navbar = () => {
                                 </motion.div>
                             ))}
 
-                            {/* Mobile CTA (same animated button) */}
-                            <NavLink href="#contact">
+                            {/* Mobile CTA */}
+                            <NavLink href={navbarData.cta.href}>
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -245,7 +229,7 @@ const Navbar = () => {
                                        before:via-white/5 before:to-transparent before:translate-x-[-100%] 
                                        hover:before:translate-x-[100%] before:transition-transform before:duration-700"
                                         onClick={toggleMenu}>
-                                        <span className="text-white font-medium tracking-wide text-sm relative z-10">Contact Us</span>
+                                        <span className="text-white font-medium tracking-wide text-sm relative z-10">{navbarData.cta.label}</span>
                                     </button>
                                 </motion.div>
                             </NavLink>
@@ -256,4 +240,5 @@ const Navbar = () => {
         </div>
     )
 }
+
 export { Navbar }

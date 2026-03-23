@@ -51,62 +51,62 @@ export interface Product {
 const features: ServiceFeature[] = [
     {
         title: 'Custom Website Development',
-        description: 'High-performance websites designed for speed, responsiveness, and seamless user experiences across all devices.',
+        description: 'High-converting, performance-driven websites built to generate leads, improve credibility, and turn visitors into customers.',
         icon: IconFileTypeJsx
     },
     {
         title: 'Web Application Development',
-        description: 'Scalable web applications using modern frameworks like React, Next.js, Laravel, and Node.js.',
+        description: 'Scalable, secure, and high-performance web applications designed to handle real business logic, users, and growth.',
         icon: IconBrandReact
     },
     {
         title: 'WordPress & CMS Development',
-        description: 'Flexible content-driven websites using WordPress and custom CMS solutions tailored for business growth.',
+        description: 'Flexible CMS solutions that give you full control—optimized for speed, SEO, and easy content management.',
         icon: IconBrandWordpress
     },
     {
         title: 'UI/UX Product Design',
-        description: 'Intuitive user interfaces and product experiences designed to increase engagement and usability.',
+        description: 'Conversion-focused user experiences designed to increase engagement, retention, and overall product usability.',
         icon: IconPhotoSquareRounded
     },
     {
         title: 'Cloud Hosting & Deployment',
-        description: 'Reliable cloud infrastructure, hosting management, and CI/CD deployment for scalable digital platforms.',
+        description: 'Secure, scalable cloud infrastructure with CI/CD pipelines to ensure smooth, reliable deployments and zero downtime.',
         icon: IconCloud
     },
     {
         title: 'SEO & Digital Growth',
-        description: 'Data-driven SEO and digital growth strategies to increase visibility, traffic, and conversions.',
+        description: 'Data-driven SEO and growth strategies that bring qualified traffic, improve rankings, and increase conversions.',
         icon: IconEyeSearch
     },
     {
         title: 'Enterprise Solutions',
-        description: 'Custom enterprise-grade applications designed to automate workflows and improve operational efficiency.',
+        description: 'Custom-built enterprise systems to automate workflows, improve efficiency, and support complex business operations.',
         icon: IconBrandLaravel
     },
     {
         title: 'E-Commerce Development',
-        description: 'Custom online stores with secure payments, inventory management, and optimized checkout experiences.',
+        description: 'High-converting e-commerce platforms with optimized checkout, payment integrations, and scalable architecture.',
         icon: IconShoppingCart
     },
     {
         title: 'API Development',
-        description: 'Secure REST API development and third-party integrations for seamless data communication.',
+        description: 'Robust and secure APIs that connect your systems, automate workflows, and enable seamless integrations.',
         icon: IconApi
     },
     {
         title: 'Website Maintenance',
-        description: 'Ongoing support, updates, performance monitoring, and bug fixes to keep your website running smoothly.',
+        description: 'Proactive monitoring, updates, and support to ensure your platform runs smoothly without interruptions.',
         icon: IconSettings
     },
     {
         title: 'Performance Optimization',
-        description: 'Speed optimization, Core Web Vitals improvements, and performance tuning for better SEO and UX.',
+        description: 'Speed, Core Web Vitals, and performance tuning to improve user experience, SEO rankings, and conversions.',
         icon: IconBolt
     },
     {
         title: 'Website Security',
-        description: 'Security audits, SSL configuration, malware protection, and vulnerability fixes.',
+        description: 'Advanced security implementation to protect your data, users, and systems from vulnerabilities and threats.',
         icon: IconShieldLock
     }
 ]
@@ -117,9 +117,9 @@ export const productsData: Product[] = [
     {
         id: 'crm',
         name: 'CRM Pro',
-        tagline: 'Customer Relationship Management',
+        tagline: 'Close Deals Faster. Scale Your Sales.',
         description:
-            'A powerful CRM platform to manage leads, pipelines, and customer interactions — all in one place. Automate follow-ups and close deals faster.',
+            'A powerful, automation-driven CRM designed to help you manage leads, track pipelines, and close more deals with less manual effort.',
         icon: IconBuildingSkyscraper,
         accent: 'var(--blue-vivid)',
         accentBg: 'oklch(0.623 0.214 259.815 / 0.10)',
@@ -129,34 +129,40 @@ export const productsData: Product[] = [
             { label: 'Deals Closed', value: '98K+' },
             { label: 'Uptime', value: '99.9%' }
         ],
-        features: ['Pipeline Management', 'Lead Scoring', 'Email Automation', 'Analytics Dashboard', 'Team Collaboration', 'Mobile App']
+        features: [
+            'Smart Pipeline Management',
+            'Lead Scoring & Tracking',
+            'Automated Follow-ups',
+            'Real-Time Analytics',
+            'Team Collaboration',
+            'Mobile Access'
+        ]
     },
     {
         id: 'lms',
         name: 'LearnFlow LMS',
-        tagline: 'Learning Management System',
-        description:
-            'A feature-rich LMS for schools, enterprises, and online educators. Create courses, track progress, and certify learners with ease.',
+        tagline: 'Launch, Manage & Scale Your Courses',
+        description: 'A complete learning platform for educators and businesses to create, manage, and monetize courses with ease.',
         icon: IconSchool,
         accent: 'var(--amber)',
         accentBg: 'oklch(0.795 0.184 86.047 / 0.10)',
-        badge: 'New',
+        badge: 'Fast Growing',
         stats: [
             { label: 'Learners', value: '50K+' },
             { label: 'Courses', value: '3K+' },
             { label: 'Completion Rate', value: '87%' }
         ],
-        features: ['Course Builder', 'Live Sessions', 'Quizzes & Exams', 'Certificates', 'Progress Tracking', 'SCORM Support']
+        features: ['Course Builder', 'Live Classes', 'Assessments & Certificates', 'Progress Tracking', 'Advanced Analytics', 'SCORM Support']
     },
     {
         id: 'hrms',
         name: 'HRM Suite',
-        tagline: 'Human Resource Management',
-        description: 'Streamline HR operations with smart tools for recruitment, payroll, attendance, and employee performance — all under one roof.',
+        tagline: 'Automate Your Workforce Management',
+        description: 'A complete HR automation platform to manage payroll, attendance, hiring, and performance—all in one place.',
         icon: IconUsers,
         accent: 'var(--blue-vivid)',
         accentBg: 'oklch(0.623 0.214 259.815 / 0.10)',
-        badge: 'Beta',
+        badge: 'Smart Automation',
         stats: [
             { label: 'Employees Managed', value: '200K+' },
             { label: 'Companies', value: '800+' },
@@ -174,26 +180,24 @@ export const productsData: Product[] = [
     {
         id: 'pms',
         name: 'ProjectFlow',
-        tagline: 'Project Management System',
-        description:
-            'Plan, execute, and deliver projects on time. Kanban boards, Gantt charts, team tasks, and real-time collaboration — built for modern teams.',
+        tagline: 'Manage Projects Without Chaos',
+        description: 'A modern project management system to plan, track, and deliver projects with clarity and efficiency.',
         icon: IconClipboardList,
         accent: 'var(--amber)',
         accentBg: 'oklch(0.795 0.184 86.047 / 0.10)',
-        badge: 'Popular',
+        badge: 'Team Favorite',
         stats: [
             { label: 'Projects Launched', value: '25K+' },
             { label: 'Tasks Completed', value: '1.2M+' },
             { label: 'Team Members', value: '80K+' }
         ],
-        features: ['Kanban Boards', 'Gantt Charts', 'Time Tracking', 'File Sharing', 'Budget Management', 'Client Portal']
+        features: ['Kanban & Gantt Views', 'Time Tracking', 'Budget Management', 'File Sharing', 'Client Portal', 'Real-Time Collaboration']
     },
     {
         id: 'analytics',
         name: 'DataPulse',
-        tagline: 'Business Analytics Platform',
-        description:
-            'Turn raw data into actionable insights with interactive dashboards, custom reports, and AI-powered trend analysis for your business.',
+        tagline: 'Turn Data Into Decisions',
+        description: 'Advanced analytics platform with real-time dashboards, forecasting, and actionable business insights.',
         icon: IconChartBar,
         accent: 'var(--blue-vivid)',
         accentBg: 'oklch(0.623 0.214 259.815 / 0.10)',
@@ -203,32 +207,32 @@ export const productsData: Product[] = [
             { label: 'Reports Generated', value: '500K+' },
             { label: 'Integrations', value: '60+' }
         ],
-        features: ['Real-Time Dashboards', 'Custom Reports', 'AI Forecasting', 'Data Import/Export', 'Role-Based Access', 'API Access']
+        features: ['Real-Time Dashboards', 'Custom Reports', 'AI Forecasting', 'Data Integration', 'Role-Based Access', 'API Access']
     },
     {
         id: 'helpdesk',
         name: 'SupportDesk',
-        tagline: 'Customer Support & Helpdesk',
-        description:
-            'Deliver exceptional customer support with a multi-channel helpdesk. Manage tickets, live chat, and feedback from a single intuitive panel.',
+        tagline: 'Deliver World-Class Support',
+        description: 'A complete helpdesk solution to manage customer queries, automate responses, and improve satisfaction.',
         icon: IconHeadset,
         accent: 'var(--amber)',
         accentBg: 'oklch(0.795 0.184 86.047 / 0.10)',
-        badge: 'Trusted',
+        badge: 'Highly Rated',
         stats: [
             { label: 'Tickets Resolved', value: '2M+' },
             { label: 'Avg Response Time', value: '< 2min' },
             { label: 'Satisfaction Rate', value: '96%' }
         ],
-        features: ['Ticket Management', 'Live Chat', 'Knowledge Base', 'SLA Management', 'Multi-Channel Inbox', 'Reports & Analytics']
+        features: ['Ticket Management', 'Live Chat Support', 'Knowledge Base', 'SLA Tracking', 'Multi-Channel Inbox', 'Performance Reports']
     }
 ]
 
 // ─── servicesData ─────────────────────────────────────────────────────────────
 
 export const servicesData = {
-    badgeTitle: 'Our Services',
-    heading: 'Comprehensive Web Development Solutions',
-    description: 'From simple websites to complex enterprise applications, we deliver solutions tailored to your needs.',
+    badgeTitle: 'What We Do',
+    heading: 'Engineering Digital Products That Drive Growth & Performance',
+    description:
+        'We don’t just build websites or apps—we design scalable digital systems that help businesses generate leads, automate operations, and grow faster with technology.',
     features
 }
