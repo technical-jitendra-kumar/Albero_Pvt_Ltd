@@ -98,7 +98,7 @@ export const aboutData = {
         titleEm: ' Scalable Systems',
         body: 'A focused team of engineers, designers, and strategists dedicated to building high-performance products that drive real business growth.',
         members: [
-            { name: 'Taher Maksee', role: 'Founder & Lead Developer', emoji: '👨‍💻', tags: ['React', 'Node.js', 'Architecture'] },
+            { name: 'Jitendra Kumar', role: 'Founder & Lead Developer', emoji: '👨‍💻', tags: ['React', 'Node.js', 'Architecture'] },
             { name: 'Design Lead', role: 'UI/UX & Brand Design', emoji: '🎨', tags: ['Figma', 'Motion', 'Branding'] },
             { name: 'Backend Engineer', role: 'Systems & Infrastructure', emoji: '⚙️', tags: ['AWS', 'PostgreSQL', 'APIs'] },
             { name: 'Growth Lead', role: 'Marketing & Strategy', emoji: '📈', tags: ['SEO', 'Analytics', 'Growth'] }
