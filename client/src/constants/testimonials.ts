@@ -1,78 +1,78 @@
 const testimonials = [
     {
-        text: 'The team delivered our website on time with exceptional design and performance. Their professionalism and technical expertise exceeded our expectations.',
+        text: 'Albero completely transformed our online presence. Within 30 days of launch, we saw a 2.5x increase in inbound leads. The execution was fast, structured, and highly result-driven.',
         image: 'https://randomuser.me/api/portraits/men/11.jpg',
         name: 'Rahul Sharma',
         role: 'Founder & CEO, TechNova Solutions'
     },
     {
-        text: 'Our custom software solution streamlined daily operations and improved efficiency. Communication was clear, and delivery was timely.',
+        text: 'Our operations were chaotic before this. Their custom software streamlined everything—saving us hours daily and improving team productivity by over 40%.',
         image: 'https://randomuser.me/api/portraits/women/12.jpg',
         name: 'Priya Verma',
         role: 'Operations Manager, BrightEdge Retail'
     },
     {
-        text: 'They developed a fast, SEO-optimized WordPress website that significantly increased our online visibility and lead generation.',
+        text: 'The website they built wasn’t just fast—it was built to convert. We saw a significant boost in traffic, engagement, and qualified leads within weeks.',
         image: 'https://randomuser.me/api/portraits/men/13.jpg',
         name: 'Amit Patel',
         role: 'Marketing Director, UrbanCart E-commerce'
     },
     {
-        text: 'Security, scalability, and performance were perfectly implemented. Their development approach is structured and highly reliable.',
+        text: 'Security and scalability were our biggest concerns, and Albero delivered flawlessly. The system runs smoothly even with growing user demand.',
         image: 'https://randomuser.me/api/portraits/women/14.jpg',
         name: 'Neha Singh',
         role: 'Co-Founder, FinCore Analytics'
     },
     {
-        text: 'Their maintenance and technical support services are proactive and dependable. System performance has improved noticeably.',
+        text: 'Their proactive support is what stands out. Issues are resolved before they become problems. Our system performance has improved drastically.',
         image: 'https://randomuser.me/api/portraits/men/15.jpg',
         name: 'Arjun Mehta',
         role: 'IT Head, NexaLogix Pvt Ltd'
     },
     {
-        text: 'From consultation to final deployment, the entire process was smooth, transparent, and professionally managed.',
+        text: 'From strategy to execution, everything was handled professionally. No confusion, no delays—just clean delivery and strong communication.',
         image: 'https://randomuser.me/api/portraits/women/16.jpg',
         name: 'Sneha Kapoor',
         role: 'Business Development Manager, Elevate Digital'
     },
     {
-        text: 'Their web development team created a modern, high-performance website that perfectly represents our brand.',
+        text: 'They didn’t just design a website—they built a brand experience. Our credibility and customer trust improved immediately after launch.',
         image: 'https://randomuser.me/api/portraits/men/17.jpg',
         name: 'Vikram Desai',
         role: 'Managing Director, Skyline Enterprises'
     },
     {
-        text: 'Our CRM software was delivered with excellent functionality and user-friendly design. Truly a dependable technology partner.',
+        text: 'Our CRM system is now faster, cleaner, and extremely easy to use. It has significantly improved how we manage clients and track growth.',
         image: 'https://randomuser.me/api/portraits/women/18.jpg',
         name: 'Ananya Gupta',
         role: 'Founder, GrowthSphere Consulting'
     },
     {
-        text: 'Clean code, scalable architecture, and strong security practices. Their development standards are truly impressive.',
+        text: 'Strong architecture, clean code, and scalable systems—that’s what impressed me the most. This is a team that actually understands engineering.',
         image: 'https://randomuser.me/api/portraits/men/19.jpg',
         name: 'Rohit Malhotra',
         role: 'CTO, ByteBridge Technologies'
     },
     {
-        text: 'The WordPress website they developed improved our search rankings and customer engagement significantly.',
+        text: 'Our search rankings and conversions improved significantly after the new website launch. This was not just design—it was strategy.',
         image: 'https://randomuser.me/api/portraits/women/20.jpg',
         name: 'Kavita Rao',
         role: 'Head of Marketing, Trendify Solutions'
     },
     {
-        text: 'Their software automation solution reduced manual work and increased operational efficiency across departments.',
+        text: 'Automation was a game changer for us. We reduced manual workload and improved operational efficiency across departments.',
         image: 'https://randomuser.me/api/portraits/men/21.jpg',
         name: 'Sandeep Khanna',
         role: 'Director of Operations, PrimeEdge Logistics'
     },
     {
-        text: 'Professional communication, timely delivery, and reliable maintenance support make them our long-term tech partner.',
+        text: 'Reliable, responsive, and highly professional. Albero is not just a vendor—they are a long-term technology partner for us.',
         image: 'https://randomuser.me/api/portraits/women/22.jpg',
         name: 'Meera Iyer',
         role: 'CEO, Innovexa Labs'
     },
     {
-        text: 'The team delivered a secure, high-performance website with excellent functionality. Their professionalism, timely delivery, and technical expertise truly impressed us.',
+        text: 'High-performance delivery, strong communication, and zero compromise on quality. One of the most dependable tech teams we’ve worked with.',
         image: 'https://randomuser.me/api/portraits/men/23.jpg',
         name: 'Rajesh Kumar',
         role: 'Founder & Managing Director, RK Digital Ventures'
@@ -80,8 +80,9 @@ const testimonials = [
 ]
 
 export const testimonialsData = {
-    badgeTitle: 'Testimonials',
-    title: 'What Our Clients Say',
-    subtitle: "Don't just take our word for it. Here's what our satisfied clients have to say about our work.",
+    badgeTitle: 'Client Success Stories',
+    title: 'Real Results. Real Businesses. Real Growth.',
+    subtitle:
+        'We don’t just deliver projects—we help businesses scale faster, convert better, and operate smarter. Here’s what our clients say after working with us.',
     testimonials
 }

@@ -4,24 +4,26 @@ import { FaHandshake, FaStopwatch } from 'react-icons/fa'
 import { RiCustomerService2Line } from 'react-icons/ri'
 
 const features = [
-    { name: '24/7 Customer Support', icon: RiCustomerService2Line, us: true, others: false },
-    { name: 'Customizable Solutions', icon: MdOutlineDashboardCustomize, us: true, others: false },
-    { name: 'Affordable Pricing', icon: DollarSign, us: true, others: true },
-    { name: 'Fast Implementation', icon: FaStopwatch, us: true, others: false },
-    { name: 'Advanced Analytics', icon: BarChart3, us: true, others: false },
-    { name: 'User-Friendly Dashboard', icon: FaHandshake, us: true, others: false }
+    { name: 'Dedicated 24/7 Expert Support (Real Humans, No Bots)', icon: RiCustomerService2Line, us: true, others: false },
+    { name: 'Fully Custom-Built Solutions (No Templates, No Shortcuts)', icon: MdOutlineDashboardCustomize, us: true, others: false },
+    { name: 'Transparent, ROI-Focused Pricing (No Hidden Costs)', icon: DollarSign, us: true, others: true },
+    { name: 'Rapid Development & Deployment (Go Live Faster)', icon: FaStopwatch, us: true, others: false },
+    { name: 'Data-Driven Insights & Advanced Analytics Integration', icon: BarChart3, us: true, others: false },
+    { name: 'Conversion-Optimized, User-Centric Experiences', icon: FaHandshake, us: true, others: false }
 ]
 
 export const whyChooseUsData = {
-    badgeTitle: 'Why Choose Us',
-    title: 'Your Success is Our Priority',
-    subtitle: 'See how we stack up against the competition with our premium features and dedicated support.',
-    col1Name: 'Features',
-    col2Name: 'Our Company', // fixed stray '<'
-    col3Name: 'Others',
-    mobileTitleText: 'Comparison',
+    badgeTitle: 'Why Top Businesses Choose Us',
+    title: 'We Don’t Just Build — We Deliver Results',
+    subtitle:
+        'While others focus on delivering projects, we focus on outcomes—faster launches, higher conversions, and scalable digital systems that grow your business.',
+    col1Name: 'Capabilities',
+    col2Name: 'Albero Technologies', // fixed stray '<'
+    col3Name: 'Typical Agencies',
+    mobileTitleText: 'Why We Stand Out',
     features,
-    cardTitle: 'Ready to experience the difference?',
-    cardSubtitle: "Join hundreds of satisfied clients who've chosen our premium services.",
-    ctaLabel: 'Get Started Today'
+    cardTitle: 'Stop Settling for Average. Build Something That Scales.',
+    cardSubtitle:
+        'Partner with a team that understands business, not just code. Join 100+ growing brands using Albero to launch faster, convert better, and scale smarter.',
+    ctaLabel: 'Book a Free Strategy Call'
 }
