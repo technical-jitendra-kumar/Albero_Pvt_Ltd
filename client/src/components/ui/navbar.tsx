@@ -49,6 +49,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
+    const [logoHovered, setLogoHovered] = useState(false)
 
     const toggleMenu = () => setIsOpen(!isOpen)
 
@@ -80,27 +81,33 @@ const Navbar = () => {
           w-full max-w-3xl px-6 py-3 rounded-full z-10
           border-white/30 bg-black/40 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1),inset_0_0_8px_4px_rgba(255,255,255,0.4)]">
                 {/* Logo */}
-                <div className="flex items-center">
+                <div
+                    className="flex items-center overflow-hidden flex-shrink-0"
+                    style={{
+                        width: logoHovered ? '7rem' : '2.5rem',
+                        transition: 'width 0.4s ease-in-out'
+                    }}
+                    onMouseEnter={() => setLogoHovered(true)}
+                    onMouseLeave={() => setLogoHovered(false)}>
                     <NavLink href={navbarData.logo.logoHref}>
                         <motion.div
-                            className="relative flex items-center cursor-pointer"
+                            className="flex items-center cursor-pointer"
                             initial="rest"
-                            whileHover="hover"
-                            animate="rest">
+                            animate={logoHovered ? 'hover' : 'rest'}>
                             <motion.img
                                 src={Logo}
                                 alt={navbarData.logo.alt}
-                                className="w-10 h-10 object-contain"
+                                className="w-10 h-10 object-contain flex-shrink-0"
                                 variants={{
-                                    rest: { scale: 1 },
+                                    rest: { scale: 1, rotate: 0 },
                                     hover: { scale: 1.15, rotate: -5 }
                                 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             />
                             <motion.span
-                                className="absolute left-10 text-xl font-semibold tracking-widest text-white whitespace-nowrap"
+                                className="ml-1 text-xl font-semibold tracking-widest text-white whitespace-nowrap"
                                 variants={{
-                                    rest: { opacity: 0, x: -20 },
+                                    rest: { opacity: 0, x: -10 },
                                     hover: { opacity: 1, x: 0 }
                                 }}
                                 transition={{ duration: 0.4, ease: 'easeInOut' }}>
