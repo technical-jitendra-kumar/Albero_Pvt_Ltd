@@ -9,3 +9,5 @@ http://www.albero.in/* https://www.albero.in/:splat  301!
 
 # Redirect non-www to www
 https://albero.in/*    https://www.albero.in/:splat  301!
+https://alberotechnologies.com/*  https://albero.in/:splat  301!
+https://www.alberotechnologies.com/*  https://albero.in/:splat  301!
