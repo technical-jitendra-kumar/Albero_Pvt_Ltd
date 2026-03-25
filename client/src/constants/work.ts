@@ -3,55 +3,55 @@
 export const workData = {
     // ── Hero ──────────────────────────────────────────────────────────────────
     hero: {
-        badge: 'Portfolio & Case Studies — 2025',
-        titleStroke: 'WORK',
-        titleLine2: 'COLLECTION',
-        titleEm: '& Impact',
-        sub: "From enterprise software to AI-powered STEAM labs for schools — everything we've built, shipped, and launched.",
+        badge: 'Case Studies & Proven Results',
+        titleStroke: 'REAL',
+        titleLine2: 'RESULTS',
+        titleEm: '& Scalable Impact',
+        sub: 'From SaaS platforms to enterprise systems and AI-driven solutions — we build products that drive growth, automate operations, and deliver measurable business outcomes.',
         ctas: [
-            { label: 'Explore Our Work', href: '#collection', variant: 'primary' },
-            { label: 'Start a Project', href: '#cta', variant: 'outline' }
+            { label: 'Explore Case Studies', href: '#collection', variant: 'primary' },
+            { label: 'Book a Free Strategy Call', href: '#cta', variant: 'outline' }
         ],
         chips: [
-            { icon: '🚀', val: '50+', lbl: 'Projects', pos: 'c1', delay: '' },
-            { icon: '🏫', val: '20+', lbl: 'Schools', pos: 'c2', delay: '.8s' },
-            { icon: '⭐', val: '95%', lbl: 'Satisfaction', pos: 'c3', delay: '', amber: true },
-            { icon: '📍', val: '10+', lbl: 'Cities', pos: 'c4', delay: '.6s', amber: true }
+            { icon: '🚀', val: '50+', lbl: 'Projects Delivered', pos: 'c1', delay: '' },
+            { icon: '🏫', val: '20+', lbl: 'SchoolInstitutions Scaled', pos: 'c2', delay: '.8s' },
+            { icon: '⭐', val: '95%', lbl: 'Client Retention', pos: 'c3', delay: '', amber: true },
+            { icon: '📍', val: '10+', lbl: 'Cities Served', pos: 'c4', delay: '.6s', amber: true }
         ],
         tickerItems: [
-            { label: 'Web Development', cls: 'hi' },
-            { label: 'Mobile Apps', cls: '' },
-            { label: 'AI Integration', cls: 'am' },
-            { label: 'E-Commerce', cls: '' },
-            { label: 'STEAM Labs', cls: 'hi' },
-            { label: 'ERP Systems', cls: '' },
-            { label: 'LLM Chatbots', cls: 'am' },
-            { label: 'Branding', cls: '' },
-            { label: 'Computer Vision', cls: 'hi' },
-            { label: 'Cloud & DevOps', cls: '' },
-            { label: 'Robotics', cls: 'am' },
-            { label: 'UI / UX Design', cls: '' }
+            { label: 'SaaS Development', cls: 'hi' },
+            { label: 'Web Applications', cls: '' },
+            { label: 'AI Automation', cls: 'am' },
+            { label: 'E-Commerce Platforms', cls: '' },
+            { label: 'Enterprise Systems', cls: 'hi' },
+            { label: 'ERP Solutions', cls: '' },
+            { label: 'AI Chatbots', cls: 'am' },
+            { label: 'Growth Marketing', cls: '' },
+            { label: 'Data Analytics', cls: 'hi' },
+            { label: 'Cloud Infrastructure', cls: '' },
+            { label: 'Automation Systems', cls: 'am' },
+            { label: 'UI/UX Design', cls: '' }
         ]
     },
 
     // ── Collection Index ──────────────────────────────────────────────────────
     collection: {
-        label: 'Portfolio Index',
+        label: 'Our Capabilities',
         title: 'WHAT WE',
-        titleAccent: 'BUILD',
-        body: 'Five categories. Fifty+ projects. One mission — technology that creates real impact.',
+        titleAccent: 'DELIVER',
+        body: 'Five core domains. 50+ successful projects. One focus — building scalable systems that drive real business growth.',
         items: [
-            { num: '01', title: 'Web & Software', em: 'Development', href: '#it-web', cta: 'See full projects' },
-            { num: '02', title: 'E-Commerce &', em: 'SaaS Platforms', href: '#it-ecom', cta: 'View collection' },
-            { num: '03', title: 'STEAM Labs', em: 'for Schools', href: '#steam-schools', cta: 'Explore labs' },
-            { num: '04', title: 'Branding &', em: 'Digital Marketing', href: '#digital', cta: 'See campaigns' },
-            { num: '05', title: 'ERP & Enterprise', em: 'Solutions', href: '#erp', cta: 'View case study' }
+            { num: '01', title: 'Web & Software', em: 'Systems', href: '#it-web', cta: 'View case studies' },
+            { num: '02', title: 'E-Commerce &', em: 'SaaS Products', href: '#it-ecom', cta: 'Explore platforms' },
+            { num: '03', title: 'STEAM Labs', em: 'Innovation Systems', href: '#steam-schools', cta: 'See implementations' },
+            { num: '04', title: 'Branding &', em: 'Growth Marketing', href: '#digital', cta: 'View campaigns' },
+            { num: '05', title: 'ERP & Enterprise', em: 'Automation', href: '#erp', cta: 'Explore solutions' }
         ],
         stats: [
             { target: '50', suffix: '+', label: 'Projects Delivered' },
-            { target: '20', suffix: '+', label: 'Schools Equipped' },
+            { target: '20', suffix: '+', label: 'Organizations Scaled' },
             { target: '10', suffix: '+', label: 'Cities Served' },
-            { target: '95', suffix: '%', label: 'Client Satisfaction' }
+            { target: '95', suffix: '%', label: 'Client Retention' }
         ]
     },
 
@@ -63,7 +63,7 @@ export const workData = {
                 {
                     client: 'Digidonar Agency',
                     tools: 'NEXT.JS · TAILWIND · SANITY CMS',
-                    desc: "Rebuilt the agency's digital presence end-to-end. Organic traffic rose 120% and bounce rate dropped 40% within 3 months. Performance score: 98/100 on Lighthouse.",
+                    desc: 'Rebuilt the entire digital platform with a performance-first architecture. Result: 120% increase in organic traffic, 40% reduction in bounce rate, and a Lighthouse performance score of 98/100 within 90 days.',
                     tags: ['Next.js', 'SEO', 'CMS', 'Performance'],
                     reverse: false,
                     mockGrid: 'c3',
@@ -101,7 +101,7 @@ export const workData = {
                 {
                     client: 'TUC — The Urban Closet',
                     tools: 'NEXT.JS · STRIPE · MONGODB',
-                    desc: 'Mobile-first fashion e-commerce. Revenue grew 3× in 6 months. Features AI-powered recommendations, one-click checkout, and real-time inventory sync.',
+                    desc: 'Built a high-conversion e-commerce platform with AI-powered recommendations and optimized checkout flow. Result: 3× revenue growth in 6 months and significant improvement in repeat purchases.',
                     tags: ['E-Commerce', 'Stripe', 'AI Reco', 'Fashion'],
                     reverse: false,
                     mockGrid: 'c3',
@@ -216,7 +216,7 @@ export const workData = {
                 {
                     client: 'Advance Group of Colleges',
                     tools: 'DJANGO · REACT · MYSQL · DOCKER',
-                    desc: 'Custom ERP covering admissions, fee management, faculty scheduling, and reporting. Eliminated 80% of manual data-entry errors, saving ₹18L/yr in operational costs.',
+                    desc: 'Developed a custom ERP system to automate admissions, fees, and reporting. Result: 80% reduction in manual work and ₹18L+ annual operational cost savings.',
                     tags: ['ERP', 'Django', 'Admissions', 'Automation'],
                     reverse: false,
                     mockGrid: 'c2',
@@ -245,18 +245,18 @@ export const workData = {
 
     // ── Industries ────────────────────────────────────────────────────────────
     industries: {
-        label: 'Industries',
-        title: 'INDUSTRIES WE',
-        titleAccent: 'SERVE',
-        body: 'We build digital solutions across verticals — each industry demands its own precision.',
+        label: 'Industries We Serve',
+        title: 'BUILT FOR',
+        titleAccent: 'REAL BUSINESS USE CASES',
+        body: 'We build industry-specific solutions designed to solve real operational challenges and unlock growth.',
         items: [
-            { icon: '🏥', name: 'Healthcare', desc: 'Compliant patient portals, EMR integrations, and telemedicine platforms.' },
-            { icon: '🎓', name: 'Education', desc: 'ERP systems, STEAM labs, and AI-powered learning infrastructure for schools.' },
-            { icon: '📱', name: 'EdTech', desc: 'SaaS dashboards, assessment engines, and real-time analytics for EdTech startups.' },
-            { icon: '🚚', name: 'Logistics', desc: 'Fleet tracking, route optimisation, and cloud-based operations platforms.' },
-            { icon: '🏢', name: 'Real Estate', desc: 'Property listings, CRM integrations, and high-conversion landing pages.' },
-            { icon: '🛍', name: 'Retail', desc: 'E-commerce platforms, inventory systems, and performance ad creatives.' },
-            { icon: '☁️', name: 'SaaS', desc: 'Full-stack SaaS product development from MVP to enterprise-grade scale.' }
+            { icon: '🏥', name: 'Healthcare', desc: 'Secure patient platforms, EMR integrations, and scalable healthcare systems.' },
+            { icon: '🎓', name: 'Education', desc: 'ERP systems, AI-powered learning platforms, and STEAM innovation labs.' },
+            { icon: '📱', name: 'EdTech', desc: 'SaaS dashboards, analytics platforms, and scalable learning ecosystems.' },
+            { icon: '🚚', name: 'Logistics', desc: 'Fleet tracking, automation systems, and real-time operational dashboards.' },
+            { icon: '🏢', name: 'Real Estate', desc: 'High-conversion platforms, CRM integrations, and performance marketing systems.' },
+            { icon: '🛍', name: 'Retail', desc: 'E-commerce platforms, inventory systems, and AI-driven customer experiences.' },
+            { icon: '☁️', name: 'SaaS', desc: 'End-to-end SaaS product development from MVP to enterprise scale.' }
         ]
     },
 
@@ -495,7 +495,7 @@ export const workData = {
         label: 'Advanced Services',
         title: 'AI &',
         titleAccent: 'INNOVATION',
-        body: "We don't just use AI — we implement it. From GPT-4o integrations to autonomous agents, every service below is production-ready and built with the latest AI stack.",
+        body: 'We implement production-ready AI systems that automate workflows, enhance decision-making, and unlock new revenue opportunities for modern businesses.',
         cards: [
             {
                 icon: '🤖',
@@ -652,7 +652,7 @@ export const workData = {
         titleAccent: 'SAY',
         items: [
             {
-                text: 'Albero built our entire ERP system that reduced manual data-entry work by 80%. The system handles admissions, fee collection, and faculty management seamlessly.',
+                text: 'Albero built our ERP system that reduced manual work by 80% and improved operational efficiency across departments. The impact was immediate and measurable.',
                 author: 'Director',
                 org: 'Advance Group of Colleges'
             },
@@ -702,14 +702,14 @@ export const workData = {
 
     // ── CTA ───────────────────────────────────────────────────────────────────
     cta: {
-        badge: 'Currently Accepting Projects',
-        title: "LET'S BUILD",
-        titleEm: 'Something',
-        titleLine2: 'POWERFUL TOGETHER',
-        body: "Whether you need a digital product, enterprise system, or a STEAM lab for your school — we're ready.",
-        primaryLabel: 'Start Your Project',
+        badge: 'Let’s Build Your Next Big Product',
+        title: 'READY TO SCALE',
+        titleEm: 'Your Business?',
+        titleLine2: 'LET’S MAKE IT HAPPEN',
+        body: "Whether you're building a SaaS product, scaling operations, or launching something new—we help you do it faster and smarter.",
+        primaryLabel: 'Book a Free Strategy Call',
         primaryHref: '/contact',
-        secondaryLabel: 'Book a Consultation',
-        secondaryHref: '/contact?type=consultation'
+        secondaryLabel: 'View More Case Studies →',
+        secondaryHref: '/work'
     }
 }

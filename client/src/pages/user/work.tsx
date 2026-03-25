@@ -631,13 +631,18 @@ export default function WorkPage() {
                 <p style={{ color: 'var(--grey-mid)', fontSize: '15px', marginTop: '14px', maxWidth: '560px', lineHeight: '1.7' }}>
                     {techStack.body}
                 </p>
-                <div className="tech-categories stagger">
+                <div
+                    className="tech-categories"
+                    style={{ overflow: 'visible', maxHeight: 'none', height: 'auto' }}>
                     {techStack.categories.map((cat, i) => (
                         <div
                             key={i}
-                            className="tech-category">
+                            className="tech-category"
+                            style={{ opacity: 1, transform: 'none', visibility: 'visible' }}>
                             <div className="tech-cat-label">{cat.label}</div>
-                            <div className="tech-pills">
+                            <div
+                                className="tech-pills"
+                                style={{ flexWrap: 'wrap', display: 'flex', gap: '8px' }}>
                                 {cat.pills.map((p) => (
                                     <span
                                         key={p}
@@ -704,11 +709,14 @@ export default function WorkPage() {
                 <p style={{ color: 'var(--grey-mid)', fontSize: '15px', marginTop: '14px', maxWidth: '580px', lineHeight: '1.7' }}>
                     {aiServices.body}
                 </p>
-                <div className="ai-grid stagger">
+                <div
+                    className="ai-grid"
+                    style={{ overflow: 'visible', maxHeight: 'none', height: 'auto' }}>
                     {aiServices.cards.map((card, i) => (
                         <div
                             key={i}
-                            className="ai-card">
+                            className="ai-card"
+                            style={{ opacity: 1, transform: 'none', visibility: 'visible' }}>
                             <div className="ai-icon">{card.icon}</div>
                             <div className="ai-title">{card.title}</div>
                             <div className="ai-desc">{card.desc}</div>
