@@ -481,12 +481,32 @@ export const workData = {
         titleAccent: 'PROCESS',
         body: 'A proven six-step workflow — brief to production, without surprises.',
         steps: [
-            { num: '01', title: 'Discovery', desc: 'Requirement gathering and deep-dive analysis with stakeholders.' },
-            { num: '02', title: 'Strategy', desc: 'Technical architecture planning and sprint roadmap definition.' },
-            { num: '03', title: 'Design', desc: 'UI/UX prototyping with stakeholder review and design system setup.' },
-            { num: '04', title: 'Development', desc: 'Agile builds with weekly sprint demos and continuous code review.' },
-            { num: '05', title: 'Deployment', desc: 'Cloud deployment, CI/CD pipelines, and QA across environments.' },
-            { num: '06', title: 'Support', desc: 'Ongoing maintenance, monitoring, and feature scaling post-launch.' }
+            {
+                num: '01',
+                title: 'DiscoveryStrategy & Product Planning',
+                desc: 'We deep-dive into your business model, target users, and goals to define a clear roadmap. This ensures we build the right product—not just a good-looking one.'
+            },
+            {
+                num: '02',
+                title: 'UI/UX Design That Converts',
+                desc: 'We design intuitive, conversion-focused interfaces with Figma prototypes—so you can visualize, validate, and refine before development begins.'
+            },
+            {
+                num: '03',
+                title: 'Scalable Development (Frontend + Backend)',
+                desc: 'Using modern tech stacks, we build fast, secure, and scalable systems engineered for long-term growth—not quick fixes.'
+            },
+            {
+                num: '04',
+                title: 'Testing, Optimization & Security',
+                desc: 'We rigorously test for performance, security, and reliability—ensuring your product runs flawlessly across all devices and user scenarios.'
+            },
+            { num: '05', title: 'Launch', desc: 'Cloud deployment, CI/CD pipelines, and QA across environments.' },
+            {
+                num: '06',
+                title: 'Scale & Continuous Support',
+                desc: 'We don’t stop at launch. We help you scale, optimize, and continuously improve with ongoing support, updates, and growth-focused enhancements.'
+            }
         ]
     },
 

@@ -25,82 +25,10 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 1;
-    transition: transform 0.05s linear;
-}
-
-/* ── HEADER ── */
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 900;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 60px;
-    background: oklch(0 0 0 / 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-}
-.logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 4px;
-    color: var(--white);
-}
-.logo span {
-    color: var(--blue-vivid);
-}
-.nav {
-    display: flex;
-    gap: 32px;
-}
-.nav a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--grey-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
-}
-.nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1.5px;
-    background: var(--blue-vivid);
-    transition: width 0.3s;
-}
-.nav a:hover {
-    color: var(--white);
-}
-.nav a:hover::after {
-    width: 100%;
-}
-.nav-cta {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--white);
-    border: none;
-    padding: 9px 22px;
-    border-radius: 999px;
-    cursor: pointer;
-    text-decoration: none;
     transition:
-        background 0.2s,
-        transform 0.2s;
-}
-.nav-cta:hover {
-    background: oklch(0.87 0 0);
-    transform: translateY(-1px);
+        left 0.05s linear,
+        top 0.05s linear;
+    will-change: left, top;
 }
 
 /* ── HERO ── */
@@ -136,7 +64,9 @@
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 85% 65% at 50% 35%, black 0%, transparent 78%);
     animation: gridDrift 20s linear infinite;
+    will-change: background-position;
 }
+
 @keyframes gridDrift {
     from {
         background-position: 0 0;
@@ -159,6 +89,7 @@
     pointer-events: none;
     animation: arcPulse 7s ease-in-out infinite;
 }
+
 .hero-arc-inner {
     position: absolute;
     bottom: -38vw;
@@ -171,6 +102,7 @@
     pointer-events: none;
     animation: arcPulse 7s 1.5s ease-in-out infinite;
 }
+
 @keyframes arcPulse {
     0%,
     100% {
@@ -189,6 +121,7 @@
     opacity: 0;
     animation: cornerIn 0.6s 1s forwards;
 }
+
 @keyframes cornerIn {
     from {
         opacity: 0;
@@ -199,6 +132,7 @@
         transform: scale(1);
     }
 }
+
 .hero-corner.tl {
     top: 28px;
     left: 44px;
@@ -246,6 +180,7 @@
         0 8px 32px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
+
 .hero-stat-chip.c1 {
     top: 24%;
     left: 5%;
@@ -266,6 +201,7 @@
     right: 3%;
     animation-delay: 1.7s;
 }
+
 @keyframes chipIn {
     from {
         opacity: 0;
@@ -276,12 +212,14 @@
         transform: translateY(0) scale(1);
     }
 }
+
 .chip-float {
     animation: chipFloat 5.5s ease-in-out infinite;
 }
 .chip-float-r {
     animation: chipFloatR 6.5s ease-in-out infinite;
 }
+
 @keyframes chipFloat {
     0%,
     100% {
@@ -318,6 +256,7 @@
     border-color: oklch(0.795 0.184 86.047 / 0.25);
     box-shadow: 0 0 12px oklch(0.795 0.184 86.047 / 0.15);
 }
+
 .chip-val {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 23px;
@@ -354,6 +293,7 @@
     animation: fadeUp 0.8s 0.2s forwards;
     box-shadow: 0 0 24px oklch(0.623 0.214 259.815 / 0.1);
 }
+
 .hero-badge-dot {
     width: 7px;
     height: 7px;
@@ -365,6 +305,7 @@
     animation: pulse 2s infinite;
     flex-shrink: 0;
 }
+
 @keyframes pulse {
     0%,
     100% {
@@ -388,13 +329,14 @@
     margin-bottom: 0;
     opacity: 0;
     animation: fadeUp 0.9s 0.4s forwards;
-    position: relative;
 }
+
 .hero h1 .stroke-word {
     -webkit-text-stroke: 1.5px oklch(0.707 0.165 254.624 / 0.65);
     color: transparent;
     letter-spacing: 6px;
 }
+
 .hero h1 em {
     font-family: 'Dancing Script', cursive;
     font-style: normal;
@@ -420,6 +362,7 @@
     margin: 20px auto;
     animation: lineExpand 1s 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
 @keyframes lineExpand {
     to {
         width: 360px;
@@ -447,6 +390,7 @@
     opacity: 0;
     animation: fadeUp 0.8s 0.85s forwards;
 }
+
 .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -538,6 +482,7 @@
     text-transform: uppercase;
     color: var(--grey-dim);
 }
+
 .scroll-line {
     width: 1px;
     height: 40px;
@@ -610,13 +555,14 @@
 
 .ticker-track {
     display: flex;
-    gap: 0;
     white-space: nowrap;
     animation: tickerScroll 30s linear infinite;
+    will-change: transform;
 }
 .ticker-track:hover {
     animation-play-state: paused;
 }
+
 @keyframes tickerScroll {
     from {
         transform: translateX(0);
@@ -625,6 +571,7 @@
         transform: translateX(-50%);
     }
 }
+
 .ticker-item {
     display: inline-flex;
     align-items: center;
@@ -691,13 +638,17 @@
     }
 }
 
-/* ── SECTION WRAPPER ── */
+/* ─────────────────────────────────────────────────────────────────────
+   FIX 1: SECTION — full-width wrapper, inner content max-width via padding
+   The original had max-width + margin:auto which caused left/right gaps.
+   Now the section spans 100% width and inner content is constrained
+   by padding, matching how hero/footer/divider behave.
+   ───────────────────────────────────────────────────────────────────── */
 .section {
     position: relative;
     z-index: 10;
-    padding: 80px 60px;
-    max-width: 1240px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 80px calc((100% - 1240px) / 2 + 60px);
 }
 
 /* ── SECTION LABEL ── */
@@ -722,6 +673,7 @@
     background: var(--bg-card);
     overflow: hidden;
 }
+
 .collection-item {
     display: flex;
     align-items: center;
@@ -844,6 +796,7 @@
 .stat-card:hover::after {
     opacity: 1;
 }
+
 .stat-num {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 58px;
@@ -992,14 +945,14 @@
     display: grid;
     gap: 10px;
 }
+.mock-grid.c2 {
+    grid-template-columns: repeat(2, 1fr);
+}
 .mock-grid.c3 {
     grid-template-columns: repeat(3, 1fr);
 }
 .mock-grid.c4 {
     grid-template-columns: repeat(4, 1fr);
-}
-.mock-grid.c2 {
-    grid-template-columns: repeat(2, 1fr);
 }
 
 .mock-img {
@@ -1036,7 +989,6 @@
 .mock-img.thumb {
     aspect-ratio: 16/9;
 }
-
 .mock-img .icon {
     font-size: 22px;
     opacity: 0.4;
@@ -1121,6 +1073,7 @@
     opacity: 1;
     transform: translateY(0);
 }
+
 .reveal-left {
     opacity: 0;
     transform: translateX(-40px);
@@ -1132,6 +1085,7 @@
     opacity: 1;
     transform: translateX(0);
 }
+
 .reveal-right {
     opacity: 0;
     transform: translateX(40px);
@@ -1144,6 +1098,10 @@
     transform: translateX(0);
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+   FIX 2: STAGGER — extended to 12 children so step 06 (and all grid
+   children up to 12) become visible when the parent gets .visible.
+   ───────────────────────────────────────────────────────────────────── */
 .stagger > * {
     opacity: 0;
     transform: translateY(24px);
@@ -1159,25 +1117,60 @@
 .stagger.visible > *:nth-child(2) {
     opacity: 1;
     transform: none;
-    transition-delay: 0.1s;
+    transition-delay: 0.08s;
 }
 .stagger.visible > *:nth-child(3) {
     opacity: 1;
     transform: none;
-    transition-delay: 0.2s;
+    transition-delay: 0.16s;
 }
 .stagger.visible > *:nth-child(4) {
     opacity: 1;
     transform: none;
-    transition-delay: 0.3s;
+    transition-delay: 0.24s;
 }
 .stagger.visible > *:nth-child(5) {
     opacity: 1;
     transform: none;
+    transition-delay: 0.32s;
+}
+.stagger.visible > *:nth-child(6) {
+    opacity: 1;
+    transform: none;
     transition-delay: 0.4s;
 }
+.stagger.visible > *:nth-child(7) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.48s;
+}
+.stagger.visible > *:nth-child(8) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.56s;
+}
+.stagger.visible > *:nth-child(9) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.6s;
+}
+.stagger.visible > *:nth-child(10) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.6s;
+}
+.stagger.visible > *:nth-child(11) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.6s;
+}
+.stagger.visible > *:nth-child(12) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.6s;
+}
 
-/* ── CTA ── */
+/* ── CTA SECTION ── */
 .cta-section {
     position: relative;
     z-index: 10;
@@ -1249,11 +1242,11 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
     transition:
         background 0.2s,
         transform 0.2s,
         box-shadow 0.2s;
-    display: inline-block;
 }
 .btn-w:hover {
     background: oklch(0.87 0 0);
@@ -1273,11 +1266,11 @@
     border: 1.5px solid rgba(255, 255, 255, 0.25);
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
     transition:
         border-color 0.2s,
         transform 0.2s,
         background 0.2s;
-    display: inline-block;
 }
 .btn-o:hover {
     border-color: var(--white);
@@ -1317,21 +1310,6 @@ footer a:hover {
     color: var(--blue-vivid);
 }
 
-/* ── TYPING CURSOR ── */
-.typing::after {
-    content: '|';
-    animation: blink 0.7s infinite;
-}
-@keyframes blink {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-}
-
 /* ── FLOATING BADGE ── */
 .float-badge {
     display: inline-flex;
@@ -1356,21 +1334,28 @@ footer a:hover {
     animation: pulse 2s infinite;
 }
 
+/* ── TYPING CURSOR ── */
+.typing::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+}
+@keyframes blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
-    .section,
-    .hero {
+    .section {
         padding: 60px 24px;
     }
     .divider {
         margin: 0 24px;
-    }
-    .site-header {
-        padding: 16px 24px;
-    }
-    .nav,
-    .nav-cta {
-        display: none;
     }
     .project-block,
     .project-block.reverse {
@@ -1381,7 +1366,7 @@ footer a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
     .collection-item {
-        padding: 20px 20px;
+        padding: 20px;
         flex-wrap: wrap;
         gap: 10px;
     }
@@ -1406,6 +1391,7 @@ footer a:hover {
     min-width: 100%;
     flex-shrink: 0;
 }
+
 .slider-nav {
     display: flex;
     align-items: center;
@@ -1417,6 +1403,7 @@ footer a:hover {
     align-items: center;
     gap: 14px;
 }
+
 .slider-btn {
     width: 42px;
     height: 42px;
@@ -1448,6 +1435,7 @@ footer a:hover {
     cursor: not-allowed;
     transform: none;
 }
+
 .slider-dots {
     display: flex;
     align-items: center;
@@ -1459,19 +1447,19 @@ footer a:hover {
     border-radius: 50%;
     background: var(--grey-dim);
     cursor: pointer;
-    transition:
-        background 0.25s,
-        transform 0.25s,
-        width 0.25s;
     border: none;
     padding: 0;
     flex-shrink: 0;
+    transition:
+        background 0.25s,
+        width 0.25s;
 }
 .slider-dot.active {
     background: var(--blue-vivid);
     width: 20px;
     border-radius: 99px;
 }
+
 .slider-counter {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 12px;
@@ -1484,7 +1472,7 @@ footer a:hover {
     color: var(--blue-soft);
 }
 
-/* ── NEW SECTIONS ── */
+/* ── INDUSTRIES ── */
 .industry-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -1499,11 +1487,11 @@ footer a:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
+    overflow: hidden;
     transition:
         border-color 0.3s,
         transform 0.3s;
-    position: relative;
-    overflow: hidden;
 }
 .industry-card::after {
     content: '';
@@ -1537,6 +1525,7 @@ footer a:hover {
     color: var(--grey-mid);
 }
 
+/* ── TECH STACK ── */
 .tech-categories {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -1583,11 +1572,11 @@ footer a:hover {
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 5px 12px;
+    cursor: default;
     transition:
         background 0.2s,
         color 0.2s,
         border-color 0.2s;
-    cursor: default;
 }
 .tech-pill:hover {
     background: oklch(0.623 0.214 259.815 / 0.15);
@@ -1595,6 +1584,7 @@ footer a:hover {
     border-color: var(--border-blu);
 }
 
+/* ── PROCESS ── */
 .process-steps {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -1634,10 +1624,10 @@ footer a:hover {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px;
     color: var(--blue-vivid);
+    flex-shrink: 0;
     transition:
         background 0.3s,
         transform 0.3s;
-    flex-shrink: 0;
 }
 .process-step:hover .step-num {
     background: oklch(0.623 0.214 259.815 / 0.15);
@@ -1656,6 +1646,7 @@ footer a:hover {
     color: var(--grey-mid);
 }
 
+/* ── CLIENTS / LOGOS ── */
 .logo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -1700,6 +1691,7 @@ footer a:hover {
     line-height: 1.3;
 }
 
+/* ── TESTIMONIALS ── */
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -1761,6 +1753,7 @@ footer a:hover {
     letter-spacing: 2px;
 }
 
+/* ── AI GRID ── */
 .ai-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1818,6 +1811,7 @@ footer a:hover {
     color: var(--grey-mid);
 }
 
+/* ── STEAM PACKAGES ── */
 .steam-packages {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1913,11 +1907,11 @@ footer a:hover {
     padding: 11px 24px;
     cursor: pointer;
     text-decoration: none;
+    text-align: center;
+    display: block;
     transition:
         background 0.2s,
         border-color 0.2s;
-    text-align: center;
-    display: block;
 }
 .steam-pkg.featured .pkg-cta {
     background: var(--blue-vivid);
@@ -1931,6 +1925,7 @@ footer a:hover {
     background: var(--blue-deep);
 }
 
+/* ── CITIES ── */
 .cities-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -1981,7 +1976,11 @@ footer a:hover {
     text-align: center;
 }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 860px) {
+    .section {
+        padding: 60px 24px;
+    }
     .process-steps {
         grid-template-columns: repeat(2, 1fr);
         gap: 24px;
