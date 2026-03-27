@@ -1,0 +1,257 @@
+# Albero.in — SEO + Conversion Optimized Service Pages System
+
+This document defines high-ranking, high-conversion service pages for Albero.
+Each page targets one primary keyword and is optimized for:
+- Google SEO (ranking)
+- AI discovery (ChatGPT, Gemini)
+- Conversion (leads)
+
+Recommended length: 1000–1500 words per page
+
+========================================================
+PAGE 1: Custom Software Development
+========================================================
+
+URL:
+https://www.albero.in/services/custom-software-development/
+
+PRIMARY KEYWORD:
+custom software development company India
+
+SECONDARY KEYWORDS:
+custom software development services, bespoke software India,
+hire software developers India, software company Ghaziabad
+
+TITLE TAG:
+Custom Software Development Company India | Scalable Solutions | Albero
+
+META DESCRIPTION:
+Build scalable custom software with Albero. We develop web apps, SaaS platforms,
+and enterprise systems tailored to your business. Book a free consultation.
+
+H1:
+Custom Software Development Company in India
+
+CONTENT STRUCTURE:
+
+H2: What is Custom Software Development?
+→ Explain problem: off-the-shelf limitations
+→ Explain solution: tailored systems
+
+H2: Our Custom Software Development Services
+- Web applications
+- SaaS platforms
+- APIs & integrations
+- Enterprise systems
+- Legacy modernization
+
+H2: Technology Stack
+- React, Next.js, Node.js, Python
+- PostgreSQL, MongoDB
+- AWS, GCP
+
+H2: Our Development Process
+1. Discovery
+2. Design
+3. Development
+4. Testing
+5. Launch
+6. Support
+
+H2: Why Choose Albero?
+- Performance-first systems
+- Transparent communication
+- Scalable architecture
+
+H2: Cost of Custom Software in India (FAQ Section)
+- Cost range
+- Timeline
+- NDA/security
+
+H2: Case Studies / Portfolio
+→ Link to work page
+
+CTA:
+Book a Free Strategy Call
+
+INTERNAL LINKS:
+- /services/web-development
+- /services/mobile-app-development
+- /work
+
+SCHEMA:
+Service + FAQPage + Breadcrumb
+
+--------------------------------------------------------
+
+PAGE 2: Web Development
+--------------------------------------------------------
+
+URL:
+https://www.albero.in/services/web-development/
+
+PRIMARY KEYWORD:
+web development company India
+
+TITLE TAG:
+Web Development Company India | React, Next.js Experts | Albero
+
+META DESCRIPTION:
+We build fast, SEO-friendly websites and web apps using modern tech like React
+and Next.js. Get a high-converting website for your business.
+
+H1:
+Web Development Services in India
+
+SECTIONS:
+
+H2: Web Development Services
+- Business websites
+- E-commerce
+- Web apps
+- CMS systems
+- Website redesign
+
+H2: Why Performance Matters
+→ Speed, SEO, conversion
+
+H2: Technologies We Use
+
+H2: Our Process
+
+H2: Website Cost in India
+
+H2: FAQs
+
+CTA:
+Get Free Website Quote
+
+--------------------------------------------------------
+
+PAGE 3: Mobile App Development
+--------------------------------------------------------
+
+URL:
+https://www.albero.in/services/mobile-app-development/
+
+PRIMARY KEYWORD:
+mobile app development company India
+
+TITLE TAG:
+Mobile App Development Company India | iOS & Android Apps | Albero
+
+META DESCRIPTION:
+Build high-performance mobile apps with Albero. We develop iOS and Android apps
+using React Native and Flutter.
+
+H1:
+Mobile App Development Company in India
+
+SECTIONS:
+
+H2: App Development Services
+- iOS apps
+- Android apps
+- Cross-platform apps
+- MVP development
+
+H2: React Native vs Flutter (HIGH TRAFFIC SECTION)
+
+H2: Development Process
+
+H2: App Cost in India
+
+H2: FAQs
+
+CTA:
+Discuss Your App Idea
+
+--------------------------------------------------------
+
+PAGE 4: Digital Marketing
+--------------------------------------------------------
+
+URL:
+https://www.albero.in/services/digital-marketing/
+
+PRIMARY KEYWORD:
+digital marketing agency India
+
+TITLE TAG:
+Digital Marketing Agency India | SEO, Ads & Growth | Albero
+
+META DESCRIPTION:
+Grow your business with Albero’s digital marketing services. SEO, Google Ads,
+and social media campaigns designed for real ROI.
+
+H1:
+Digital Marketing Agency in India
+
+SECTIONS:
+
+H2: Services
+- SEO
+- Google Ads
+- Meta Ads
+- LinkedIn Marketing
+- Content Marketing
+
+H2: Our Growth Strategy
+→ Data-driven + ROI focused
+
+H2: Case Study (IMPORTANT FOR TRUST)
+
+H2: Pricing / Budget Expectations
+
+H2: FAQs
+
+CTA:
+Get Free Marketing Audit
+
+--------------------------------------------------------
+
+BLOG CONTENT STRATEGY (HIGH IMPACT)
+--------------------------------------------------------
+
+1. How to Hire a Software Development Company in India (2026)
+2. React Native vs Flutter (2026)
+3. Custom Software Development Cost in India
+4. Mobile App Development Cost India
+5. When Do You Need Custom Software?
+6. SEO for Startups in India
+
+BLOG RULES:
+- 1200–2000 words
+- Internal links to services
+- Author name (E-E-A-T)
+- Optimized headings (H1–H3)
+- Answer search queries clearly
+
+--------------------------------------------------------
+
+AI + SEO OPTIMIZATION RULES
+--------------------------------------------------------
+
+- Each page must answer:
+  → What is it?
+  → Why does it matter?
+  → Cost?
+  → Process?
+  → FAQs?
+
+- Use clear, simple sentences (AI-friendly)
+
+- Add:
+  → FAQs (for rich results)
+  → Internal links (for ranking)
+  → CTA (for conversion)
+
+--------------------------------------------------------
+
+FINAL GOAL
+--------------------------------------------------------
+
+This system is designed to:
+- Rank for high-intent keywords
+- Appear in AI answers
+- Convert visitors into leads

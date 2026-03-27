@@ -1,40 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-    <!-- Home Page -->
+    <!-- Core SEO Landing Pages -->
+
     <url>
-        <loc>https://www.albero.in/</loc>
-        <lastmod>2025-09-09T09:16:07+00:00</lastmod>
+        <loc>https://www.albero.in/software-development-company-in-india</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/custom-software-development-services</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/web-development-company-for-startups</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/web-application-development-company</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/mobile-app-development-company-india</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- SaaS Focus -->
+
+    <url>
+        <loc>https://www.albero.in/saas-development-company</loc>
         <priority>1.0</priority>
     </url>
 
-    <!-- Refund Policy Page -->
     <url>
-        <loc>https://www.albero.in/refund-policy</loc>
-        <lastmod>2025-09-09T09:16:07+00:00</lastmod>
+        <loc>https://www.albero.in/saas-product-development-services</loc>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/mvp-development-for-startups</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Business Systems -->
+
+    <url>
+        <loc>https://www.albero.in/crm-software-development-company</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/lms-development-company</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/erp-software-development-company</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Marketing + Growth -->
+
+    <url>
+        <loc>https://www.albero.in/seo-agency-for-startups</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/digital-marketing-agency-india</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/performance-marketing-services</loc>
         <priority>0.8</priority>
     </url>
 
-    <!-- Terms & Policies Page -->
+    <!-- UI/UX + Design -->
+
     <url>
-        <loc>https://www.albero.in/terms-and-policies</loc>
-        <lastmod>2025-09-09T09:16:07+00:00</lastmod>
+        <loc>https://www.albero.in/ui-ux-design-agency</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.albero.in/ui-ux-design-for-saas-products</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Tech + Infra -->
+
+    <url>
+        <loc>https://www.albero.in/cloud-devops-services-india</loc>
         <priority>0.8</priority>
     </url>
-<!-- About Page-->
+
     <url>
-        <loc>https://www.albero.in/about</loc>
-        <lastmod>2025-09-09T09:16:07+00:00</lastmod>
+        <loc>https://www.albero.in/api-development-and-integration-services</loc>
         <priority>0.8</priority>
     </url>
-    <!-- Work Page-->
+
+    <!-- Conversion + Website -->
+
     <url>
-        <loc>https://www.albero.in/work</loc>
-        <lastmod>2025-09-09T09:16:07+00:00</lastmod>
-        <priority>0.8</priority>
+        <loc>https://www.albero.in/high-converting-website-development</loc>
+        <priority>0.9</priority>
     </url>
+
+    <url>
+        <loc>https://www.albero.in/website-development-company-for-small-business</loc>
+        <priority>0.9</priority>
+    </url>
+
 </urlset>
