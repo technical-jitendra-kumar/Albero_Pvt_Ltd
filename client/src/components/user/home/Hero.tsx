@@ -76,25 +76,34 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     }
                     .hero-pill:hover { border-color: rgba(96,165,250,0.35); background: rgba(96,165,250,0.07); }
 
-                    /* ── CTA button — FIX: removed ::before pseudo white bleed ── */
+                    /* ── CTA button — professional spacing ── */
                     .hero-btn {
                         position: relative;
-                        display: inline-flex; align-items: center; gap: 8px;
-                        padding: 13px 28px; border-radius: 999px;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 16px;
+                        padding: 13px 32px;
+                        border-radius: 999px;
                         background: #000;
                         border: 1px solid rgba(255,255,255,0.15);
-                        color: #fff; font-weight: 600; font-size: 14px;
-                        cursor: pointer; overflow: hidden;
-                        /* FIX: isolate so child whites don't bleed out */
+                        color: #fff;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        overflow: hidden;
                         isolation: isolate;
+                        outline: none;
                         transition: border-color 0.25s, box-shadow 0.25s;
-                        /* FIX: prevent stuck hover state on page transition */
                         -webkit-tap-highlight-color: transparent;
+                        white-space: nowrap;
                     }
+                    .hero-btn:focus-visible { outline: 2px solid rgba(96,165,250,0.6); outline-offset: 3px; }
+                    
                     /* Blue overlay on hover */
                     .hero-btn::before {
                         content: '';
-                        position: absolute; inset: 0;
+                        position: absolute;
+                        inset: 0;
                         background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(96,165,250,0.04));
                         opacity: 0;
                         transition: opacity 0.25s;
@@ -103,21 +112,43 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     }
                     .hero-btn:hover { border-color: rgba(96,165,250,0.5); box-shadow: 0 0 24px rgba(96,165,250,0.2); }
                     .hero-btn:hover::before { opacity: 1; }
+                    
                     .hero-btn-icon {
-                        width: 22px; height: 22px; border-radius: 50%;
-                        background: #fff; display: flex; align-items: center; justify-content: center;
-                        transition: transform 0.2s; flex-shrink: 0;
-                        /* FIX: explicit z-index so icon stays above ::after */
-                        position: relative; z-index: 1;
-                    }
-                    .hero-btn:hover .hero-btn-icon { transform: rotate(45deg); }
-                    .hero-btn-label {
-                        position: relative; overflow: hidden; display: inline-block;
-                        /* FIX: explicit z-index so text stays above ::after */
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        background: #fff;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: transform 0.2s;
+                        flex-shrink: 0;
+                        position: relative;
                         z-index: 1;
                     }
-                    .hero-btn-label span { display: block; transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); }
-                    .hero-btn-label span:last-child { position: absolute; inset: 0; transform: translateY(100%); color: #fff; }
+                    .hero-btn:hover .hero-btn-icon { transform: rotate(45deg); }
+                    
+                    .hero-btn-label {
+                        position: relative;
+                        display: inline-flex;
+                        align-items: center;
+                        white-space: nowrap;
+                        z-index: 1;
+                        overflow: hidden;
+                        flex-shrink: 0;
+                        letter-spacing: 0.02em;
+                    }
+                    .hero-btn-label span {
+                        display: inline-block;
+                        transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+                    }
+                    .hero-btn-label span:last-child {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        transform: translateY(100%);
+                        color: #fff;
+                    }
                     .hero-btn:hover .hero-btn-label span:first-child { transform: translateY(-100%); }
                     .hero-btn:hover .hero-btn-label span:last-child  { transform: translateY(0); }
 
@@ -135,9 +166,13 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                         /* Subtitle readable on mobile */
                         .hero-subtitle { font-size: 15px !important; margin-bottom: 32px !important; }
 
-                        /* CTA button full-width-ish on mobile */
-                        .hero-btn { padding: 12px 22px; font-size: 13px; }
-                        .hero-btn-icon { width: 20px; height: 20px; }
+                        /* CTA button with adjusted spacing for mobile */
+                        .hero-btn { 
+                            padding: 12px 28px; 
+                            font-size: 13px; 
+                            gap: 14px;
+                        }
+                        .hero-btn-icon { width: 22px; height: 22px; }
 
                         /* Globe — smaller on mobile so it doesn't bleed too much */
                         .hero-globe-wrap {
@@ -329,44 +364,28 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                     </p>
 
                     {ctaLabel && (
-                        <div
-                            className="hero-cta flex justify-center"
-                            style={{ background: 'none' }}>
-                            <a
-                                href="#contact"
-                                style={{
-                                    background: 'none',
-                                    border: 'none',
-                                    padding: 0,
-                                    margin: 0,
-                                    display: 'inline-flex',
-                                    textDecoration: 'none',
-                                    outline: 'none',
-                                    boxShadow: 'none'
-                                }}>
-                                <button
-                                    className="hero-btn"
-                                    type="button">
-                                    <div className="hero-btn-label">
-                                        <span>{ctaLabel}</span>
-                                        <span>Right Now</span>
-                                    </div>
-                                    <div className="hero-btn-icon">
-                                        <svg
-                                            width="12"
-                                            height="12"
-                                            viewBox="0 0 24 24"
-                                            fill="none">
-                                            <path
-                                                strokeLinejoin="round"
-                                                strokeLinecap="round"
-                                                strokeWidth="2.5"
-                                                stroke="black"
-                                                d="M7.5 16.5L16.5 7.5M16.5 7.5H10.5M16.5 7.5V13.5"
-                                            />
-                                        </svg>
-                                    </div>
-                                </button>
+                        <div className="hero-cta flex justify-center">
+                            <a href="#contact" className="hero-btn">
+                                <span className="hero-btn-label">
+                                    <span>{ctaLabel}</span>
+                                    <span>Right Now</span>
+                                </span>
+                                <div className="hero-btn-icon">
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            strokeLinejoin="round"
+                                            strokeLinecap="round"
+                                            strokeWidth="2.5"
+                                            stroke="black"
+                                            d="M7.5 16.5L16.5 7.5M16.5 7.5H10.5M16.5 7.5V13.5"
+                                        />
+                                    </svg>
+                                </div>
                             </a>
                         </div>
                     )}
