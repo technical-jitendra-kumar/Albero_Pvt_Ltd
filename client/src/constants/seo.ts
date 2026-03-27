@@ -1,9 +1,9 @@
 export const homeSEO = {
-    title: 'Albero - Web Development & Digital Growth Solutions',
+    title: 'Albero Technologies | SaaS, Web Development & AI Solutions for Business Growth',
     description:
-        'Albero helps startups, SMEs, and enterprises with smarter web development, faster launch, and digital growth solutions. Build, scale, and grow your business online.',
+        'Albero Technologies builds high-performance websites, SaaS platforms, and AI-powered systems to help startups and enterprises launch faster, automate operations, and scale efficiently.',
     keywords:
-        'Albero, web development company, digital solutions, website design, custom web apps, startups, SMEs, enterprise software, business growth, IT services',
+        'Albero Technologies, SaaS development company, web development agency India, AI solutions, custom web applications, software development company, startup tech partner, enterprise software, automation systems, digital growth solutions',
     url: 'https://www.albero.in/',
     canonical: 'https://www.albero.in/',
     image: 'https://www.albero.in/og-image.png',
@@ -11,10 +11,11 @@ export const homeSEO = {
 }
 
 export const refundSEO = {
-    title: 'Refund Policy - Albero',
+    title: 'Refund Policy | Albero Technologies',
     description:
-        "Read Albero's Refund Policy to understand eligibility, non-refundable items, and the refund process. We prioritize your satisfaction and provide clear guidance for refunds.",
-    keywords: 'Albero refund policy, refunds, return policy, digital services refund, purchase refund, service refund',
+        "Understand Albero Technologies' refund policy, including eligibility criteria, service terms, and refund timelines. We ensure transparency and clarity for all service engagements.",
+    keywords:
+        'Albero refund policy, digital services refund policy, SaaS refund terms, web development refund policy, service agreement refund, Albero Technologies policy',
     url: 'https://www.albero.in/refund-policy',
     canonical: 'https://www.albero.in/refund-policy',
     image: 'https://www.albero.in/og-image.png',
@@ -22,10 +23,11 @@ export const refundSEO = {
 }
 
 export const termsSEO = {
-    title: 'Terms & Policies - Albero',
+    title: 'Terms & Conditions | Albero Technologies',
     description:
-        "Read Albero's Terms & Policies to understand the rules, intellectual property rights, and limitations of liability when using our services.",
-    keywords: 'Albero terms and policies, website terms, service agreement, intellectual property, liability, user agreement, rules, policies',
+        "Review Albero Technologies' terms and conditions, including service agreements, intellectual property rights, and user responsibilities when working with our platform and solutions.",
+    keywords:
+        'Albero terms and conditions, SaaS terms, web development agreement, software service terms, intellectual property policy, Albero Technologies legal',
     url: 'https://www.albero.in/terms-and-policies',
     canonical: 'https://www.albero.in/terms-and-policies',
     image: 'https://www.albero.in/og-image.png',
@@ -33,9 +35,11 @@ export const termsSEO = {
 }
 
 export const notFoundSEO = {
-    title: 'Albero - Page Not Found (404)',
-    description: 'The page you are looking for does not exist. Return to the homepage and explore our web development and digital growth solutions.',
-    keywords: 'Albero, 404 error, page not found, web development, digital solutions, website design, custom web apps, business growth',
+    title: 'Page Not Found (404) | Albero Technologies',
+    description:
+        'The page you are looking for doesn’t exist. Explore Albero Technologies to discover high-performance web development, SaaS platforms, and AI-powered solutions for business growth.',
+    keywords:
+        'Albero 404, page not found, SaaS development company, web development India, AI solutions company, digital products, software development services',
     url: 'https://www.albero.in/',
     canonical: 'https://www.albero.in/',
     image: 'https://www.albero.in/og-image.png',
