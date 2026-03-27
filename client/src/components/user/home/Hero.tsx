@@ -365,7 +365,9 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
 
                     {ctaLabel && (
                         <div className="hero-cta flex justify-center">
-                            <a href="#contact" className="hero-btn">
+                            <a
+                                href="#contact"
+                                className="hero-btn">
                                 <span className="hero-btn-label">
                                     <span>{ctaLabel}</span>
                                     <span>Right Now</span>
@@ -375,8 +377,7 @@ export function Hero({ eyebrow = 'Innovate Without Limits', title, subtitle, cta
                                         width="12"
                                         height="12"
                                         viewBox="0 0 24 24"
-                                        fill="none"
-                                    >
+                                        fill="none">
                                         <path
                                             strokeLinejoin="round"
                                             strokeLinecap="round"
